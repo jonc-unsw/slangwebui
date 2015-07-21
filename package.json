@@ -24,6 +24,7 @@
     "react": "^0.13.3",
     "react-bootstrap": "^0.23.7",
     "react-code-mirror": "^3.0.4",
+    "react-d3": "git+https://github.com/esbullington/react-d3.git",
     "react-layout-pane": "^0.1.10",
     "react-tools": "^0.13.3",
     "react-treeview": "^0.3.12"

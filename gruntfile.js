@@ -6,7 +6,10 @@ module.exports = function(grunt){
       dev: {
         options: {
             debug: true,
-            transform: [["babelify", { "stage": 0 }]]
+            transform: [["babelify", { "stage": 0 }]],
+            browserifyOptions: {
+              extensions: ['.jsx']
+            }
         },
         files: {
             'dist/app.js': 'src/**/*.jsx',
