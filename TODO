@@ -7,3 +7,4 @@ Change
 * Should react look after the state of the graph or should cytoscape???
   If cy does then we need to use plain js to access it
   If react does then we need to make action/store
+* Possible to use @decorators for common actions/stores eg toggleAccordion?
