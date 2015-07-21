@@ -1,0 +1,5 @@
+New
+* Add Charts
+
+Change
+* Codemirror doesnt need to know about stores
