@@ -1,0 +1,88 @@
+{
+  "parent": "..",
+  "path": "",
+  "name": "src",
+  "type": "directory",
+  "children": [
+    {
+      "parent": "",
+      "path": "actions",
+      "name": "actions",
+      "type": "directory",
+      "children": [
+        {
+          "parent": "actions",
+          "path": "actions/.Actions.js.swp",
+          "name": ".Actions.js.swp",
+          "type": "file"
+        },
+        {
+          "parent": "actions",
+          "path": "actions/Actions.js",
+          "name": "Actions.js",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "parent": "",
+      "path": "components",
+      "name": "components",
+      "type": "directory",
+      "children": [
+        {
+          "parent": "components",
+          "path": "components/.app.jsx.swp",
+          "name": ".app.jsx.swp",
+          "type": "file"
+        },
+        {
+          "parent": "components",
+          "path": "components/app.jsx",
+          "name": "app.jsx",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "parent": "",
+      "path": "constants",
+      "name": "constants",
+      "type": "directory",
+      "children": []
+    },
+    {
+      "parent": "",
+      "path": "dispatcher",
+      "name": "dispatcher",
+      "type": "directory",
+      "children": []
+    },
+    {
+      "parent": "",
+      "path": "stores",
+      "name": "stores",
+      "type": "directory",
+      "children": [
+        {
+          "parent": "stores",
+          "path": "stores/Store.js",
+          "name": "Store.js",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "parent": "",
+      "path": ".alt.js.swp",
+      "name": ".alt.js.swp",
+      "type": "file"
+    },
+    {
+      "parent": "",
+      "path": "alt.js",
+      "name": "alt.js",
+      "type": "file"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+[
+     {
+        "name": "Entry_B6",
+        "succs": [
+            "main_B5"
+        ]
+    },
+     {
+        "name": "main_B1",
+        "statements": [
+            "return 0;"
+        ],
+        "preds": [
+            "main_B2"
+        ],
+        "succs": [
+            "main_B0"
+        ]
+    },
+     {
+        "name": "main_B2",
+        "statements": [
+            "i &lt; 100"
+        ],
+        "preds": [
+            "main_B3",
+            "main_B5"
+        ],
+        "succs": [
+            "main_B4",
+            "main_B1"
+        ]
+    },
+     {
+        "name": "main_B3",
+        "statements": [
+            "i++"
+        ],
+        "preds": [
+            "main_B4"
+        ],
+        "succs": [
+            "main_B2"
+        ]
+    },
+     {
+        "name": "main_B4",
+        "statements": [
+            "a[2 * i] = b[i]",
+            "c[i] = a[4 * i + 1]"
+        ],
+        "preds": [
+            "main_B2"
+        ],
+        "succs": [
+            "main_B3"
+        ]
+    },
+     {
+        "name": "main_B5",
+        "statements": [
+            "int a[200] = { 0 };",
+            "int b[100] = { 3 };",
+            "int c[100] = { 0 };",
+            "int i;",
+            "i = 0"
+        ],
+        "preds": [
+            "main_B6"
+        ],
+        "succs": [
+            "main_B2"
+        ]
+    },
+     {
+        "name": "main_B0",
+        "statements": [
+        ],
+        "preds": [
+            "main_B1"
+        ]
+    }
+]
