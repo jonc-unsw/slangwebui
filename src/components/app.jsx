@@ -1,12 +1,8 @@
 "use strict";
 import React from 'react';
-import { Accordion, TabbedArea, TabPane, PanelGroup } from 'react-bootstrap';
+import { Accordion, TabbedArea, TabPane } from 'react-bootstrap';
 
 import {Layout, Flex, Fixed} from 'react-layout-pane';
-
-import connectToStores from 'alt/utils/connectToStores';
-import { BBStore, DDBStore, SourceCodeStore } from '../stores/Store.js';
-import { BBActions, DDBActions, SourceCodeActions } from '../actions/Actions.js';
 
 import { Header } from './header.jsx';
 import { IndependentPanel } from './independentpanel.jsx';
