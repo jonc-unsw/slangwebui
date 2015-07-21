@@ -9,6 +9,7 @@ import { IndependentPanel } from './independentpanel.jsx';
 import { Project } from './project.jsx';
 import { SourceCode } from './sourcecode.jsx';
 import { Graph } from './graph.jsx';
+import { MyChart } from './chart.jsx';
 import { BasicBlocks } from './bb.jsx';
 import { DataDependenceBlocks } from './ddb.jsx';
 import { Footer } from './footer.jsx';
@@ -34,12 +35,12 @@ class App extends React.Component {
                 </Accordion>
               </Fixed>
               <Flex className="content">
-                <TabbedArea defaultActiveKey={1}>
+                <TabbedArea defaultActiveKey={2}>
                   <TabPane eventKey={1} tab="System Dependence Graph">
                     <Graph />
                   </TabPane>
                   <TabPane eventKey={2} tab="Statistics">
-                    Insert pie and bar chart
+                    <MyChart />
                   </TabPane>
                 </TabbedArea>
               </Flex>
