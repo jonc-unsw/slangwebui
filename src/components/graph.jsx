@@ -87,7 +87,7 @@ class Graph extends React.Component {
 
     // TODO fix this. Since putting the graph in the tabpane we need to got up the DOM
     // find a better way to do this
-    $(React.findDOMNode(this)).height($(React.findDOMNode(this)).closest( ".Flex" ).height() );
+    $(React.findDOMNode(this)).height($(React.findDOMNode(this)).closest( ".Flex" ).height() - 100 );
     $(React.findDOMNode(this)).cytoscape('get').resize();
   }
 
