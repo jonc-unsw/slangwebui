@@ -35,7 +35,7 @@ class App extends React.Component {
                 </Accordion>
               </Fixed>
               <Flex className="content">
-                <TabbedArea defaultActiveKey={2}>
+                <TabbedArea defaultActiveKey={1}>
                   <TabPane eventKey={1} tab="System Dependence Graph">
                     <Graph />
                   </TabPane>
