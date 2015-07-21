@@ -2,6 +2,16 @@ Slang GUI
 
 This is the slang webui frontend. It is a work in progress.
 
+Instructions:
+The grunt build tool is used. Make sure that you have set up npm correctly
+
+Single compile: "grunt browserify"
+Watching files: "grunt watch" or just "grunt"
+Build static files eg css and js: "grunt cssmin" and "grunt uglify"
+
+Start a webserver like "python -m SimpleHTTPServer 8000" in the proj dir and you
+can view the site.
+
 Features:
 * Written in modern javascapt (es6 2015) and is transcompiled into es5 to work
   with current web browsers. Can make pure es6 optional when the major browsers
