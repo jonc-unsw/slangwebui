@@ -1,6 +1,6 @@
 import React from 'react';
 import { DropdownMenu, Nav, Navbar, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
-import { DDBActions, BBActions, SourceCodeActions } from '../actions/Actions.js';
+import { DDBActions, BBActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js';
 
 class MyNavbar extends React.Component {
   render() {
@@ -82,7 +82,10 @@ class MyNavbar2 extends React.Component {
       <Navbar brand="Slang" fixedTop fluid inverse>
         <Nav>
           <DropdownButton eventKey={1} title='View' onSelect={this.closeMenu}>
-            <MenuItem eventKey='1' onClick={ () => {} } >Project</MenuItem>
+            <MenuItem eventKey='1' onClick={ () => {
+              ProjectActions.toggleAccordion();
+              } 
+            }>Project</MenuItem>
             
             <MenuItem eventKey='2' onClick={ () => {
               SourceCodeActions.toggleAccordion()

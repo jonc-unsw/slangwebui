@@ -12,6 +12,12 @@ class BBActions {
   }
 }
 
+class ProjectActions {
+  constructor() {
+    this.generateActions('toggleAccordion');
+  }
+}
+
 class SourceCodeActions {
   constructor() {
     this.generateActions('highlightLine', 'toggleAccordion');
@@ -21,5 +27,6 @@ class SourceCodeActions {
 module.exports = {
     DDBActions: alt.createActions(DDBActions),
     BBActions: alt.createActions(BBActions),
+    ProjectActions: alt.createActions(ProjectActions),
     SourceCodeActions: alt.createActions(SourceCodeActions)
 };

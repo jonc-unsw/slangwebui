@@ -1,6 +1,6 @@
 import alt from '../alt';
 
-import { BBActions, DDBActions, SourceCodeActions } from '../actions/Actions.js'
+import { BBActions, DDBActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
 
 class DDBStore {
   constructor() {
@@ -54,6 +54,21 @@ class BBStore {
   }
 }
 
+class ProjectStore {
+  constructor() {
+    this.bindActions( ProjectActions );
+
+    this.state = {
+      expanded: true
+    };
+  }
+  
+  onToggleAccordion() {
+    this.setState( {expanded: !this.state.expanded} );
+  }
+
+}
+
 class SourceCodeStore {
   constructor() {
     this.bindActions( SourceCodeActions );
@@ -77,5 +92,6 @@ class SourceCodeStore {
 module.exports = {
     DDBStore: alt.createStore(DDBStore),
     BBStore: alt.createStore(BBStore),
+    ProjectStore: alt.createStore(ProjectStore),
     SourceCodeStore: alt.createStore(SourceCodeStore)
 };
