@@ -4,3 +4,4 @@ New
 Change
 * Codemirror doesnt need to know about stores
 * Make gruntfile better
+* Prop validation
