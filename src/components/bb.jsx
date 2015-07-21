@@ -1,3 +1,4 @@
+import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import { BBStore } from '../stores/Store.js';
 import { BBActions } from '../actions/Actions.js';
