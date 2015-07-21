@@ -59,8 +59,15 @@ class ProjectStore {
     this.bindActions( ProjectActions );
 
     this.state = {
+      path: undefined,
       expanded: true
     };
+  }
+  
+  onLoadProject(url) {
+    $.get(url, (result) => {
+      this.setState( {path: result} );  
+    } );
   }
   
   onToggleAccordion() {

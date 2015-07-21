@@ -23,12 +23,6 @@ class Project extends React.Component {
     return ProjectStore.getState();
   }
   
-  componentDidMount() {
-    $.get("path.json", (data) => {
-      this.setState( {path: data} );
-    });
-  }
-
   rec = ( path ) => {
     path.children && path.children.forEach( this.rec );
     return <div>{path.name}</div>

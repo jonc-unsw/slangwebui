@@ -14,7 +14,7 @@ class BBActions {
 
 class ProjectActions {
   constructor() {
-    this.generateActions('toggleAccordion');
+    this.generateActions('loadProject', 'toggleAccordion');
   }
 }
 
