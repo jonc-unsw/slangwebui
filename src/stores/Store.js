@@ -60,7 +60,6 @@ class SourceCodeStore {
 
     this.state = {
       line: undefined,
-      markedText: undefined,
       expanded: true
     };
   }

@@ -12,18 +12,9 @@ require('codemirror/addon/selection/mark-selection');
 require('codemirror/addon/search/searchcursor');
 require('codemirror/mode/clike/clike');
 
-@connectToStores
 class CodeMirrorEditor extends React.Component {
   constructor(props) {
     super(props);
-  }
-  
-  static getStores() {
-    return [SourceCodeStore];
-  }
-
-  static getPropsFromStores() {
-    return SourceCodeStore.getState();
   }
   
   componentDidMount() {
@@ -88,7 +79,7 @@ class SourceCode extends React.Component {
   render() {
     return (
       <IndependentPanel {...this.props} header="Source Code" expanded={this.props.expanded}>
-        <CodeMirrorEditor src="main.c" />
+        <CodeMirrorEditor src="main.c" line={this.props.line} />
       </IndependentPanel>
     )
   }
