@@ -1,0 +1,19 @@
+Slang GUI
+
+This is the slang webui frontend. It is a work in progress.
+
+Features:
+* Written in modern javascapt (es6 2015) and is transcompiled into es5 to work
+  with current web browsers. Can make pure es6 optional when the major browsers
+  bring in support.
+* Uses Reactjs. This is a js library from facebook to write user interfaces.
+  It is the V in MVC
+* Uses Flux architecture. This works well with React. It is a uni directional 
+  data flow pattern. We are using the Alt implementation
+
+Source Layout:
+* Has an index.html page with placeholders for the js to bind to.
+* React code is in src/ There are 3 main components. Action, Components, Stores
+  * Components are classes much like classes in Java OO
+  * Actions are called from components which update the store
+  * Stores maintain the state of the application
