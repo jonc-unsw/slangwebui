@@ -1,4 +1,3 @@
-import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import { BBStore } from '../stores/Store.js';
 import { BBActions } from '../actions/Actions.js';
@@ -46,7 +45,6 @@ class Preds extends React.Component {
 
   handleClick = (e) => {
     //SourceCodeActions.highlightLine( edge.data("ddb") );
-    console.log(this);
   }
 
   render() {

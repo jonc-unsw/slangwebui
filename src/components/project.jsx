@@ -13,7 +13,6 @@ class Project extends React.Component {
   
   componentDidMount() {
     $.get("path.json", (data) => {
-      console.log(data);
       this.setState( {path: data} );
     });
   }
