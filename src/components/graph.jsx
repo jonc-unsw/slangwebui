@@ -74,6 +74,38 @@ class Graph extends React.Component {
     });
     cy.on( 'select', 'edge', (e) => this.handleSelectEdge(e) );
     cy.on( 'unselect', 'edge', (e) => this.handleUnSelectEdge(e) );
+    
+    // TODO this is letting cytoscape handle custom function calls itself
+    var ddbedges = cy.collection();
+    cytoscape('core', 'toggleddb', function( fn ){
+      var edges = cy.elements('edge[ type *= "ddb" ]')
+
+      if( ddbedges.removed() ) {
+        ddbedges.restore();
+        // Reset so it still works when we click Reset
+        ddbedges = cy.collection();
+      }
+      else {
+        ddbedges = cy.remove( edges );
+      }
+
+      return this; // chainability
+    });
+
+    var cfedges = cy.collection();
+    cytoscape('core', 'togglecontrolflow', function( fn ){
+      var edges = cy.elements('edge[ type *= "cf" ]')
+
+      if( cfedges.removed() ) {
+        cfedges.restore();
+        // Reset so it still works when we click Reset
+        cfedges = cy.collection();
+      }
+      else {
+        cfedges = cy.remove( edges );
+      }
+      return this; // chainability
+    });
 
     // Since react-layout-pane uses relative we need to manually find the size...
     // TODO find a better way to do this

@@ -4,3 +4,6 @@ New
 Change
 * Make gruntfile better
 * Prop validation
+* Should react look after the state of the graph or should cytoscape???
+  If cy does then we need to use plain js to access it
+  If react does then we need to make action/store

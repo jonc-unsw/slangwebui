@@ -104,8 +104,16 @@ class MyNavbar2 extends React.Component {
             <DropdownButton className="dropdown-submenu" navItem noCaret 
               eventKey={3} title='System Dependence Graph'
             >
-              <MenuItem eventKey='1'>Toggle Data Dependencies</MenuItem>
-              <MenuItem eventKey='2'>Toggle Control Flow</MenuItem>
+              <MenuItem eventKey='1' onClick={() => {
+                var cy = $('#cy').cytoscape('get');
+                cy.toggleddb();
+                }
+              }>Toggle Data Dependencies</MenuItem>
+              <MenuItem eventKey='2' onClick={ () => {
+                var cy = $('#cy').cytoscape('get');
+                cy.togglecontrolflow();
+                }
+              }>Toggle Control Flow</MenuItem>
               <MenuItem divider />
               <MenuItem eventKey='3'>Reset</MenuItem>
             </DropdownButton>
