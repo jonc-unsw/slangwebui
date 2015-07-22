@@ -31,21 +31,21 @@
 
         { "data": { "source": "main_B1_1", "target": "Return_main", "color": "#FF0000", "type": "cf" } },
 
-        { "data": { "source": "main_B3_1", "target": "main_B2_1", "color": "#000000", "type": "ddb", "ddb": 0, "weight": 32 } },
-        { "data": { "source": "main_B3_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 1, "weight": 32 } },
-        { "data": { "source": "main_B3_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 2, "weight": 32 } },
-        { "data": { "source": "main_B3_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 3, "weight": 32 } },
-        { "data": { "source": "main_B3_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 4, "weight": 32 } },
-        { "data": { "source": "main_B3_1", "target": "main_B3_1", "color": "#000000", "type": "ddb", "ddb": 5, "weight": 32 } },
-        { "data": { "source": "main_B5_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 6, "weight": 6400 } },
-        { "data": { "source": "main_B5_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 7, "weight": 6400 } },
-        { "data": { "source": "main_B5_2", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 8, "weight": 3200 } },
-        { "data": { "source": "main_B5_3", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 9, "weight": 3200 } },
-        { "data": { "source": "main_B5_5", "target": "main_B2_1", "color": "#000000", "type": "ddb", "ddb": 10, "weight": 32 } },
-        { "data": { "source": "main_B5_5", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 11, "weight": 32 } },
-        { "data": { "source": "main_B5_5", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 12, "weight": 32 } },
-        { "data": { "source": "main_B5_5", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 13, "weight": 32 } },
-        { "data": { "source": "main_B5_5", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 14, "weight": 32 } },
-        { "data": { "source": "main_B5_5", "target": "main_B3_1", "color": "#000000", "type": "ddb", "ddb": 15, "weight": 32 } }
+        { "data": { "source": "main_B3_1", "target": "main_B2_1", "color": "#000000", "type": "ddb", "ddb": 0, "line": [9, 9], "weight": 32 } },
+        { "data": { "source": "main_B3_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 1, "line": [9, 11], "weight": 32 } },
+        { "data": { "source": "main_B3_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 2, "line": [9, 11], "weight": 32 } },
+        { "data": { "source": "main_B3_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 3, "line": [9, 12], "weight": 32 } },
+        { "data": { "source": "main_B3_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 4, "line": [9, 12], "weight": 32 } },
+        { "data": { "source": "main_B3_1", "target": "main_B3_1", "color": "#000000", "type": "ddb", "ddb": 5, "line": [9, 9], "weight": 32 } },
+        { "data": { "source": "main_B5_1", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 6, "line": [5, 11], "weight": 6400 } },
+        { "data": { "source": "main_B5_1", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 7, "line": [5, 12], "weight": 6400 } },
+        { "data": { "source": "main_B5_2", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 8, "line": [6, 11], "weight": 3200 } },
+        { "data": { "source": "main_B5_3", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 9, "line": [7, 12], "weight": 3200 } },
+        { "data": { "source": "main_B5_5", "target": "main_B2_1", "color": "#000000", "type": "ddb", "ddb": 10, "line": [9, 9], "weight": 32 } },
+        { "data": { "source": "main_B5_5", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 11, "line": [9, 11], "weight": 32 } },
+        { "data": { "source": "main_B5_5", "target": "main_B4_1", "color": "#000000", "type": "ddb", "ddb": 12, "line": [9, 11], "weight": 32 } },
+        { "data": { "source": "main_B5_5", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 13, "line": [9, 12], "weight": 32 } },
+        { "data": { "source": "main_B5_5", "target": "main_B4_2", "color": "#000000", "type": "ddb", "ddb": 14, "line": [9, 12], "weight": 32 } },
+        { "data": { "source": "main_B5_5", "target": "main_B3_1", "color": "#000000", "type": "ddb", "ddb": 15, "line": [9, 9], "weight": 32 } }
     ]
 }

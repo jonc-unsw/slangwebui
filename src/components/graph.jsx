@@ -138,7 +138,8 @@ class Graph extends React.Component {
     // Only black edges have ddb info
     if( edge.data("ddb") !== undefined ) {
       DDBActions.updateCurrentDdb( edge.data("ddb") );
-      SourceCodeActions.highlightLine( edge.data("ddb") );
+      let line = edge.data("line");
+      SourceCodeActions.highlightLine( line );
     }
   }
 

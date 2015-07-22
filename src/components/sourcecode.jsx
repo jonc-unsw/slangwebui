@@ -15,6 +15,7 @@ require('codemirror/mode/clike/clike');
 class CodeMirrorEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.marked = [undefined, undefined];
   }
   
   componentDidMount() {
@@ -36,17 +37,26 @@ class CodeMirrorEditor extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if( this.props.line !== nextProps.line ) {
+    //if( this.props.line && this.props.line[0] !== nextProps.line[0] && this.props.line[1] !== nextProps.line[1] ) {
 
+      // TODO do this nicer
       // Dont store marked in the Store since nested Actions are evil
-      this.marked && this.marked.clear();
-      let marked = this.editor.markText( 
-        {line: nextProps.line, ch:0},
-        {line: nextProps.line+1,ch:0},
+      this.marked[0] && this.marked[0].clear();
+      let marked0 = this.editor.markText( 
+        {line: nextProps.line[0]-1, ch:0},
+        {line: nextProps.line[0],ch:0},
         {css: "background-color: #ff7"}
       );
-      this.marked = marked;
-    }
+      this.marked[0] = marked0;
+      
+      this.marked[1] && this.marked[1].clear();
+      let marked1 = this.editor.markText( 
+        {line: nextProps.line[1]-1, ch:0},
+        {line: nextProps.line[1],ch:0},
+        {css: "background-color: #ff7"}
+      );
+      this.marked[1] = marked1;
+    //}
   }
 
   componentWillUnmount() {
