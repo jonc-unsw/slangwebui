@@ -35,7 +35,6 @@ class Project extends React.Component {
         <TreeView nodeLabel={"Project Foo"} defaultCollapsed={false}>
           <TreeView nodeLabel={"src"} defaultCollapsed={false}>
               <div><a href="#" className="info">main.c</a></div>
-              <div><a href="#" className="info">foo.c</a></div>
           </TreeView>
         </TreeView>
       </IndependentPanel>
