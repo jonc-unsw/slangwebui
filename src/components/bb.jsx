@@ -2,6 +2,7 @@ import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import { BBStore } from '../stores/Store.js';
 import { BBActions } from '../actions/Actions.js';
+import { SourceCodeActions } from '../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 
 @connectToStores
@@ -26,7 +27,7 @@ class BasicBlocks extends React.Component {
           <div className="blockname">
             <a href="#">[ {bb.name} ]</a>
           </div>
-          <Statements statements={bb.statements} />
+          <Statements line={bb.line} statements={bb.statements} />
           <Preds preds={bb.preds} />
           <Succs succs={bb.succs} />
         </div>
@@ -75,10 +76,15 @@ class Succs extends React.Component {
 }
 
 class Statement extends React.Component {
+
+  handleClick = () => {
+    SourceCodeActions.highlightLine( this.props.line );
+  }
+
   render() {
     return (
       // TODO the json has encoded html. Maybe we should not do that..
-      <li dangerouslySetInnerHTML={{__html: this.props.statement}} />
+      <li><a href="#" onClick={this.handleClick} dangerouslySetInnerHTML={{__html: this.props.statement}} /></li>
     )
   }
 }
@@ -86,10 +92,13 @@ class Statement extends React.Component {
 class Statements extends React.Component {
   render() {
     if( this.props.statements ) {
+      let line = this.props.line;
+      // line is the starting line of the BB. Key is a unique inc from 0 which
+      // works nicely :)
       return (
         <ol>
           { this.props.statements.map(function(statement, key){
-            return <Statement key={key} statement={statement}/>;
+            return <Statement key={key} line={line+key} statement={statement}/>;
           }) }
         </ol>
       )

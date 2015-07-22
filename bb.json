@@ -3,7 +3,8 @@
         "name": "Entry_B6",
         "succs": [
             "main_B5"
-        ]
+        ],
+        "line": 3
     },
      {
         "name": "main_B1",
@@ -15,7 +16,8 @@
         ],
         "succs": [
             "main_B0"
-        ]
+        ],
+        "line": 15
     },
      {
         "name": "main_B2",
@@ -29,7 +31,8 @@
         "succs": [
             "main_B4",
             "main_B1"
-        ]
+        ],
+        "line": 9
     },
      {
         "name": "main_B3",
@@ -41,7 +44,8 @@
         ],
         "succs": [
             "main_B2"
-        ]
+        ],
+        "line": 9
     },
      {
         "name": "main_B4",
@@ -54,7 +58,8 @@
         ],
         "succs": [
             "main_B3"
-        ]
+        ],
+        "line": 11
     },
      {
         "name": "main_B5",
@@ -70,7 +75,8 @@
         ],
         "succs": [
             "main_B2"
-        ]
+        ],
+        "line": 5
     },
      {
         "name": "main_B0",
@@ -78,6 +84,7 @@
         ],
         "preds": [
             "main_B1"
-        ]
+        ],
+        "line": 1
     }
 ]
