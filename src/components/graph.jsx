@@ -7,6 +7,7 @@ class Graph extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      json: undefined,
       timeout: undefined,
       edges: new Set()
     };
@@ -70,6 +71,7 @@ class Graph extends React.Component {
     });
     var cy = $('#cy').cytoscape('get');
     $.get("graph.json", (result) => {
+        this.setState({json: result});
         cy.load(result);
     });
     cy.on( 'select', 'edge', (e) => this.handleSelectEdge(e) );
@@ -104,6 +106,11 @@ class Graph extends React.Component {
       else {
         cfedges = cy.remove( edges );
       }
+      return this; // chainability
+    });
+    var self = this;
+    cytoscape('core', 'reloadJson', function( ){
+      cy.load(self.state.json);
       return this; // chainability
     });
 

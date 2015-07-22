@@ -118,7 +118,11 @@ class MyNavbar2 extends React.Component {
                 }
               }>Toggle Control Flow</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey='3'>Reset</MenuItem>
+              <MenuItem eventKey='3' onClick={()=>{
+                var cy = $('#cy').cytoscape('get');
+                cy.reloadJson();
+                }
+              }>Reset</MenuItem>
             </DropdownButton>
 
           </DropdownButton>
