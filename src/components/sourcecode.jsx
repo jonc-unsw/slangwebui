@@ -42,20 +42,36 @@ class CodeMirrorEditor extends React.Component {
       // TODO do this nicer
       // Dont store marked in the Store since nested Actions are evil
       this.marked[0] && this.marked[0].clear();
-      let marked0 = this.editor.markText( 
-        {line: nextProps.line[0]-1, ch:0},
-        {line: nextProps.line[0],ch:0},
-        {css: "background-color: #ff7"}
-      );
-      this.marked[0] = marked0;
-      
       this.marked[1] && this.marked[1].clear();
-      let marked1 = this.editor.markText( 
-        {line: nextProps.line[1]-1, ch:0},
-        {line: nextProps.line[1],ch:0},
-        {css: "background-color: #ff7"}
-      );
-      this.marked[1] = marked1;
+
+      if( nextProps.line === undefined )
+        return;
+
+      if( nextProps.line instanceof Array ) {
+        this.marked[0] && this.marked[0].clear();
+        let marked0 = this.editor.markText( 
+          {line: nextProps.line[0]-1, ch:0},
+          {line: nextProps.line[0],ch:0},
+          {css: "background-color: #ff7"}
+        );
+        this.marked[0] = marked0;
+        
+        this.marked[1] && this.marked[1].clear();
+        let marked1 = this.editor.markText( 
+          {line: nextProps.line[1]-1, ch:0},
+          {line: nextProps.line[1],ch:0},
+          {css: "background-color: #ff7"}
+        );
+        this.marked[1] = marked1;
+      }
+      else {
+        let marked0 = this.editor.markText( 
+          {line: nextProps.line-1, ch:0},
+          {line: nextProps.line,ch:0},
+          {css: "background-color: #ff7"}
+        );
+        this.marked[0] = marked0;
+      }
     //}
   }
 

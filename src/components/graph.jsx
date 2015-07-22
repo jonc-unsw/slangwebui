@@ -74,6 +74,8 @@ class Graph extends React.Component {
         this.setState({json: result});
         cy.load(result);
     });
+    cy.on( 'select', 'node', (n) => this.handleSelectNode(n) );
+    cy.on( 'unselect', 'node', (n) => this.handleUnSelectNode(n) );
     cy.on( 'select', 'edge', (e) => this.handleSelectEdge(e) );
     cy.on( 'unselect', 'edge', (e) => this.handleUnSelectEdge(e) );
     
@@ -149,6 +151,18 @@ class Graph extends React.Component {
     if( edge.data("ddb") !== undefined ) {
       DDBActions.updateCurrentDdb( edge.data("ddb") );
     }
+  }
+  
+  handleSelectNode(n) {
+    let node = n.cyTarget; 
+    DDBActions.updateCurrentDdb( undefined );
+    let line = node.data("line");
+    SourceCodeActions.highlightLine( line );
+  }
+
+  handleUnSelectNode(e) {
+    DDBActions.updateCurrentDdb( undefined );
+    SourceCodeActions.highlightLine( undefined );
   }
   
   shouldComponentUpdate(nextProps, nextState) {
