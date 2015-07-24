@@ -1,5 +1,11 @@
+Important
+* Keep third party code in sepate files etc when ugligying them
+* https://github.com/substack/browserify-handbook#external-bundles
+
 New
 * Deal with multiple node/edge selections
+* IE8
+* Add new tab that shows trees...
 
 Change
 * Make gruntfile better
