@@ -47,7 +47,7 @@ class App extends React.Component {
               <Fixed className="sidebar">
                 <Accordion>
                   <BasicBlocks {...this.props} url="bb.json"/>
-                  <DataDependenceBlocks {...this.props} url="ddb.json"/>
+                  <DataDependenceBlocks {...this.props} url="fib/ddb.json"/>
                 </Accordion>
               </Fixed>
             </Layout>

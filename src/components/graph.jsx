@@ -20,7 +20,7 @@ class Graph extends React.Component {
       style: cytoscape.stylesheet()
         .selector('node')
           .css({
-            'content': 'data(label)',
+            'content': 'data(id)',
             'text-valign': 'center',
             'color': 'data(color)',
             'text-outline-width': 2,
@@ -32,8 +32,8 @@ class Graph extends React.Component {
             'line-color': 'data(color)',
             'source-arrow-color': 'data(color)',
             'target-arrow-color': 'data(color)',
-            'content' : 'data(label)',
-            'width': 'mapData(weight, 0, 6400, 1, 10)',
+            /*'content' : 'data(label)',
+            'width': 'mapData(weight, 0, 6400, 1, 10)',*/
           })
         .selector(':selected')
           .css({
@@ -70,7 +70,8 @@ class Graph extends React.Component {
       }
     });
     var cy = $('#cy').cytoscape('get');
-    $.get("graph.json", (result) => {
+    $.get("./fib/graph.json", (result) => {
+        console.log(result);
         this.setState({json: result});
         cy.load(result);
     });

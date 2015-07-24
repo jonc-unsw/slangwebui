@@ -32,8 +32,12 @@ class Project extends React.Component {
 
     return (
       <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded}>
-        <TreeView nodeLabel={"Project Foo"} defaultCollapsed={false}>
+        <TreeView nodeLabel={"Project Fib"} defaultCollapsed={false}>
           <TreeView nodeLabel={"src"} defaultCollapsed={false}>
+              <div><a href="#" className="info">fac.c</a></div>
+              <div><a href="#" className="info">fac.h</a></div>
+              <div><a href="#" className="info">fib.c</a></div>
+              <div><a href="#" className="info">fib.h</a></div>
               <div><a href="#" className="info">main.c</a></div>
           </TreeView>
         </TreeView>
