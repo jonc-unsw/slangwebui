@@ -14,3 +14,5 @@ Change
   If cy does then we need to use plain js to access it
   If react does then we need to make action/store
 * Possible to use @decorators for common actions/stores eg toggleAccordion?
+* Clean up source loading
+* Make slang output better - do this when i refactor the code???

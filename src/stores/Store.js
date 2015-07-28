@@ -81,13 +81,20 @@ class SourceCodeStore {
     this.bindActions( SourceCodeActions );
 
     this.state = {
+      file: undefined,
       line: undefined,
       expanded: true
     };
   }
 
-  onHighlightLine(line) {
-    this.setState( {line: line} );
+  onHighlightLine(src) {
+    if(src === undefined)
+      this.setState( {file: undefined, line: undefined} );
+    this.setState( {file: src.file, line: src.line} );
+  }
+
+  onLoadSource(file) {
+    this.setState( {file: file} );
   }
   
   onToggleAccordion() {

@@ -32,8 +32,8 @@ class Graph extends React.Component {
             'line-color': 'data(color)',
             'source-arrow-color': 'data(color)',
             'target-arrow-color': 'data(color)',
-            /*'content' : 'data(label)',
-            'width': 'mapData(weight, 0, 6400, 1, 10)',*/
+            /*'content' : 'data(label)',*/
+            'width': 'mapData(weight, 0, 6400, 1, 10)',
           })
         .selector(':selected')
           .css({
@@ -70,7 +70,7 @@ class Graph extends React.Component {
       }
     });
     var cy = $('#cy').cytoscape('get');
-    $.get("./fib/graph.json", (result) => {
+    $.get("projects/fib/graph.json", (result) => {
         console.log(result);
         this.setState({json: result});
         cy.load(result);
@@ -137,33 +137,33 @@ class Graph extends React.Component {
     var edge = e.cyTarget; 
     // TODO change this to use the store. Just like this for POC
     this.state.edges.add(edge);
-
+    console.log( edge.data("ddb") );
     // Only black edges have ddb info
     if( edge.data("ddb") !== undefined ) {
       DDBActions.updateCurrentDdb( edge.data("ddb") );
       let line = edge.data("line");
       SourceCodeActions.highlightLine( line );
     }
+    else {
+      DDBActions.updateCurrentDdb( undefined );
+    }
   }
 
   handleUnSelectEdge(e) {
-    var edge = e.cyTarget; 
-    this.state.edges.delete(edge);
-    if( edge.data("ddb") !== undefined ) {
-      DDBActions.updateCurrentDdb( edge.data("ddb") );
-    }
+    DDBActions.updateCurrentDdb( undefined );
   }
   
   handleSelectNode(n) {
     let node = n.cyTarget; 
     DDBActions.updateCurrentDdb( undefined );
+    let file = node.data("file");
     let line = node.data("line");
-    SourceCodeActions.highlightLine( line );
+    SourceCodeActions.highlightLine( {file: file, line: line} );
   }
 
   handleUnSelectNode(e) {
     DDBActions.updateCurrentDdb( undefined );
-    SourceCodeActions.highlightLine( undefined );
+    SourceCodeActions.highlightLine( {file: undefined, line: undefined} );
   }
   
   shouldComponentUpdate(nextProps, nextState) {

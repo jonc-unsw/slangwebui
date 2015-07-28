@@ -20,7 +20,7 @@ class ProjectActions {
 
 class SourceCodeActions {
   constructor() {
-    this.generateActions('highlightLine', 'toggleAccordion');
+    this.generateActions('highlightLine', 'loadSource', 'toggleAccordion');
   }
 }
 

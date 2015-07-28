@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   render() {
-
+    const prefix = "projects/fib/";
     return (
         <Layout type="rows">
           <Fixed className="header">
@@ -31,7 +31,7 @@ class App extends React.Component {
               <Fixed className="sidebar">
                 <Accordion>
                   <Project />
-                  <SourceCode />
+                  <SourceCode prefix={prefix} file="fib/main.c"/>
                 </Accordion>
               </Fixed>
               <Flex className="content">
@@ -47,7 +47,7 @@ class App extends React.Component {
               <Fixed className="sidebar">
                 <Accordion>
                   <BasicBlocks {...this.props} url="bb.json"/>
-                  <DataDependenceBlocks {...this.props} url="fib/ddb.json"/>
+                  <DataDependenceBlocks {...this.props} url={`${prefix}/ddb.json`} />
                 </Accordion>
               </Fixed>
             </Layout>

@@ -28,6 +28,20 @@
         "type": "Pointer"
     },
     {
+        "label": "Basic Block main_B4_2 to Basic Block main_B4_3",
+        "vartype": "int",
+        "varname": "b1",
+        "varsize": 32,
+        "varscope": "Local",
+        "isVoidPointer": false,
+        "isConstantArray": false,
+        "isPointer": false,
+        "isStruct": false,
+        "isArray": false,
+        "isConstantSizeType": true,
+        "type": "Builtin"
+    },
+    {
         "label": "Basic Block main_B4_2 to Basic Block main_B2_1",
         "vartype": "int",
         "varname": "b1",
@@ -59,34 +73,6 @@
         "label": "Basic Block main_B4_2 to Basic Block main_B4_1",
         "vartype": "int",
         "varname": "b1",
-        "varsize": 32,
-        "varscope": "Local",
-        "isVoidPointer": false,
-        "isConstantArray": false,
-        "isPointer": false,
-        "isStruct": false,
-        "isArray": false,
-        "isConstantSizeType": true,
-        "type": "Builtin"
-    },
-    {
-        "label": "Basic Block main_B4_3 to Basic Block main_B1_1",
-        "vartype": "int",
-        "varname": "c1",
-        "varsize": 32,
-        "varscope": "Local",
-        "isVoidPointer": false,
-        "isConstantArray": false,
-        "isPointer": false,
-        "isStruct": false,
-        "isArray": false,
-        "isConstantSizeType": true,
-        "type": "Builtin"
-    },
-    {
-        "label": "Basic Block main_B4_3 to Basic Block main_B4_3",
-        "vartype": "int",
-        "varname": "c1",
         "varsize": 32,
         "varscope": "Local",
         "isVoidPointer": false,
@@ -208,6 +194,20 @@
         "isArray": false,
         "isConstantSizeType": true,
         "type": "Builtin"
+    },
+    {
+        "label": "Basic Block main_B5_8 to Basic Block main_B4_3",
+        "vartype": "int [100]",
+        "varname": "d1",
+        "varsize": 3200,
+        "varscope": "Local",
+        "isVoidPointer": false,
+        "isConstantArray": true,
+        "isPointer": false,
+        "isStruct": false,
+        "isArray": true,
+        "isConstantSizeType": true,
+        "type": "ConstantArray"
     },
     {
         "label": "Basic Block fac_Actual_In_m to Basic Block fac_B2_1",

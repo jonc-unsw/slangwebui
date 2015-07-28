@@ -19,30 +19,32 @@ class CodeMirrorEditor extends React.Component {
   }
   
   componentDidMount() {
-
-    $.get(this.props.src, (data) => {
-      
-      $(React.findDOMNode(this)).text(data);
-
-      this.editor = CodeMirror.fromTextArea(React.findDOMNode(this), {
-        mode: "text/x-csrc",
-        styleActiveLine: false,
-        styleSelectedText: true,
-        lineNumbers: true,
-        readOnly: true,
-        lineWrapping: true,
-        viewportMargin: Infinity
-      });
+    this.editor = CodeMirror.fromTextArea(React.findDOMNode(this), {
+      mode: "text/x-csrc",
+      styleActiveLine: false,
+      styleSelectedText: true,
+      lineNumbers: true,
+      readOnly: true,
+      lineWrapping: true,
+      viewportMargin: Infinity
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    //if( this.props.line && this.props.line[0] !== nextProps.line[0] && this.props.line[1] !== nextProps.line[1] ) {
+    // TODO do this nicer
+    // Dont store marked in the Store since nested Actions are evil
+    this.marked[0] && this.marked[0].clear();
+    this.marked[1] && this.marked[1].clear();
 
-      // TODO do this nicer
-      // Dont store marked in the Store since nested Actions are evil
-      this.marked[0] && this.marked[0].clear();
-      this.marked[1] && this.marked[1].clear();
+    if(nextProps.file === undefined )
+      return;
+
+    $.get(`${this.props.prefix}src/${nextProps.file}`, (data) => {
+      this.editor.setValue(data);
+
+    
+      if(nextProps.file === undefined )
+        return;
 
       if( nextProps.line === undefined )
         return;
@@ -72,7 +74,8 @@ class CodeMirrorEditor extends React.Component {
         );
         this.marked[0] = marked0;
       }
-    //}
+
+    });
   }
 
   componentWillUnmount() {
@@ -92,6 +95,7 @@ class CodeMirrorEditor extends React.Component {
 class SourceCode extends React.Component {
   constructor(props) {
     super(props);
+    SourceCodeActions.loadSource(this.props.file);
   }
   
   static getStores() {
@@ -105,7 +109,7 @@ class SourceCode extends React.Component {
   render() {
     return (
       <IndependentPanel {...this.props} header="Source Code" expanded={this.props.expanded}>
-        <CodeMirrorEditor src="main.c" line={this.props.line} />
+        <CodeMirrorEditor prefix={this.props.prefix} file={this.props.file} line={this.props.line} />
       </IndependentPanel>
     )
   }
