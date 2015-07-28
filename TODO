@@ -16,3 +16,9 @@ Change
 * Possible to use @decorators for common actions/stores eg toggleAccordion?
 * Clean up source loading
 * Make slang output better - do this when i refactor the code???
+  Eg there are multiple compiler instances for each source file which means
+  it is really hard to figure out which stmt belongs to what source file
+  If i refactor to use a newer clang then i might be able to use 1 compilerinstance
+  Also need to write c++ code to generate bb.json since it currently uses inbuilt llvm dump()
+* Manually fix fib/graph.json to have correct line numbers
+* Manually write the BB for fib
