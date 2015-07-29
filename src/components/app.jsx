@@ -30,7 +30,7 @@ class App extends React.Component {
             <Layout type="columns">
               <Fixed className="sidebar">
                 <Accordion>
-                  <Project />
+                  <Project project={`${prefix}/project.json`} />
                   <SourceCode prefix={prefix} file="fib/main.c"/>
                 </Accordion>
               </Fixed>
@@ -46,7 +46,7 @@ class App extends React.Component {
               </Flex>
               <Fixed className="sidebar">
                 <Accordion>
-                  <BasicBlocks {...this.props} url="bb.json"/>
+                  <BasicBlocks {...this.props} url={`${prefix}/bb.json`} />
                   <DataDependenceBlocks {...this.props} url={`${prefix}/ddb.json`} />
                 </Accordion>
               </Fixed>

@@ -39,9 +39,8 @@ class CodeMirrorEditor extends React.Component {
     if(nextProps.file === undefined )
       return;
 
-    $.get(`${this.props.prefix}src/${nextProps.file}`, (data) => {
+    $.get(`${this.props.prefix}/${nextProps.file}`, (data) => {
       this.editor.setValue(data);
-
     
       if(nextProps.file === undefined )
         return;
@@ -95,7 +94,7 @@ class CodeMirrorEditor extends React.Component {
 class SourceCode extends React.Component {
   constructor(props) {
     super(props);
-    SourceCodeActions.loadSource(this.props.file);
+    SourceCodeActions.loadSource(`${this.props.prefix}/this.props.file`);
   }
   
   static getStores() {

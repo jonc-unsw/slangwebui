@@ -11,11 +11,13 @@ int main(int argc, char* argv[])
   printf("fib: %d\n", b1);
 
   int c1 = 0;
+  int d1[100] = {0};
   while( b1 < a1 )
   {
     b1 = fib(b1);
-    c1++;
+    d1[c1++] = b1;
   }
   printf("foo: %d\n", c1);
+
   return 0;
 }

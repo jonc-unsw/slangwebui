@@ -1,7 +1,7 @@
 import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import { ProjectStore } from '../stores/Store.js';
-import { ProjectActions } from '../actions/Actions.js';
+import { ProjectActions, SourceCodeActions } from '../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 import TreeView from 'react-treeview';
 
@@ -9,10 +9,7 @@ import TreeView from 'react-treeview';
 class Project extends React.Component {
   constructor(props){
     super(props);
-
-    this.state = {
-      path: undefined
-    };
+    ProjectActions.loadProject(this.props.project);
   }
   
   static getStores() {
@@ -23,22 +20,20 @@ class Project extends React.Component {
     return ProjectStore.getState();
   }
   
-  rec = ( path ) => {
-    path.children && path.children.forEach( this.rec );
-    return <div>{path.name}</div>
+  handleClick = (source) => {
+    SourceCodeActions.loadSource(source);
   }
 
   render() {
-
     return (
       <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded}>
         <TreeView nodeLabel={"Project Fib"} defaultCollapsed={false}>
           <TreeView nodeLabel={"src"} defaultCollapsed={false}>
-              <div><a href="#" className="info">fac.c</a></div>
-              <div><a href="#" className="info">fac.h</a></div>
-              <div><a href="#" className="info">fib.c</a></div>
-              <div><a href="#" className="info">fib.h</a></div>
-              <div><a href="#" className="info">main.c</a></div>
+              <div><a href="#" className="info" onClick={ () => this.handleClick("src/fac.c") }>fac.c</a></div>
+              <div><a href="#" className="info" onClick={ () => this.handleClick("src/fac.h") }>fac.h</a></div>
+              <div><a href="#" className="info" onClick={ () => this.handleClick("src/fib.c") }>fib.c</a></div>
+              <div><a href="#" className="info" onClick={ () => this.handleClick("src/fib.h") }>fib.h</a></div>
+              <div><a href="#" className="info" onClick={ () => this.handleClick("src/main.c") }>main.c</a></div>
           </TreeView>
         </TreeView>
       </IndependentPanel>

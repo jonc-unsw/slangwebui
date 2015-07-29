@@ -27,7 +27,7 @@ class BasicBlocks extends React.Component {
           <div className="blockname">
             <a href="#">[ {bb.name} ]</a>
           </div>
-          <Statements line={bb.line} statements={bb.statements} />
+          <Statements file={bb.file} line={bb.line} statements={bb.statements} />
           <Preds preds={bb.preds} />
           <Succs succs={bb.succs} />
         </div>
@@ -47,6 +47,7 @@ class Preds extends React.Component {
 
   handleClick = (e) => {
     //SourceCodeActions.highlightLine( edge.data("ddb") );
+    console.log(e);
   }
 
   render() {
@@ -78,7 +79,7 @@ class Succs extends React.Component {
 class Statement extends React.Component {
 
   handleClick = () => {
-    SourceCodeActions.highlightLine( this.props.line );
+    SourceCodeActions.highlightLine( { file: this.props.file, line: this.props.line } );
   }
 
   render() {
@@ -92,13 +93,14 @@ class Statement extends React.Component {
 class Statements extends React.Component {
   render() {
     if( this.props.statements ) {
-      let line = this.props.line;
-      // line is the starting line of the BB. Key is a unique inc from 0 which
-      // works nicely :)
+      let file = this.props.file;
       return (
         <ol>
           { this.props.statements.map(function(statement, key){
-            return <Statement key={key} line={line+key} statement={statement}/>;
+            // statement contains the statement and the line number
+            // statement[0] = "statement"
+            // statement[1] = linenumber
+            return <Statement key={key} file={file} line={statement[1]} statement={statement[0]}/>;
           }) }
         </ol>
       )

@@ -59,7 +59,7 @@ class Graph extends React.Component {
           
           fit: true, 
           padding: 30, 
-          animate: true, 
+          animate: false, 
           animationDuration: 500, 
           boundingBox: undefined, 
           ready: function(){}, 
@@ -135,14 +135,14 @@ class Graph extends React.Component {
 
   handleSelectEdge(e) {
     var edge = e.cyTarget; 
-    // TODO change this to use the store. Just like this for POC
-    this.state.edges.add(edge);
-    console.log( edge.data("ddb") );
-    // Only black edges have ddb info
     if( edge.data("ddb") !== undefined ) {
       DDBActions.updateCurrentDdb( edge.data("ddb") );
-      let line = edge.data("line");
-      SourceCodeActions.highlightLine( line );
+      let source = edge.source();
+      let target = edge.target();
+      let line0 = source.data("line");
+      let line1 = target.data("line");
+      let file  = source.data("file");
+      SourceCodeActions.highlightLine( {file: file, line: [line0, line1]} );
     }
     else {
       DDBActions.updateCurrentDdb( undefined );
@@ -151,6 +151,7 @@ class Graph extends React.Component {
 
   handleUnSelectEdge(e) {
     DDBActions.updateCurrentDdb( undefined );
+    SourceCodeActions.highlightLine( {file: undefined, line: undefined} );
   }
   
   handleSelectNode(n) {
