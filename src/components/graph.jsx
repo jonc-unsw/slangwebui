@@ -23,6 +23,18 @@ class Graph extends React.Component {
             'content': 'data(id)',
             'text-valign': 'center',
             'color': 'data(color)',
+            'background-color': '#428bca',
+            'text-outline-width': 1,
+            'text-outline-color': '#888'
+          })
+        .selector('$node > node')
+          .css({
+            'content': 'data(id)',
+            'text-valign': 'center',
+            'color': 'data(color)',
+            'background-color': '#f5f5f5',
+            'border-color': 'black',
+            'border-width': 2,
             'text-outline-width': 2,
             'text-outline-color': '#888'
           })
@@ -32,6 +44,7 @@ class Graph extends React.Component {
             'line-color': 'data(color)',
             'source-arrow-color': 'data(color)',
             'target-arrow-color': 'data(color)',
+            'curve-style': 'haystack',
             /*'content' : 'data(label)',*/
             'width': 'mapData(weight, 0, 6400, 1, 10)',
           })
@@ -54,7 +67,7 @@ class Graph extends React.Component {
           edgeSep: undefined, 
           rankSep: undefined, 
           rankDir: undefined, 
-          minLen: function( edge ){ return 10; }, 
+          minLen: function( edge ){ return 1; }, 
           edgeWeight: function( edge ){ return 1; }, 
           
           fit: true, 
@@ -83,7 +96,7 @@ class Graph extends React.Component {
     // TODO this is letting cytoscape handle custom function calls itself
     var ddbedges = cy.collection();
     cytoscape('core', 'toggleddb', function( fn ){
-      var edges = cy.elements('edge[ type *= "ddb" ]')
+      var edges = cy.elements('edge[ddb]')
 
       if( ddbedges.removed() ) {
         ddbedges.restore();
@@ -99,7 +112,7 @@ class Graph extends React.Component {
 
     var cfedges = cy.collection();
     cytoscape('core', 'togglecontrolflow', function( fn ){
-      var edges = cy.elements('edge[ type *= "cf" ]')
+      var edges = cy.elements('edge[^ddb]')
 
       if( cfedges.removed() ) {
         cfedges.restore();
@@ -113,7 +126,8 @@ class Graph extends React.Component {
     });
     var self = this;
     cytoscape('core', 'reloadJson', function( ){
-      cy.load(self.state.json);
+      ddbedges.restore();
+      cfedges.restore();
       return this; // chainability
     });
 
