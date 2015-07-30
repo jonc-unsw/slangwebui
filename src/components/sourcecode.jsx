@@ -28,6 +28,7 @@ class CodeMirrorEditor extends React.Component {
       lineWrapping: true,
       viewportMargin: Infinity
     });
+    this.editor.setValue("Nothing selected yet");
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,7 +37,7 @@ class CodeMirrorEditor extends React.Component {
     this.marked[0] && this.marked[0].clear();
     this.marked[1] && this.marked[1].clear();
 
-    if(nextProps.file === undefined )
+    if(nextProps.file === undefined)
       return;
 
     $.get(`${this.props.prefix}/${nextProps.file}`, (data) => {
@@ -94,7 +95,6 @@ class CodeMirrorEditor extends React.Component {
 class SourceCode extends React.Component {
   constructor(props) {
     super(props);
-    SourceCodeActions.loadSource(`${this.props.prefix}/this.props.file`);
   }
   
   static getStores() {
