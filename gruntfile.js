@@ -51,13 +51,24 @@ module.exports = function(grunt){
       options: {
         nospawn: true
       }
-    }
+    },
+    compress: {
+      main: {
+        options: {
+          archive: 'demo.tgz',
+        },
+        files: [
+          {src: ['dist/**','projects/**','index.html'], dest: 'demo/', filter: 'isFile', expand: true}, // includes files in path and its subdirs
+        ]
+      }
+    }    
   })
 
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-browserify');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-compress');
 grunt.registerTask('default', ['watch']);
 //grunt.registerTask('build', ['env:build', 'browserify:build']);
 };
