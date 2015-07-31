@@ -1,6 +1,7 @@
 Important
 * Keep third party code in sepate files etc when ugligying them
 * https://github.com/substack/browserify-handbook#external-bundles
+* Do tooltips again
 
 New
 * Deal with multiple node/edge selections
