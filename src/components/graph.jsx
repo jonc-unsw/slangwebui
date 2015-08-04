@@ -1,5 +1,5 @@
 import React from 'react';
-import cytoscape from 'cytoscape';
+//import cytoscape from 'cytoscape';
 
 import { DDBActions, SourceCodeActions } from '../actions/Actions.js';
 
@@ -14,9 +14,11 @@ class Graph extends React.Component {
   }
   
   componentDidMount() {
-    $( React.findDOMNode(this) ).cytoscape({
+    //$( React.findDOMNode(this) ).cytoscape({
       //boxSelectionEnabled: true,
       //selectionType: 'additive',
+    var cy = window.cy = cytoscape({
+      container: document.getElementById( "cy" ),
       style: cytoscape.stylesheet()
         .selector('node')
           .css({
@@ -82,7 +84,7 @@ class Graph extends React.Component {
         //cy.on('tap', 'node', (e) => self.handleClick(e) );
       }
     });
-    var cy = $('#cy').cytoscape('get');
+    //var cy = $('#cy').cytoscape('get');
     $.get("projects/fib/graph.json", (result) => {
         console.log(result);
         this.setState({json: result});
@@ -174,6 +176,38 @@ class Graph extends React.Component {
     let file = node.data("file");
     let line = node.data("line");
     SourceCodeActions.highlightLine( {file: file, line: line} );
+
+    if( node.isParent() )
+      return;
+    node.qtip({
+      content: {
+        title: node.id(),
+        text: "Degree: " + node.degree(),
+        button: true
+      },
+      show: {
+        delay: 0,
+        event: false,
+        ready: true,
+        effect: true
+      },
+      position: {
+        my: 'top center',
+        at: 'bottom center',
+        effect: false
+      },
+      hide: {
+        //fixed: true,
+        //event: false,
+        //inactive: 2000,
+        event: 'click',
+        effect: true
+      },
+      style: {
+        classes: 'qtip-bootstrap'
+      }
+    });
+
   }
 
   handleUnSelectNode(e) {
@@ -187,7 +221,9 @@ class Graph extends React.Component {
 
   render() {
     return (
-      <div id="cy" />
+      <div id="cy">
+        <div id="box"></div>
+      </div>
     )
   }
 }

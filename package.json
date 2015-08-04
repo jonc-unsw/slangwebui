@@ -11,6 +11,7 @@
     "bootstrap": "^3.3.5",
     "codemirror": "^5.5.0",
     "cytoscape": "^2.4.4",
+    "cytoscape-qtip": "^2.2.3",
     "dir-to-json": "0.0.3",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",

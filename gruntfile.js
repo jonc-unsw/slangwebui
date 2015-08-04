@@ -21,6 +21,9 @@ module.exports = function(grunt){
         files: {
           'dist/static.js': [
               './node_modules/jquery/dist/jquery.min.js',
+              './jquery.qtip.js',
+              './node_modules/cytoscape/dist/cytoscape.js',
+              './node_modules/cytoscape-qtip/cytoscape-qtip.js',
               './node_modules/bootstrap/dist/js/bootstrap.min.js',
               './node_modules/babel-core/browser-polyfill.min.js',
               './node_modules/cytoscape/lib/dagre.js'
