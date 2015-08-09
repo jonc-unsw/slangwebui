@@ -10,6 +10,7 @@ import { Project } from './project.jsx';
 import { SourceCode } from './sourcecode.jsx';
 import { Graph } from './graph.jsx';
 import { MyChart } from './chart.jsx';
+import { Tree } from './tree.jsx';
 import { BasicBlocks } from './bb.jsx';
 import { DataDependenceBlocks } from './ddb.jsx';
 import { Footer } from './footer.jsx';
@@ -17,6 +18,13 @@ import { Footer } from './footer.jsx';
 class App extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      key: 1
+    };
+  }
+
+  handleSelect = (key) => {
+    this.setState({key});
   }
 
   render() {
@@ -35,12 +43,15 @@ class App extends React.Component {
                 </Accordion>
               </Fixed>
               <Flex className="content">
-                <TabbedArea defaultActiveKey={1}>
+                <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect}>
                   <TabPane eventKey={1} tab="System Dependence Graph">
                     <Graph />
                   </TabPane>
                   <TabPane eventKey={2} tab="Statistics">
                     <MyChart />
+                  </TabPane>
+                  <TabPane eventKey={3} tab="Tree">
+                    <Tree />
                   </TabPane>
                 </TabbedArea>
               </Flex>
