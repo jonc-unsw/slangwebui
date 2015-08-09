@@ -20,6 +20,7 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
     "jquery": "^2.1.4",
+    "licensify": "^1.4.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.0",
     "react-d3": "git+https://github.com/esbullington/react-d3.git",

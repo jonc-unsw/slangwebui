@@ -5,6 +5,9 @@ module.exports = function(grunt){
     browserify: {
       dev: {
         options: {
+            plugin: [
+              [ "licensify"],
+            ],
             debug: true,
             transform: [["babelify", { "stage": 0 }]],
             browserifyOptions: {
