@@ -24,19 +24,29 @@ class MyChart extends React.Component {
     ];
     
     var barData = [
-      {label: "Control Flow", value: 20.0}, 
-      {label: "Data Dependence", value: 55.0}
+      {
+        name: "Edges",
+        values: [
+          {x: "Control Flow", y: 20.0},
+          {x: "Data Dependence", y: 55.0}
+        ]
+      }
     ];
 
     var bbData = [
-      { label: "main_B0", value: 0 },
-      { label: "main_B1", value: 1 },
-      { label: "main_B2", value: 1 },
-      { label: "main_B3", value: 1 },
-      { label: "main_B4", value: 2 },
-      { label: "main_B5", value: 5 },
-      { label: "main_B6", value: 0 }
-    ]
+      {
+        "name": "Series A",
+        "values": [
+          { x: "main_B0", y: 0 },
+          { x: "main_B1", y: 1 },
+          { x: "main_B2", y: 1 },
+          { x: "main_B3", y: 1 },
+          { x: "main_B4", y: 2 },
+          { x: "main_B5", y: 5 },
+          { x: "main_B6", y: 0 }
+        ]
+      }
+    ];
 
     return (
     <div style={{'overflow': 'auto'}}>
