@@ -1,12 +1,8 @@
 Important
-* Keep third party code in sepate files etc when ugligying them
-* https://github.com/substack/browserify-handbook#external-bundles
-* Do tooltips again
 
 New
 * Deal with multiple node/edge selections
 * IE8
-* Add new tab that shows trees...
 
 Change
 * Make gruntfile better
@@ -23,3 +19,5 @@ Change
   Also need to write c++ code to generate bb.json since it currently uses inbuilt llvm dump()
 * Manually fix fib/graph.json to have correct line numbers
 * Manually write the BB for fib
+* Add new tab that shows trees...Make it work now...
+* Fix tooltips
