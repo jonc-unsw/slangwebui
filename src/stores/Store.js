@@ -1,6 +1,6 @@
 import alt from '../alt';
 
-import { BBActions, DDBActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
+import { BBActions, DDBActions, FeaturesActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
 
 class DDBStore {
   constructor() {
@@ -103,9 +103,54 @@ class SourceCodeStore {
 
 }
 
+class FeaturesStore {
+  constructor() {
+    this.bindActions( FeaturesActions );
+
+    this.bindListeners({
+      onGetOptimisationForFile: SourceCodeActions.loadSource,
+    });
+
+    this.state = {
+      json: undefined,
+      optimisations: [],
+      expanded: true
+    };
+  }
+
+  onLoadFeatures(url) {
+    $.get(url, (result) => {
+      this.setState({json: result});
+      this.setState({optimisations: this.state.json.optimisations});
+    });
+  }
+
+  onGetOptimisationForFile(file) {
+    let o = this.state.json && this.state.json.optimisations.filter( (v,k) => {
+      return v.files.includes(file);
+    });
+    this.setState( { optimisations: o });
+  }
+
+  onSelectOptimisation(optimisation) {
+    this.state.json.optimisations[optimisation].checked = 
+      !this.state.json.optimisations[optimisation].checked;
+
+    this.setState( { optimisations: this.state.json.optimisations } );
+
+    console.log(  this.state.json.optimisations[optimisation].checked );
+  }
+
+  onToggleAccordion() {
+    this.setState( {expanded: !this.state.expanded} );
+  }
+
+}
+
 module.exports = {
     DDBStore: alt.createStore(DDBStore),
     BBStore: alt.createStore(BBStore),
     ProjectStore: alt.createStore(ProjectStore),
-    SourceCodeStore: alt.createStore(SourceCodeStore)
+    SourceCodeStore: alt.createStore(SourceCodeStore),
+    FeaturesStore: alt.createStore(FeaturesStore)
 };

@@ -8,6 +8,7 @@ import { Header } from './header.jsx';
 import { IndependentPanel } from './independentpanel.jsx';
 import { Project } from './project.jsx';
 import { SourceCode } from './sourcecode.jsx';
+import { Features } from './features.jsx';
 import { Graph } from './graph.jsx';
 import { MyChart } from './chart.jsx';
 import { Tree } from './tree.jsx';
@@ -40,6 +41,7 @@ class App extends React.Component {
                 <Accordion>
                   <Project project={`${prefix}/project.json`} />
                   <SourceCode prefix={prefix} file="fib/main.c"/>
+                  <Features />
                 </Accordion>
               </Fixed>
               <Flex className="content">

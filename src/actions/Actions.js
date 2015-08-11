@@ -24,9 +24,17 @@ class SourceCodeActions {
   }
 }
 
+class FeaturesActions {
+  constructor() {
+    this.generateActions('loadFeatures', 'getOptimisationForFile', 
+      'selectOptimisation', 'toggleAccordion');
+  }
+}
+
 module.exports = {
     DDBActions: alt.createActions(DDBActions),
     BBActions: alt.createActions(BBActions),
     ProjectActions: alt.createActions(ProjectActions),
-    SourceCodeActions: alt.createActions(SourceCodeActions)
+    SourceCodeActions: alt.createActions(SourceCodeActions),
+    FeaturesActions: alt.createActions(FeaturesActions)
 };
