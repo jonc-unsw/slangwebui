@@ -76,7 +76,6 @@ class Tree extends React.Component {
     });
     var cy1 = $('#cy1').cytoscape('get');
     $.get("projects/fib/tree.json", (result) => {
-        console.log(result);
         cy1.load(result);
     });
     

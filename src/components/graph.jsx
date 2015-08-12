@@ -1,18 +1,32 @@
 import React from 'react';
 //import cytoscape from 'cytoscape';
+import connectToStores from 'alt/utils/connectToStores';
+import { FeaturesStore } from '../stores/Store.js';
+import { DDBActions, FeaturesActions, SourceCodeActions } from '../actions/Actions.js';
 
-import { DDBActions, SourceCodeActions } from '../actions/Actions.js';
-
+@connectToStores
 class Graph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      json: undefined,
-      timeout: undefined,
-      edges: new Set()
-    };
   }
   
+  static getStores() {
+    return [FeaturesStore];
+  }
+
+  static getPropsFromStores() {
+    return FeaturesStore.getState();
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    //let collection = this.cy.collection("");
+    //this.cy.$('#j').select();
+    if( nextProps.optimisations.length === 0 )
+      return;
+    console.log(nextProps.optimisations[0].data);
+    console.log(collection);
+  }
+
   componentDidMount() {
     //$( React.findDOMNode(this) ).cytoscape({
       //boxSelectionEnabled: true,
@@ -84,9 +98,9 @@ class Graph extends React.Component {
         //cy.on('tap', 'node', (e) => self.handleClick(e) );
       }
     });
+    this.cy = cy;
     //var cy = $('#cy').cytoscape('get');
     $.get("projects/fib/graph.json", (result) => {
-        console.log(result);
         this.setState({json: result});
         cy.load(result);
     });
