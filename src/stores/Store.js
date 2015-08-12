@@ -114,6 +114,7 @@ class FeaturesStore {
     this.state = {
       json: undefined,
       optimisations: [], // The currently viewed optimisations
+      file: undefined,
       expanded: true
     };
   }
@@ -145,7 +146,7 @@ class FeaturesStore {
     // Alternatively we could set .checked in the state.json and state.optimisations
     // which means we do not need the below line
     let o = this.state.json && this.state.json.optimisations.filter( (v,k) => {
-      return v.files.includes(this.state.file);
+      return this.state.file ? v.files.includes(this.state.file) : v.files;
     });
 
     this.setState( { optimisations: o } );
