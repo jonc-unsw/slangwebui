@@ -4,6 +4,7 @@ import { FeaturesStore } from '../stores/Store.js';
 import { FeaturesActions } from '../actions/Actions.js';
 import { Input } from 'react-bootstrap';
 import { IndependentPanel } from './independentpanel.jsx';
+import TreeView from 'react-treeview';
 
 @connectToStores
 class Features extends React.Component {
@@ -33,8 +34,12 @@ class Features extends React.Component {
         <form>
         {
           this.props.optimisations.map( (v,k) => {
+          const label = <Input groupClassName="featureslabel" checked={v.checked} type='checkbox' label={v.title} key={k} data-id={v.id} onChange={this.handleChange} />;
+
             return (
-              <Input checked={v.checked} type='checkbox' label={v.title} key={k} data-id={v.id} onChange={this.handleChange} />
+        <TreeView nodeLabel={label} defaultCollapsed={false}>
+          <div className="featuresmessage">{v.message}</div>
+        </TreeView>
             )
           })
         }
