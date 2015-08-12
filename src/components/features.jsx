@@ -34,7 +34,7 @@ class Features extends React.Component {
         {
           this.props.optimisations.map( (v,k) => {
             return (
-              <Input type='checkbox' label={v.title} key={k} data-id={k} onChange={this.handleChange} />
+              <Input checked={v.checked} type='checkbox' label={v.title} key={k} data-id={v.id} onChange={this.handleChange} />
             )
           })
         }

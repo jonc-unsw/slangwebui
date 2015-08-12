@@ -113,7 +113,7 @@ class FeaturesStore {
 
     this.state = {
       json: undefined,
-      optimisations: [],
+      optimisations: [], // The currently viewed optimisations
       expanded: true
     };
   }
@@ -129,16 +129,26 @@ class FeaturesStore {
     let o = this.state.json && this.state.json.optimisations.filter( (v,k) => {
       return v.files.includes(file);
     });
-    this.setState( { optimisations: o });
+    this.setState( { optimisations: o, file: file });
   }
 
   onSelectOptimisation(optimisation) {
-    this.state.json.optimisations[optimisation].checked = 
-      !this.state.json.optimisations[optimisation].checked;
 
-    this.setState( { optimisations: this.state.json.optimisations } );
+    // Find the correct array element
+    let i = this.state.json.optimisations.findIndex( x => x.id === optimisation );
 
-    console.log(  this.state.json.optimisations[optimisation].checked );
+    // Update the main file
+    this.state.json.optimisations[i].checked = 
+      !this.state.json.optimisations[i].checked;
+    
+    // Reload the optimisations
+    // Alternatively we could set .checked in the state.json and state.optimisations
+    // which means we do not need the below line
+    let o = this.state.json && this.state.json.optimisations.filter( (v,k) => {
+      return v.files.includes(this.state.file);
+    });
+
+    this.setState( { optimisations: o } );
   }
 
   onToggleAccordion() {
