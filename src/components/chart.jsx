@@ -4,7 +4,7 @@ import { BarChart, PieChart, LineChart } from 'react-d3';
 class MyChart extends React.Component {
 
   componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener( "resize", this.handleResize );
     this.handleResize();
   }
 
@@ -14,21 +14,21 @@ class MyChart extends React.Component {
    * This works for now but would be nicer to fix react-bootstrap
    * */
   handleResize = () => {
-    $(React.findDOMNode(this)).height($(React.findDOMNode(this)).closest( ".Flex" ).height() - 100 );
+    $( React.findDOMNode( this ) ).height( $( React.findDOMNode( this ) ).closest( ".Flex" ).height() - 100 );
   }
 
-  render(){
+  render() {
     var pieData = [
-      {label: "Control Flow", value: 20.0}, 
-      {label: "Data Dependence", value: 55.0}
+      { label: "Control Flow", value: 20.0 },
+      { label: "Data Dependence", value: 55.0 }
     ];
-    
+
     var barData = [
       {
         name: "Edges",
         values: [
-          {x: "Control Flow", y: 20.0},
-          {x: "Data Dependence", y: 55.0}
+          { x: "Control Flow", y: 20.0 },
+          { x: "Data Dependence", y: 55.0 }
         ]
       }
     ];
@@ -49,19 +49,20 @@ class MyChart extends React.Component {
     ];
 
     return (
-    <div style={{'overflow': 'auto'}}>
-      <div style={{'display': 'flex'}}>
-        <div style={{'flex': 1}} ><PieChart data={pieData} width={450} height={400} radius={110}
-          innerRadius={20} sectorBorderColor="white" title="Edges" /></div>
-        <div style={{'flex': 1}}><BarChart data={barData} width={500} height={300} title="Edges"
-          yAxisLabel="Percentage" xAxisLabel="Edges"/></div>
+      <div style={{'overflow': 'auto'}} >
+        <div style={{'display': 'flex'}} >
+          <div style={{'flex': 1}} ><PieChart data={pieData} width={450} height={400} radius={110}
+                                              innerRadius={20} sectorBorderColor="white" title="Edges" /></div>
+          <div style={{'flex': 1}} ><BarChart data={barData} width={500} height={300} title="Edges"
+                                              yAxisLabel="Percentage" xAxisLabel="Edges" /></div>
+        </div>
+        <div style={{'display': 'flex'}} >
+          <div style={{'margin': 'auto'}} ><BarChart data={bbData} width={1000}
+                                                     height={300} title="Number of Basic Blocks"
+                                                     yAxisLabel="Number"
+                                                     xAxisLabel="Basic Blocks" /></div>
+        </div>
       </div>
-      <div style={{'display': 'flex'}}>
-        <div style={{'margin': 'auto'}}><BarChart data={bbData} width={1000} 
-          height={300} title="Number of Basic Blocks" yAxisLabel="Number" 
-          xAxisLabel="Basic Blocks"/></div>
-      </div>
-    </div>
     )
   }
 }

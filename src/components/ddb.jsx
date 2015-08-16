@@ -4,15 +4,14 @@ import { DDBStore } from '../stores/Store.js';
 import { DDBActions } from '../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 
-@connectToStores
-class DataDependenceBlocks extends React.Component {
-  constructor(props) {
-    super(props);
-    DDBActions.loadDdb(this.props.url);
+@connectToStores class DataDependenceBlocks extends React.Component {
+  constructor( props ) {
+    super( props );
+    DDBActions.loadDdb( this.props.url );
   }
 
   static getStores() {
-    return [DDBStore];
+    return [ DDBStore ];
   }
 
   static getPropsFromStores() {
@@ -22,27 +21,27 @@ class DataDependenceBlocks extends React.Component {
   render() {
 
     if( this.props.ddbid !== undefined ) {
-      
+
       var ddblock = this.props.ddbdata[ this.props.ddbid ];
 
       return (
-        <IndependentPanel {...this.props} header="Data Dependence Blocks" 
-          expanded={this.props.expanded}
-        >
+        <IndependentPanel {...this.props} header="Data Dependence Blocks"
+                                          expanded={this.props.expanded}
+          >
           <ul>
             {
-              Object.keys(ddblock).map( (k,v) => {
-                return ( <li key={v}>{k} {ddblock[k]}</li> )  
-              })
+              Object.keys( ddblock ).map( ( k, v ) => {
+                return ( <li key={v} >{k} {ddblock[ k ]}</li> )
+              } )
             }
           </ul>
         </IndependentPanel>
       )
     }
     return (
-      <IndependentPanel {...this.props} header="Data Dependence Blocks" 
-        expanded={this.props.expanded}
-      >
+      <IndependentPanel {...this.props} header="Data Dependence Blocks"
+                                        expanded={this.props.expanded}
+        >
         <div>Nothing selected</div>
       </IndependentPanel>
     )
