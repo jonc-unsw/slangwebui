@@ -21,8 +21,8 @@
       "data": {
         "nodes": ["fib_B1_1", "fib_B1_2", "fib_B2_1", "fib_B3_If", "fib_B1_3"]
       },
-      "files": ["src/fac.c"],
-      "title": "This is loop optimisation foo fac.c",
+      "files": ["src/fib.c"],
+      "title": "This is loop optimisation foo fib.c",
       "message": "These nodes and edges are part of the foo loop optimisation."
     },
     {
@@ -30,10 +30,10 @@
       "type": "graph",
       "priority": 3,
       "data": {
-        "nodes": ["main_B1_1", "main_B1_2", "main_B2_1"]
+        "nodes": ["fac_B2_For", "fac_B3_1", "fac_B4_1", "fac_B2_1"]
       },
-      "files": ["src/main.c"],
-      "title": "This is loop optimisation foo2 main.c",
+      "files": ["src/fac.c"],
+      "title": "This is loop optimisation foo2 fac.c",
       "message": "These nodes and edges are part of the foo loop optimisation."
     },
     {
@@ -41,7 +41,7 @@
       "type": "graph",
       "priority": 0,
       "data": {
-        "nodes": ["main_B1_1", "main_B1_2", "main_B2_1", "fib_B1_1"]
+        "nodes": ["main_B4_1", "Entry_fib", "main_B4_2", "fib_B5_4"]
       },
       "files": ["src/main.c", "src/fib.c"],
       "title": "This is loop optimisation bar1 main.c fib.c",

@@ -24,10 +24,10 @@ class SourceCodeActions {
   }
 }
 
-class FeaturesActions {
+class GraphActions {
   constructor() {
     this.generateActions( 'loadFeatures', 'getOptimisationForFile',
-      'selectOptimisation', 'toggleAccordion' );
+      'selectOptimisation', 'toggleAccordion', 'storeGraph', 'storeFeaturedNodes' );
   }
 }
 
@@ -36,5 +36,5 @@ module.exports = {
   BBActions: alt.createActions( BBActions ),
   ProjectActions: alt.createActions( ProjectActions ),
   SourceCodeActions: alt.createActions( SourceCodeActions ),
-  FeaturesActions: alt.createActions( FeaturesActions )
+  GraphActions: alt.createActions( GraphActions )
 };

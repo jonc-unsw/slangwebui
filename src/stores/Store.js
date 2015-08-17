@@ -1,6 +1,6 @@
 import alt from '../alt';
 
-import { BBActions, DDBActions, FeaturesActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
+import { BBActions, DDBActions, GraphActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
 
 class DDBStore {
   constructor() {
@@ -103,9 +103,9 @@ class SourceCodeStore {
 
 }
 
-class FeaturesStore {
+class GraphStore {
   constructor() {
-    this.bindActions( FeaturesActions );
+    this.bindActions( GraphActions );
 
     this.bindListeners( {
       onGetOptimisationForFile: SourceCodeActions.loadSource,
@@ -115,7 +115,9 @@ class FeaturesStore {
       json: undefined,
       optimisations: [], // The currently viewed optimisations
       file: undefined,
-      expanded: true
+      expanded: true,
+      graph: undefined,
+      featurednodes: []
     };
   }
 
@@ -136,23 +138,36 @@ class FeaturesStore {
   onSelectOptimisation( optimisation ) {
 
     // Find the correct array element
+    // This is because this.state.optimisations is an reduced sized array. Maybe change the filtering to be in the
+    // jsx file so we can have a 1-1 index mapping...
     let i = this.state.json.optimisations.findIndex( x => x.id === optimisation );
 
     // Update the main file
     this.state.json.optimisations[ i ].checked = !this.state.json.optimisations[ i ].checked;
 
     // Reload the optimisations
-    // Alternatively we could set .checked in the state.json and state.optimisations
-    // which means we do not need the below line
-    let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
+    /*let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
         return this.state.file ? v.files.includes( this.state.file ) : v.files;
-      } );
+      } );*/
 
-    this.setState( { optimisations: o } );
+    //this.setState( { optimisations: o } );
+    this.setState( { json: this.state.json } );
   }
 
   onToggleAccordion() {
     this.setState( { expanded: !this.state.expanded } );
+  }
+
+  onStoreGraph( graph ) {
+    this.setState( {graph: graph} );
+    this.preventDefault();
+  }
+
+  onStoreFeaturedNodes( nodes ) {
+    this.setState( { featuresNodes: this.state.featurednodes.push( nodes ) } );
+
+    // We dont need to tell the view otherwise we inf loop
+    this.preventDefault();
   }
 
 }
@@ -162,5 +177,5 @@ module.exports = {
   BBStore: alt.createStore( BBStore ),
   ProjectStore: alt.createStore( ProjectStore ),
   SourceCodeStore: alt.createStore( SourceCodeStore ),
-  FeaturesStore: alt.createStore( FeaturesStore )
+  GraphStore: alt.createStore( GraphStore )
 };

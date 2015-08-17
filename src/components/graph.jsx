@@ -1,29 +1,126 @@
 import React from 'react';
 //import cytoscape from 'cytoscape';
 import connectToStores from 'alt/utils/connectToStores';
-import { FeaturesStore } from '../stores/Store.js';
-import { DDBActions, FeaturesActions, SourceCodeActions } from '../actions/Actions.js';
+import { GraphStore } from '../stores/Store.js';
+import { DDBActions, GraphActions, SourceCodeActions } from '../actions/Actions.js';
+
+const DEFAULT_NODE_COLOR = "#428bca";
+const HIGHLIGHTED_NODE_COLOR = "#ff0000";
+const HIGHLIGHTED_NODE_COLOR_PRIORITY = ["#00ff00", "#ff00ff", "#ffff00", "#00ffff"];
+
 
 @connectToStores class Graph extends React.Component {
   constructor( props ) {
     super( props );
+
+    this.featured = {}; // Just store the css properties that we want to change for each node/edge
+                        // TODO move this into a store...
+    this.ready = false;
   }
 
   static getStores() {
-    return [ FeaturesStore ];
+    return [ GraphStore ];
   }
 
   static getPropsFromStores() {
-    return FeaturesStore.getState();
+    return GraphStore.getState();
   }
 
   componentWillReceiveProps( nextProps ) {
-    //let collection = this.cy.collection("");
-    //this.cy.$('#j').select();
-    if( nextProps.optimisations.length === 0 )
+
+    if( nextProps.json.optimisations.length === 0 )
       return;
-    console.log( nextProps.optimisations[ 0 ].data );
-    console.log( collection );
+
+    if( this.props.graph === undefined )
+      return;
+
+    // Hack to get around when we are saving the cy graph state but we are not ready to process things
+    if( this.ready === false ) {
+      this.ready = true;
+      return;
+    }
+
+    // Cytoscape can process the graph by batching. There is an endBatch() afterwards
+    // This improves performance since it does not need to redraw until everything is done
+    this.props.graph.startBatch();
+
+    // Unhighlight first
+    for ( let optimisation of nextProps.json.optimisations ) {
+      if ( optimisation.checked === undefined || optimisation.checked )
+        continue;
+
+      if( this.featured[ optimisation.id ] === undefined )
+        continue;
+
+      // We still need to query the graph to find which nodes to unhighlight.
+      // Originally I thought to remove the clone the nodes then delete/restore but that breaks the graph...
+      let query = "";
+
+      for ( let v of optimisation.data.nodes ) {
+        query += 'node[id = "'+v+'" ] , ';
+      }
+      query = query.substring(0, query.length - 2);
+
+      let nodes = this.props.graph.filter(query);
+
+      nodes.forEach( (ele, i, eles) => {
+        ele.css( 'background-color', this.featured[ optimisation.id ]["nodes"][ele.id()] );
+      });
+
+      let edges = nodes.edgesWith( nodes );
+
+      edges.forEach( (ele, i, eles) => {
+        ele.css( 'line-color', this.featured[ optimisation.id ]["edges"][ele.id()] );
+      });
+
+      this.featured[ optimisation.id ] = undefined;
+    }
+
+    // Now highlight
+    for ( let optimisation of nextProps.json.optimisations ) {
+      if( optimisation.checked === undefined || !optimisation.checked )
+        continue;
+
+      if( this.featured[ optimisation.id ] )
+        continue;
+
+      let query = "";
+
+      for ( let v of optimisation.data.nodes ) {
+        query += 'node[id = "'+v+'" ] , ';
+      }
+      query = query.substring(0, query.length - 2);
+
+      let nodes = this.props.graph.filter(query);
+
+      if(this.featured[ optimisation.id ] === undefined){
+        this.featured[ optimisation.id ] = {};
+        this.featured[ optimisation.id ]["nodes"] = {};
+        this.featured[ optimisation.id ]["edges"] = {};
+      }
+
+      nodes.forEach( (ele, i, eles) => {
+        this.featured[ optimisation.id ]["nodes"][ele.id()] = ele.css('background-color');
+      });
+
+      nodes.css( {
+        'background-color': HIGHLIGHTED_NODE_COLOR_PRIORITY[optimisation.priority]
+      });
+
+      // Highlight the edges which are connected by each node in the collection
+      let edges = nodes.edgesWith( nodes );
+
+      edges.forEach( (ele, i, eles) => {
+        this.featured[ optimisation.id ]["edges"][ele.id()] = ele.css('line-color');
+      });
+
+      edges.css( {
+        'line-color': HIGHLIGHTED_NODE_COLOR_PRIORITY[optimisation.priority]
+      });
+    }
+
+    this.props.graph.endBatch();
+
   }
 
   componentDidMount() {
@@ -38,7 +135,7 @@ import { DDBActions, FeaturesActions, SourceCodeActions } from '../actions/Actio
           'content': 'data(id)',
           'text-valign': 'center',
           'color': 'data(color)',
-          'background-color': '#428bca',
+          'background-color': DEFAULT_NODE_COLOR,
           'text-outline-width': 1,
           'text-outline-color': '#888'
         } )
@@ -103,7 +200,9 @@ import { DDBActions, FeaturesActions, SourceCodeActions } from '../actions/Actio
         //cy.on('tap', 'node', (e) => self.handleClick(e) );
       }
     } );
-    this.cy = cy;
+
+    GraphActions.storeGraph( cy );
+
     //var cy = $('#cy').cytoscape('get');
     $.get( "projects/fib/graph.json", ( result ) => {
       this.setState( { json: result } );
