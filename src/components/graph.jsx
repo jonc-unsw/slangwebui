@@ -1,4 +1,6 @@
 import React from 'react';
+import Immutable from 'immutable';
+
 //import cytoscape from 'cytoscape';
 import connectToStores from 'alt/utils/connectToStores';
 import { GraphStore } from '../stores/Store.js';
@@ -28,118 +30,113 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
 
   componentWillReceiveProps( nextProps ) {
 
-    if( nextProps.json.optimisations.length === 0 )
-      return;
-
+    // We are not ready yet.
     if( this.props.graph === undefined )
       return;
 
-    // Hack to get around when we are saving the cy graph state but we are not ready to process things
-    if( this.ready === false ) {
-      this.ready = true;
-      return;
-    }
-
-    // Cytoscape can process the graph by batching. There is an endBatch() afterwards
-    // This improves performance since it does not need to redraw until everything is done
     this.props.graph.startBatch();
 
-    // Unhighlight first
-    for( let optimisation of nextProps.json.optimisations ) {
-      if( optimisation.checked === undefined || optimisation.checked )
-        continue;
+    // this.props is the original state and nextProps is the incomming state.
+    // This means that if we have some already highlighted optimisations we need to add or remove the highlights of the
+    // difference between the two sets
 
-      if( this.featured[ optimisation.id ] === undefined )
-        continue;
+    // To add
+    if( this.props.selected.size < nextProps.selected.size ) {
+      let optimisations = nextProps.selected.subtract( this.props.selected );
 
-      // We still need to query the graph to find which nodes to unhighlight.
-      // Originally I thought to remove the clone the nodes then delete/restore but that breaks the graph...
-      let query = "";
+      for( let o of optimisations ) {
+        let optimisation = nextProps.json.optimisations[ o ];
 
-      for( let v of optimisation.data.nodes ) {
-        query += 'node[id = "' + v + '" ] , ';
-      }
-      query = query.substring( 0, query.length - 2 );
+        let query = "";
 
-      let nodes = this.props.graph.filter( query );
+        for( let v of optimisation.data.nodes ) {
+          query += 'node[id = "' + v + '" ] , ';
+        }
+        query = query.substring( 0, query.length - 2 );
 
-      nodes.forEach( ( ele, i, eles ) => {
-        ele.css( 'background-color', this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] );
-        ele.qtip( 'api' ).destroy( true );
-      } );
+        let nodes = this.props.graph.filter( query );
 
-      let edges = nodes.edgesWith( nodes );
+        if( this.featured[ optimisation.id ] === undefined ) {
+          this.featured[ optimisation.id ] = {};
+          this.featured[ optimisation.id ][ "nodes" ] = {};
+          this.featured[ optimisation.id ][ "edges" ] = {};
+        }
 
-      edges.forEach( ( ele, i, eles ) => {
-        ele.css( 'line-color', this.featured[ optimisation.id ][ "edges" ][ ele.id() ] );
-      } );
+        nodes.forEach( ( ele, i, eles ) => {
+          // Backup the current color
+          this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] = ele.css( 'background-color' );
 
-      this.featured[ optimisation.id ] = undefined;
-    }
+          // Apply new color
+          ele.css( 'background-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
 
-    // Now highlight
-    for( let optimisation of nextProps.json.optimisations ) {
-      if( optimisation.checked === undefined || !optimisation.checked )
-        continue;
-
-      if( this.featured[ optimisation.id ] )
-        continue;
-
-      let query = "";
-
-      for( let v of optimisation.data.nodes ) {
-        query += 'node[id = "' + v + '" ] , ';
-      }
-      query = query.substring( 0, query.length - 2 );
-
-      let nodes = this.props.graph.filter( query );
-
-      if( this.featured[ optimisation.id ] === undefined ) {
-        this.featured[ optimisation.id ] = {};
-        this.featured[ optimisation.id ][ "nodes" ] = {};
-        this.featured[ optimisation.id ][ "edges" ] = {};
-      }
-
-      nodes.forEach( ( ele, i, eles ) => {
-        // Backup the current color
-        this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] = ele.css( 'background-color' );
-
-        // Apply new color
-        ele.css( 'background-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
-
-        ele.qtip( {
-          content: {
-            title: optimisation.title,
-            text: "Priority: " + optimisation.priority + "<br>" + optimisation.message
-          },
-          position: {
-            my: 'top center',
-            at: 'bottom center'
-          },
-          show: {
-            event: 'mouseover'
-          },
-          hide: {
-            event: 'mouseout'
-          },
-          style: {
-            classes: 'qtip-bootstrap',
-            tip: {
-              width: 16,
-              height: 8
+          ele.qtip( {
+            content: {
+              title: optimisation.title,
+              text: "Priority: " + optimisation.priority + "<br>" + optimisation.message
+            },
+            position: {
+              my: 'top center',
+              at: 'bottom center'
+            },
+            show: {
+              event: 'mouseover'
+            },
+            hide: {
+              event: 'mouseout'
+            },
+            style: {
+              classes: 'qtip-bootstrap',
+              tip: {
+                width: 16,
+                height: 8
+              }
             }
-          }
+          } );
+
         } );
 
-      } );
+        // Highlight the edges which are connected by each node in the collection
+        let edges = nodes.edgesWith( nodes );
 
-      // Highlight the edges which are connected by each node in the collection
-      let edges = nodes.edgesWith( nodes );
+        edges.forEach( ( ele, i, eles ) => {
+          this.featured[ optimisation.id ][ "edges" ][ ele.id() ] = ele.css( 'line-color' );
+          ele.css( 'line-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
+        } );
 
-      edges.forEach( ( ele, i, eles ) => {
-        this.featured[ optimisation.id ][ "edges" ][ ele.id() ] = ele.css( 'line-color' );
-        ele.css( 'line-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
-      } );
+      }
+
+    }
+    // To remove
+    else {
+      let optimisations = this.props.selected.subtract( nextProps.selected );
+
+      for( let o of optimisations ) {
+        let optimisation = nextProps.json.optimisations[ o ];
+
+        // We still need to query the graph to find which nodes to unhighlight.
+        // Originally I thought to remove the clone the nodes then delete/restore but that breaks the graph...
+        let query = "";
+
+        for( let v of optimisation.data.nodes ) {
+          query += 'node[id = "' + v + '" ] , ';
+        }
+        query = query.substring( 0, query.length - 2 );
+
+        let nodes = this.props.graph.filter( query );
+
+        nodes.forEach( ( ele, i, eles ) => {
+          ele.css( 'background-color', this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] );
+          ele.qtip( 'api' ).destroy( true );
+        } );
+
+        let edges = nodes.edgesWith( nodes );
+
+        edges.forEach( ( ele, i, eles ) => {
+          ele.css( 'line-color', this.featured[ optimisation.id ][ "edges" ][ ele.id() ] );
+        } );
+
+        this.featured[ optimisation.id ] = undefined;
+      }
 
     }
 

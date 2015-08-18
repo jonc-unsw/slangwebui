@@ -1,5 +1,7 @@
 import alt from '../alt';
 
+import Immutable from 'immutable';
+
 import { BBActions, DDBActions, GraphActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
 
 class DDBStore {
@@ -117,7 +119,8 @@ class GraphStore {
       file: undefined,
       expanded: true,
       graph: undefined,
-      featurednodes: []
+      featurednodes: [],
+      selected: Immutable.Set() // Immutable set which returns a new set each time we add/delete something, This helps make this.props and nextProps different
     };
   }
 
@@ -143,15 +146,14 @@ class GraphStore {
     let i = this.state.json.optimisations.findIndex( x => x.id === optimisation );
 
     // Update the main file
+    // This is passed around as a reference so it will always be up to date.
+    // Make this immutable if we dont want this...
     this.state.json.optimisations[ i ].checked = !this.state.json.optimisations[ i ].checked;
 
-    // Reload the optimisations
-    /*let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
-        return this.state.file ? v.files.includes( this.state.file ) : v.files;
-      } );*/
-
-    //this.setState( { optimisations: o } );
-    this.setState( { json: this.state.json } );
+    if( this.state.selected.has(i) )
+      this.setState({selected: this.state.selected.delete(i)});
+    else
+      this.setState({selected: this.state.selected.add(i)});
   }
 
   onToggleAccordion() {
