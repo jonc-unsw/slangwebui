@@ -19,7 +19,7 @@
       "type": "graph",
       "priority": 0,
       "data": {
-        "nodes": ["fib_B1_1", "fib_B1_2", "fib_B2_1", "fib_B3_If", "fib_B1_3"]
+        "nodes": ["fib_B1_1", "fib_B1_2", "fib_B2_1", "fib_B3_If", "fib_B1_3", "Entry_fib"]
       },
       "files": ["src/fib.c"],
       "title": "This is loop optimisation foo fib.c",

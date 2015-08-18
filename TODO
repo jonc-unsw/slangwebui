@@ -21,3 +21,4 @@ Change
 * Manually write the BB for fib
 * Add new tab that shows trees...Make it work now...
 * Fix tooltips
+* Optimise the highlighting of optimisations nodes
