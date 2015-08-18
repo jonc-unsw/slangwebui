@@ -22,3 +22,6 @@ Change
 * Add new tab that shows trees...Make it work now...
 * Fix tooltips
 * Optimise the highlighting of optimisations nodes
+
+BUGS
+* If two optimisations contain overlapping nodes then when deselecting both of them will result in that node node being restored to the original color
