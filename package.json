@@ -26,6 +26,7 @@
     "react-bootstrap": "^0.24.0",
     "react-d3": "git+https://github.com/esbullington/react-d3.git",
     "react-layout-pane": "^0.1.10",
+    "react-router": "^0.13.3",
     "react-treeview": "^0.3.12",
     "reactify": "^1.1.1"
   },
