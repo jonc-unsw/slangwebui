@@ -2,70 +2,13 @@ import React from 'react';
 import { DropdownMenu, Nav, Navbar, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 import { DDBActions, BBActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js';
 
+import { NavItemLink } from 'react-router-bootstrap';
+
 class MyNavbar extends React.Component {
-  render() {
 
-    return (
-      <nav className="navbar navbar-inverse navbar-default navbar-fixed-top" >
-        <div className="container-fluid" >
-          <div className="navbar-header" >
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" >
-              <span className="sr-only" >Toggle navigation</span>
-              <span className="icon-bar" ></span>
-              <span className="icon-bar" ></span>
-              <span className="icon-bar" ></span>
-            </button>
-            <a className="navbar-brand" href="#" >Slang</a>
-          </div>
-
-
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-            <ul className="nav navbar-nav" >
-              <li className="dropdown" >
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-expanded="false" >View<span className="caret" ></span></a>
-                <ul className="dropdown-menu" role="menu" >
-                  <li><a href="#" id="projectitem" >Project</a></li>
-                  <li><a href="#" id="sourceitem" >Source Code</a></li>
-                  <li><a href="#" id="bbitem" >Basic Block</a></li>
-                  <li><a href="#" id="ddbitem" >Data Dependence Block</a></li>
-                </ul>
-              </li>
-              <li className="dropdown" >
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-expanded="false" >Command<span className="caret" ></span></a>
-                <ul className="dropdown-menu" role="menu" >
-                  <li className="dropdown-submenu" >
-                    <a tabIndex="-1" href="#" >System Dependence Graph</a>
-                    <ul className="dropdown-menu" >
-                      <li><a href="#" onclick="cy.load(graphJson)" >Reset</a></li>
-                      <li><a href="#" onclick="cy.toggleddb()" >Toggle Data Dependencies</a></li>
-                      <li><a href="#" onclick="cy.togglecontrolflow()" >Toggle Control Flow</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right" >
-              <li><a href="#" >Dashboard</a></li>
-              <li><a href="#" >Settings</a></li>
-              <li><a href="#" >Profile</a></li>
-              <li><a href="#" >Help</a></li>
-            </ul>
-            <form className="navbar-form navbar-right" >
-              <input type="text" className="form-control" placeholder="Search..." />
-            </form>
-          </div>
-        </div>
-      </nav>
-    )
-
+  constructor( props ) {
+    super( props );
   }
-}
-
-class MyNavbar2 extends React.Component {
 
   handleClick = () => {
     DDBActions.toggleAccordion();
@@ -82,54 +25,66 @@ class MyNavbar2 extends React.Component {
    while the custom css puts in the one you can when rendered
    */
   render() {
+
+    let viewmenu = this.props.inapp ? (
+      <DropdownButton eventKey={1} title='View' onSelect={this.closeMenu} >
+        <MenuItem eventKey='1' onClick={ () => {
+                  ProjectActions.toggleAccordion();
+                  }
+                } >Project</MenuItem>
+
+        <MenuItem eventKey='2' onClick={ () => {
+                  SourceCodeActions.toggleAccordion()
+                  }
+                } >Source Code</MenuItem>
+
+        <MenuItem eventKey='3' onClick={ () => {
+                  BBActions.toggleAccordion()
+                  }
+                } >Basic Block</MenuItem>
+
+        <MenuItem eventKey='4' onClick={() => {
+                  DDBActions.toggleAccordion()
+                  }
+                } >Data Dependence Block</MenuItem>
+      </DropdownButton>
+
+    ) : undefined;
+
+    let commandmenu = this.props.inapp ? (
+
+      <DropdownButton eventKey={2} title='Command' onSelect={this.closeMenu} >
+        <DropdownButton className="dropdown-submenu" navItem noCaret
+                        eventKey={3} title='System Dependence Graph'>
+          <MenuItem eventKey='1' onClick={() => {
+            var cy = $('#cy').cytoscape('get');
+            cy.toggleddb();
+          }
+          } >Toggle Data Dependencies</MenuItem>
+          <MenuItem eventKey='2' onClick={ () => {
+            var cy = $('#cy').cytoscape('get');
+            cy.togglecontrolflow();
+          }
+          } >Toggle Control Flow</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey='3' onClick={()=>{
+            var cy = $('#cy').cytoscape('get');
+            cy.reloadJson();
+          }
+          } >Reset</MenuItem>
+        </DropdownButton>
+      </DropdownButton>
+
+    ) : undefined;
+
     return (
       <Navbar brand="Slang" fixedTop fluid inverse >
         <Nav>
-          <DropdownButton eventKey={1} title='View' onSelect={this.closeMenu} >
-            <MenuItem eventKey='1' onClick={ () => {
-              ProjectActions.toggleAccordion();
-              } 
-            } >Project</MenuItem>
+          <NavItemLink to="home">Home</NavItemLink>
 
-            <MenuItem eventKey='2' onClick={ () => {
-              SourceCodeActions.toggleAccordion()
-              }
-            } >Source Code</MenuItem>
+          {viewmenu}
+          {commandmenu}
 
-            <MenuItem eventKey='3' onClick={ () => {
-              BBActions.toggleAccordion()
-              }
-            } >Basic Block</MenuItem>
-
-            <MenuItem eventKey='4' onClick={() => {
-              DDBActions.toggleAccordion()
-              }
-            } >Data Dependence Block</MenuItem>
-          </DropdownButton>
-          <DropdownButton eventKey={2} title='Command' onSelect={this.closeMenu} >
-
-            <DropdownButton className="dropdown-submenu" navItem noCaret
-                            eventKey={3} title='System Dependence Graph'
-              >
-              <MenuItem eventKey='1' onClick={() => {
-                var cy = $('#cy').cytoscape('get');
-                cy.toggleddb();
-                }
-              } >Toggle Data Dependencies</MenuItem>
-              <MenuItem eventKey='2' onClick={ () => {
-                var cy = $('#cy').cytoscape('get');
-                cy.togglecontrolflow();
-                }
-              } >Toggle Control Flow</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey='3' onClick={()=>{
-                var cy = $('#cy').cytoscape('get');
-                cy.reloadJson();
-                }
-              } >Reset</MenuItem>
-            </DropdownButton>
-
-          </DropdownButton>
         </Nav>
       </Navbar>
     )
@@ -138,7 +93,7 @@ class MyNavbar2 extends React.Component {
 
 class Header extends React.Component {
   render() {
-    return <MyNavbar2 />
+    return <MyNavbar {...this.props} />
   }
 }
 

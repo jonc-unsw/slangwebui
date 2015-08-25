@@ -9,7 +9,7 @@ import TreeView from 'react-treeview';
 @connectToStores class Features extends React.Component {
   constructor( props ) {
     super( props );
-    GraphActions.loadFeatures( "./projects/fib/features.json" );
+    GraphActions.loadFeatures( "/projects/fib/features.json" );
   }
 
   static getStores() {

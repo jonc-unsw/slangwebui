@@ -2,6 +2,7 @@
 import React from 'react';
 import { Accordion, TabbedArea, TabPane } from 'react-bootstrap';
 
+
 import {Layout, Flex, Fixed} from 'react-layout-pane';
 
 import { Header } from './header.jsx';
@@ -29,11 +30,11 @@ class App extends React.Component {
   }
 
   render() {
-    const prefix = "projects/fib/";
+    const prefix = "/projects/fib/";
     return (
       <Layout type="rows" >
         <Fixed className="header" >
-          <Header />
+          <Header inapp={true} />
         </Fixed>
         <Flex>
           <Layout type="columns" >
@@ -73,10 +74,4 @@ class App extends React.Component {
   }
 }
 
-
-React.render(
-  <App />,
-  document.body
-);
-
-
+export { App };
