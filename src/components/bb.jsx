@@ -8,7 +8,7 @@ import { IndependentPanel } from './independentpanel.jsx';
 @connectToStores class BasicBlocks extends React.Component {
   constructor( props ) {
     super( props );
-    BBActions.loadBb( this.props.url );
+    BBActions.loadBb( { root: this.props.root, url: this.props.url } );
   }
 
   static getStores() {

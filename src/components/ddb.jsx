@@ -7,7 +7,7 @@ import { IndependentPanel } from './independentpanel.jsx';
 @connectToStores class DataDependenceBlocks extends React.Component {
   constructor( props ) {
     super( props );
-    DDBActions.loadDdb( this.props.url );
+    DDBActions.loadDdb( { root: this.props.root, url: this.props.url } );
   }
 
   static getStores() {

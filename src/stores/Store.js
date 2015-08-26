@@ -20,8 +20,9 @@ class DDBStore {
     };
   }
 
-  onLoadDdb( url ) {
-    $.get( url, ( result ) => {
+  onLoadDdb( data ) {
+    let { root, url } = data;
+    $.get( `${root}/${url}`, ( result ) => {
       this.setState( { ddbdata: result } );
     } );
   }
@@ -45,8 +46,9 @@ class BBStore {
     };
   }
 
-  onLoadBb( url ) {
-    $.get( url, ( result ) => {
+  onLoadBb( data ) {
+    let { root, url } = data;
+    $.get( `${root}/${url}`, ( result ) => {
       this.setState( { bbdata: result } );
     } );
   }

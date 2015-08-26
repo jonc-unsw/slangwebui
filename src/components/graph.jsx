@@ -225,7 +225,7 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     GraphActions.storeGraph( cy );
 
     //var cy = $('#cy').cytoscape('get');
-    $.get( `${this.props.root}/graph.json`, ( result ) => {
+    $.get( `${this.props.root}/${this.props.url}`, ( result ) => {
       this.setState( { json: result } );
       cy.load( result );
     } );

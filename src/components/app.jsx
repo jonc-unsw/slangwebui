@@ -49,7 +49,7 @@ class App extends React.Component {
             <Flex className="content" >
               <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} >
                 <TabPane eventKey={1} tab="System Dependence Graph" >
-                  <Graph root={PROJECTS_DIR} />
+                  <Graph root={PROJECTS_DIR} url="graph.json" />
                 </TabPane>
                 <TabPane eventKey={2} tab="Statistics" >
                   <MyChart />
@@ -61,8 +61,8 @@ class App extends React.Component {
             </Flex>
             <Fixed className="sidebar" >
               <Accordion>
-                <BasicBlocks {...this.props} url={`${PROJECTS_DIR}/bb.json`} />
-                <DataDependenceBlocks {...this.props} url={`${PROJECTS_DIR}/ddb.json`} />
+                <BasicBlocks root={PROJECTS_DIR} url="bb.json" />
+                <DataDependenceBlocks root={PROJECTS_DIR} url="ddb.json" />
               </Accordion>
             </Fixed>
           </Layout>
