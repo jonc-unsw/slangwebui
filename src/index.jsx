@@ -14,6 +14,20 @@ import { Header } from './components/header.jsx';
 import { Footer } from './components/footer.jsx';
 
 class Home extends React.Component {
+
+  constructor( props ) {
+    super( props );
+    this.state = {
+      projects: undefined
+    }
+  }
+
+  componentDidMount() {
+    $.get( "projects/src.json", ( result ) => {
+      this.setState( { projects: result } );
+    } );
+  }
+
   render() {
     return (
       <Layout type="rows" >
@@ -26,8 +40,13 @@ class Home extends React.Component {
             <Accordion>
               <IndependentPanel {...this.props} header="Projects" expanded={true} >
                 <ul>
-                  <li><Link to="project" params={{id: "fib"}} query={{foo: "z"}}>Project 1</Link></li>
-                  <li><Link to="project" params={{id: "simple"}} query={{foo: "z"}}>Project 2</Link></li>
+                  {
+                    this.state.projects && this.state.projects.children.map( (proj, key) => {
+                      return (
+                        <li key={key}><Link to="project" params={{id: proj.name}} query={{foo: "z"}}>Project {proj.name}</Link></li>
+                      )
+                    })
+                  }
                 </ul>
               </IndependentPanel>
             </Accordion>

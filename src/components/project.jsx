@@ -47,13 +47,13 @@ import TreeView from 'react-treeview';
 
   render() {
 
-    if( this.props.project ) {
+    if( this.props.source ) {
 
       let files = this.generatePath( this.props.source, 0 );
 
       return (
         <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
-          <TreeView nodeLabel={this.props.project.name} defaultCollapsed={false} >
+          <TreeView nodeLabel={this.props.name} defaultCollapsed={false} >
             {files}
           </TreeView>
         </IndependentPanel>

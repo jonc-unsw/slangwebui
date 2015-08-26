@@ -21,8 +21,17 @@ class App extends React.Component {
   constructor( props ) {
     super( props );
     this.state = {
-      key: 1
+      key: 1,
+      project: undefined
     };
+
+    this.PROJECTS_DIR = `/projects/${this.props.params.id}`;
+  }
+
+  componentDidMount() {
+    $.get( `${this.PROJECTS_DIR}/project.json`, ( result ) => {
+      this.setState( { project: result } );
+    } );
   }
 
   handleSelect = ( key ) => {
@@ -30,7 +39,9 @@ class App extends React.Component {
   }
 
   render() {
-    const PROJECTS_DIR = `/projects/${this.props.params.id}`;
+    if( this.state.project === undefined ) {
+      return (<div>Loading...</div>);
+    }
 
     return (
       <Layout type="rows" >
@@ -41,15 +52,15 @@ class App extends React.Component {
           <Layout type="columns" >
             <Fixed className="sidebar" >
               <Accordion>
-                <Project root={PROJECTS_DIR} url="project.json" />
-                <SourceCode prefix={PROJECTS_DIR} file="fib/main.c" />
-                <Features root={PROJECTS_DIR} url="features.json" />
+                <Project root={this.PROJECTS_DIR} url={this.state.project.source} name={this.state.project.name} />
+                <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
+                <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
               </Accordion>
             </Fixed>
             <Flex className="content" >
               <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} >
                 <TabPane eventKey={1} tab="System Dependence Graph" >
-                  <Graph root={PROJECTS_DIR} url="graph.json" />
+                  <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
                 </TabPane>
                 <TabPane eventKey={2} tab="Statistics" >
                   <MyChart />
@@ -61,8 +72,8 @@ class App extends React.Component {
             </Flex>
             <Fixed className="sidebar" >
               <Accordion>
-                <BasicBlocks root={PROJECTS_DIR} url="bb.json" />
-                <DataDependenceBlocks root={PROJECTS_DIR} url="ddb.json" />
+                <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
+                <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
               </Accordion>
             </Fixed>
           </Layout>

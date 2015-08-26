@@ -63,7 +63,6 @@ class ProjectStore {
     this.bindActions( ProjectActions );
 
     this.state = {
-      project: undefined,
       source: undefined,
       expanded: true
     };
@@ -71,10 +70,8 @@ class ProjectStore {
 
   onLoadProject( data ) {
     let { root, url } = data;
-    $.get( `${root}/${url}`, ( project ) => {
-      $.get( `${root}/${project.source}`, ( source ) => {
-        this.setState( { project: project, source: source } );
-      });
+    $.get( `${root}/${url}`, ( result ) => {
+      this.setState( { source: result } );
     });
   }
 
