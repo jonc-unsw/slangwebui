@@ -43,7 +43,7 @@ class Home extends React.Component {
                   {
                     this.state.projects && this.state.projects.children.map( (proj, key) => {
                       return (
-                        <li key={key}><Link to="project" params={{id: proj.name}} query={{foo: "z"}}>Project {proj.name}</Link></li>
+                        <li key={key}><Link to="project" params={{id: proj.name}}>Project {proj.name}</Link></li>
                       )
                     })
                   }
@@ -53,12 +53,13 @@ class Home extends React.Component {
           </Fixed>
           <Flex className="content" >
             <div>
-              <div>Welcome to slang. Here is a list of projects which you can choose from</div>
+              <h1>Welcome to slang</h1>
+              <p>Click on a project to load it</p>
             </div>
           </Flex>
         </Layout>
         </Flex>
-        <Fixed className="footer" >
+        <Fixed className="header" >
           <Footer />
         </Fixed>
       </Layout>
