@@ -26,8 +26,8 @@ class Home extends React.Component {
             <Accordion>
               <IndependentPanel {...this.props} header="Projects" expanded={true} >
                 <ul>
-                  <li><Link to="project" params={{id: 1}} query={{foo: "z"}}>Project 1</Link></li>
-                  <li><Link to="project" params={{id: 2}} query={{foo: "z"}}>Project 2</Link></li>
+                  <li><Link to="project" params={{id: "fib"}} query={{foo: "z"}}>Project 1</Link></li>
+                  <li><Link to="project" params={{id: "simple"}} query={{foo: "z"}}>Project 2</Link></li>
                 </ul>
               </IndependentPanel>
             </Accordion>

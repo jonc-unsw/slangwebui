@@ -1,88 +1,9 @@
 {
-  "parent": "",
-  "path": "",
-  "name": ".",
-  "type": "directory",
-  "children": [
-    {
-      "parent": "",
-      "path": "src",
-      "name": "src",
-      "type": "directory",
-      "children": [
-        {
-          "parent": "src",
-          "path": "src/fac.c",
-          "name": "fac.c",
-          "type": "file"
-        },
-        {
-          "parent": "src",
-          "path": "src/fac.h",
-          "name": "fac.h",
-          "type": "file"
-        },
-        {
-          "parent": "src",
-          "path": "src/fib.c",
-          "name": "fib.c",
-          "type": "file"
-        },
-        {
-          "parent": "src",
-          "path": "src/fib.h",
-          "name": "fib.h",
-          "type": "file"
-        },
-        {
-          "parent": "src",
-          "path": "src/main.c",
-          "name": "main.c",
-          "type": "file"
-        }
-      ]
-    },
-    {
-      "parent": "",
-      "path": ".path.json.swp",
-      "name": ".path.json.swp",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "bb.json",
-      "name": "bb.json",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "ddb.json",
-      "name": "ddb.json",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "graph.json",
-      "name": "graph.json",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "path.json",
-      "name": "path.json",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "z",
-      "name": "z",
-      "type": "file"
-    },
-    {
-      "parent": "",
-      "path": "zz",
-      "name": "zz",
-      "type": "file"
-    }
-  ]
+  "name": "fib",
+  "description": "This is the fib project",
+  "source" : "src.json",
+  "bb" : "bb.json",
+  "ddb": "ddb.json",
+  "graph": "graph.json",
+  "features": "features.json"
 }

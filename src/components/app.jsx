@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   render() {
-    const prefix = "/projects/fib/";
+    const PROJECTS_DIR = "/projects/fib/";
     return (
       <Layout type="rows" >
         <Fixed className="header" >
@@ -40,8 +40,8 @@ class App extends React.Component {
           <Layout type="columns" >
             <Fixed className="sidebar" >
               <Accordion>
-                <Project project={`${prefix}/project.json`} />
-                <SourceCode prefix={prefix} file="fib/main.c" />
+                <Project root={PROJECTS_DIR} url="project.json" />
+                <SourceCode prefix={PROJECTS_DIR} file="fib/main.c" />
                 <Features />
               </Accordion>
             </Fixed>
@@ -60,8 +60,8 @@ class App extends React.Component {
             </Flex>
             <Fixed className="sidebar" >
               <Accordion>
-                <BasicBlocks {...this.props} url={`${prefix}/bb.json`} />
-                <DataDependenceBlocks {...this.props} url={`${prefix}/ddb.json`} />
+                <BasicBlocks {...this.props} url={`${PROJECTS_DIR}/bb.json`} />
+                <DataDependenceBlocks {...this.props} url={`${PROJECTS_DIR}/ddb.json`} />
               </Accordion>
             </Fixed>
           </Layout>

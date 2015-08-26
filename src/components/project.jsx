@@ -1,3 +1,4 @@
+"use strict";
 import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import { ProjectStore } from '../stores/Store.js';
@@ -8,7 +9,7 @@ import TreeView from 'react-treeview';
 @connectToStores class Project extends React.Component {
   constructor( props ) {
     super( props );
-    ProjectActions.loadProject( this.props.project );
+    ProjectActions.loadProject( { root: this.props.root, url: this.props.url } );
   }
 
   static getStores() {
@@ -23,25 +24,46 @@ import TreeView from 'react-treeview';
     SourceCodeActions.loadSource( { file: source } );
   }
 
-  render() {
-    return (
-      <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
-        <TreeView nodeLabel={"Project Fib"} defaultCollapsed={false} >
-          <TreeView nodeLabel={"src"} defaultCollapsed={false} >
-            <div><a href="#" className="info" onClick={ () => this.handleClick("src/fac.c") } >fac.c</a>
-            </div>
-            <div><a href="#" className="info" onClick={ () => this.handleClick("src/fac.h") } >fac.h</a>
-            </div>
-            <div><a href="#" className="info" onClick={ () => this.handleClick("src/fib.c") } >fib.c</a>
-            </div>
-            <div><a href="#" className="info" onClick={ () => this.handleClick("src/fib.h") } >fib.h</a>
-            </div>
-            <div><a href="#" className="info" onClick={ () => this.handleClick("src/main.c") } >main.c</a>
-            </div>
-          </TreeView>
+  /*
+  * Recursively generate the file/dirs for the project panel
+  * */
+  generatePath( src, key ) {
+    if( src.type === "file" ) {
+      return (
+        <div key={key}>
+          <a href="#" className="info" onClick={ () => this.handleClick( src.path ) } >{src.name}</a>
+        </div>
+      )
+    }
+
+    if( src.type === "directory" )
+      return (
+        <TreeView nodeLabel={src.name} defaultCollapsed={false} key={key} >
+          {src.children.map( (newsrc, key) => { return this.generatePath(newsrc, key) } )}
         </TreeView>
-      </IndependentPanel>
-    )
+      );
+
+  }
+
+  render() {
+
+    if( this.props.project ) {
+
+      let files = this.generatePath( this.props.source, 0 );
+
+      return (
+        <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
+          <TreeView nodeLabel={this.props.project.name} defaultCollapsed={false} >
+            {files}
+          </TreeView>
+        </IndependentPanel>
+      )
+    }
+    else {
+      return (<div>Loading</div>)
+    }
+
+
   }
 }
 

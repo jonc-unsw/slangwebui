@@ -1,0 +1,38 @@
+{
+  "parent": "",
+  "path": "src",
+  "name": "src",
+  "type": "directory",
+  "children": [
+     {
+      "parent": "src",
+      "path": "src/fac.c",
+      "name": "fac.c",
+      "type": "file"
+    },
+    {
+      "parent": "src",
+      "path": "src/fac.h",
+      "name": "fac.h",
+      "type": "file"
+    },
+    {
+      "parent": "src",
+      "path": "src/fib.c",
+      "name": "fib.c",
+      "type": "file"
+    },
+    {
+      "parent": "src",
+      "path": "src/fib.h",
+      "name": "fib.h",
+      "type": "file"
+    },
+    {
+      "parent": "src",
+      "path": "src/main.c",
+      "name": "main.c",
+      "type": "file"
+    }
+  ]
+}

@@ -61,15 +61,19 @@ class ProjectStore {
     this.bindActions( ProjectActions );
 
     this.state = {
-      path: undefined,
+      project: undefined,
+      source: undefined,
       expanded: true
     };
   }
 
-  onLoadProject( url ) {
-    $.get( url, ( result ) => {
-      this.setState( { path: result } );
-    } );
+  onLoadProject( data ) {
+    let { root, url } = data;
+    $.get( `${root}/${url}`, ( project ) => {
+      $.get( `${root}/${project.source}`, ( source ) => {
+        this.setState( { project: project, source: source } );
+      });
+    });
   }
 
   onToggleAccordion() {
