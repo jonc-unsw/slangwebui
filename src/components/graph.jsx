@@ -358,6 +358,13 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     return false;
   }
 
+  componentWillUnmount() {
+    // Cleanup graph
+    if( this.props.graph ) {
+      this.props.graph.destroy();
+    }
+  }
+
   render() {
     return (
       <div id="cy" >
