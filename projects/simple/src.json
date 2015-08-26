@@ -1,0 +1,14 @@
+{
+  "parent": "",
+  "path": "src",
+  "name": "src",
+  "type": "directory",
+  "children": [
+    {
+      "parent": "src",
+      "path": "src/main.c",
+      "name": "main.c",
+      "type": "file"
+    }
+  ]
+}

@@ -31,7 +31,7 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
   componentWillReceiveProps( nextProps ) {
 
     // We are not ready yet.
-    if( this.props.graph === undefined )
+    if( this.props.graph === undefined || this.props.json === undefined )
       return;
 
     this.props.graph.startBatch();
@@ -225,7 +225,7 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     GraphActions.storeGraph( cy );
 
     //var cy = $('#cy').cytoscape('get');
-    $.get( "/projects/fib/graph.json", ( result ) => {
+    $.get( `${this.props.root}/graph.json`, ( result ) => {
       this.setState( { json: result } );
       cy.load( result );
     } );

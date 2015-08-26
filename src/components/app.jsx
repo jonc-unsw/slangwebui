@@ -30,7 +30,8 @@ class App extends React.Component {
   }
 
   render() {
-    const PROJECTS_DIR = "/projects/fib/";
+    const PROJECTS_DIR = `/projects/${this.props.params.id}`;
+
     return (
       <Layout type="rows" >
         <Fixed className="header" >
@@ -42,13 +43,13 @@ class App extends React.Component {
               <Accordion>
                 <Project root={PROJECTS_DIR} url="project.json" />
                 <SourceCode prefix={PROJECTS_DIR} file="fib/main.c" />
-                <Features />
+                <Features root={PROJECTS_DIR} url="features.json" />
               </Accordion>
             </Fixed>
             <Flex className="content" >
               <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} >
                 <TabPane eventKey={1} tab="System Dependence Graph" >
-                  <Graph />
+                  <Graph root={PROJECTS_DIR} />
                 </TabPane>
                 <TabPane eventKey={2} tab="Statistics" >
                   <MyChart />

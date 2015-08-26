@@ -128,14 +128,17 @@ class GraphStore {
     };
   }
 
-  onLoadFeatures( url ) {
-    $.get( url, ( result ) => {
-      this.setState( { json: result } );
-      this.setState( { optimisations: this.state.json.optimisations } );
+  onLoadFeatures( data ) {
+    let { root, url } = data;
+    $.get( `${root}/${url}`, ( result ) => {
+      this.setState( { json: result, optimisations: result.optimisations } );
     } );
   }
 
   onGetOptimisationForFile( arg0 ) {
+    if( this.state.json === undefined )
+      return;
+
     let { file, ...xs } = arg0;
     let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
         return v.files.includes( file );
@@ -144,6 +147,9 @@ class GraphStore {
   }
 
   onSelectOptimisation( optimisation ) {
+
+    if( this.state.json === undefined )
+      return;
 
     // Find the correct array element
     // This is because this.state.optimisations is an reduced sized array. Maybe change the filtering to be in the

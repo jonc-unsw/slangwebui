@@ -1,0 +1,9 @@
+{
+  "name": "simple",
+  "description": "This is the simple project",
+  "source" : "src.json",
+  "bb" : "bb.json",
+  "ddb": "ddb.json",
+  "graph": "graph.json",
+  "features": "features.json"
+}

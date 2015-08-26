@@ -9,7 +9,7 @@
      {
         "name": "main_B1",
         "statements": [
-            "return 0;"
+            ["return 0;", 15]
         ],
         "preds": [
             "main_B2"
@@ -17,12 +17,12 @@
         "succs": [
             "main_B0"
         ],
-        "line": 15
+       "file": "src/main.c"
     },
      {
         "name": "main_B2",
         "statements": [
-            "i &lt; 100"
+            ["i &lt; 100", 9]
         ],
         "preds": [
             "main_B3",
@@ -32,12 +32,12 @@
             "main_B4",
             "main_B1"
         ],
-        "line": 9
+       "file": "src/main.c"
     },
      {
         "name": "main_B3",
         "statements": [
-            "i++"
+            ["i++", 9]
         ],
         "preds": [
             "main_B4"
@@ -45,13 +45,13 @@
         "succs": [
             "main_B2"
         ],
-        "line": 9
+       "file": "src/main.c"
     },
      {
         "name": "main_B4",
         "statements": [
-            "a[2 * i] = b[i]",
-            "c[i] = a[4 * i + 1]"
+            ["a[2 * i] = b[i]", 11],
+            ["c[i] = a[4 * i + 1]", 12]
         ],
         "preds": [
             "main_B2"
@@ -59,16 +59,16 @@
         "succs": [
             "main_B3"
         ],
-        "line": 11
+       "file": "src/main.c"
     },
      {
         "name": "main_B5",
         "statements": [
-            "int a[200] = { 0 };",
-            "int b[100] = { 3 };",
-            "int c[100] = { 0 };",
-            "int i;",
-            "i = 0"
+            ["int a[200] = { 0 };", 5],
+            ["int b[100] = { 3 };", 6],
+            ["int c[100] = { 0 };", 7],
+            ["int i;", 8],
+            ["i = 0", 9]
         ],
         "preds": [
             "main_B6"
@@ -76,7 +76,7 @@
         "succs": [
             "main_B2"
         ],
-        "line": 5
+       "file": "src/main.c"
     },
      {
         "name": "main_B0",
@@ -85,6 +85,6 @@
         "preds": [
             "main_B1"
         ],
-        "line": 1
+       "file": "src/main.c"
     }
 ]

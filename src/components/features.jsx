@@ -9,7 +9,7 @@ import TreeView from 'react-treeview';
 @connectToStores class Features extends React.Component {
   constructor( props ) {
     super( props );
-    GraphActions.loadFeatures( "/projects/fib/features.json" );
+    GraphActions.loadFeatures( { root: this.props.root, url: this.props.url } );
   }
 
   static getStores() {
@@ -25,24 +25,30 @@ import TreeView from 'react-treeview';
   }
 
   render() {
+
+    let features = this.props.optimisations ? (
+      <form>
+        {
+          this.props.optimisations.map( ( v, k ) => {
+            const label = <Input groupClassName="featureslabel" checked={v.checked} type='checkbox'
+                                 label={v.title} data-id={v.id} onChange={this.handleChange} />;
+
+            return (
+              <TreeView nodeLabel={label} defaultCollapsed={false} key={k} >
+                <div className="featuresmessage" >{v.message}</div>
+              </TreeView>
+            )
+          } )
+        }
+      </form>
+    ) : (<div>There are no features for this project</div>);
+
     return (
       <IndependentPanel {...this.props} header="Features" expanded={this.props.expanded} >
-        <form>
-          {
-            this.props.optimisations.map( ( v, k ) => {
-              const label = <Input groupClassName="featureslabel" checked={v.checked} type='checkbox'
-                                   label={v.title} data-id={v.id} onChange={this.handleChange} />;
-
-              return (
-                <TreeView nodeLabel={label} defaultCollapsed={false} key={k} >
-                  <div className="featuresmessage" >{v.message}</div>
-                </TreeView>
-              )
-            } )
-          }
-        </form>
+        {features}
       </IndependentPanel>
     )
+
   }
 }
 
