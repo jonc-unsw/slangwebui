@@ -95,8 +95,8 @@ class SourceCodeStore {
     this.setState( { file: src.file, line: src.line } );
   }
 
-  onLoadSource( file ) {
-    this.setState( { file: file } );
+  onLoadSource( src ) {
+    this.setState( { file: src.file } );
   }
 
   onToggleAccordion() {
@@ -110,7 +110,7 @@ class GraphStore {
     this.bindActions( GraphActions );
 
     this.bindListeners( {
-      onGetOptimisationForFile: SourceCodeActions.loadSource,
+      onGetOptimisationForFile: [ SourceCodeActions.loadSource, SourceCodeActions.highlightLine ]
     } );
 
     this.state = {
@@ -131,7 +131,8 @@ class GraphStore {
     } );
   }
 
-  onGetOptimisationForFile( file ) {
+  onGetOptimisationForFile( arg0 ) {
+    let { file, ...xs } = arg0;
     let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
         return v.files.includes( file );
       } );

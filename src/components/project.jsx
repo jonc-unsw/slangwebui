@@ -20,7 +20,7 @@ import TreeView from 'react-treeview';
   }
 
   handleClick = ( source ) => {
-    SourceCodeActions.loadSource( source );
+    SourceCodeActions.loadSource( { file: source } );
   }
 
   render() {
