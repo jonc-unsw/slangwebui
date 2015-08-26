@@ -26,8 +26,8 @@ class Home extends React.Component {
             <Accordion>
               <IndependentPanel {...this.props} header="Projects" expanded={true} >
                 <ul>
-                  <li><Link to="app" params={{id: 1}} query={{foo: "z"}}>Project 1</Link></li>
-                  <li><Link to="app" params={{id: 2}} query={{foo: "z"}}>Project 2</Link></li>
+                  <li><Link to="project" params={{id: 1}} query={{foo: "z"}}>Project 1</Link></li>
+                  <li><Link to="project" params={{id: 2}} query={{foo: "z"}}>Project 2</Link></li>
                 </ul>
               </IndependentPanel>
             </Accordion>
@@ -39,7 +39,7 @@ class Home extends React.Component {
           </Flex>
         </Layout>
         </Flex>
-        <Fixed className="header" >
+        <Fixed className="footer" >
           <Footer />
         </Fixed>
       </Layout>
@@ -60,7 +60,7 @@ var routes = (
 
     <DefaultRoute name="home" handler={Home} />
 
-    <Route name="app" path="/app/:id" handler={App} />
+    <Route name="project" path="/project/:id" handler={App} />
     <Route path="/footer" handler={Footer} />
   </Route>
 );
