@@ -40,7 +40,26 @@ class App extends React.Component {
 
   render() {
     if( this.state.project === undefined ) {
-      return (<div>Loading...</div>);
+      return (
+        <Layout type="rows" >
+          <Fixed className="header" >
+            <Header inapp={true} />
+          </Fixed>
+          <Flex>
+            <Layout type="columns" >
+              <Fixed className="sidebar" >
+              </Fixed>
+              <Flex className="content" >
+              </Flex>
+              <Fixed className="sidebar" >
+              </Fixed>
+            </Layout>
+          </Flex>
+          <Fixed className="header" >
+            <Footer />
+          </Fixed>
+        </Layout>
+      )
     }
 
     return (
