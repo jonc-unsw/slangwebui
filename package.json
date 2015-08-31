@@ -23,6 +23,7 @@
     "jquery": "^2.1.4",
     "licensify": "^1.4.0",
     "react": "^0.13.3",
+    "react-autocomplete": "^0.1.4",
     "react-bootstrap": "^0.24.3",
     "react-d3": "git+https://github.com/esbullington/react-d3.git",
     "react-layout-pane": "^0.1.12",
