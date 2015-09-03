@@ -1,7 +1,7 @@
 "use strict";
 import React from 'react';
 import Router from 'react-router';
-import { Accordion, ButtonInput, Panel } from 'react-bootstrap';
+import { Accordion, ButtonInput, Panel, Grid, Row, Col } from 'react-bootstrap';
 import { IndependentPanel } from './components/independentpanel.jsx';
 import Autocomplete from 'react-autocomplete';
 
@@ -66,7 +66,7 @@ class Home extends React.Component {
     * so we manually pass down this class to get it styled correctly. Alternatively rewrite react-autocomplete...
     * */
     const autocomplete = this.state.projects ? (
-      <Autocomplete inputProps={{placeholder: 'placeholder text', className: "form-control"}} initialValue="" items={this.state.projects.children} getItemValue={(item) => item.name} shouldItemRender={this.matchProjectToTerm}
+      <Autocomplete inputProps={{placeholder: 'Project Search', className: "form-control"}} initialValue="" items={this.state.projects.children} getItemValue={(item) => item.name} shouldItemRender={this.matchProjectToTerm}
       renderItem={(item, isHighlighted) => (
             <div key={item.name} >{item.name}</div>
       )}
@@ -85,23 +85,21 @@ class Home extends React.Component {
         <Fixed className="header" >
           <Header inapp={false} />
         </Fixed>
-        <Flex>
-        <Layout type="columns" >
-          <Fixed className="sidebar" >
-
-          </Fixed>
           <Flex className="content" >
-            <div>
-              <h1>Welcome to slang</h1>
-              <p>Project Search</p>
-              <form className='form-inline' onSubmit={this.routeHandler}>
-                {autocomplete}
-                <ButtonInput type="submit" value="Submit Your Input" />
-              </form>
-            </div>
+
+            <Grid fluid>
+              <Row className='center-block'>
+                <Col md={12}>
+                  <h1>Welcome to slang</h1>
+                  <form className='form-inline' onSubmit={this.routeHandler}>
+                    {autocomplete}
+                    <ButtonInput type="submit" value="Open" />
+                  </form>
+                </Col>
+              </Row>
+            </Grid>
+
           </Flex>
-        </Layout>
-        </Flex>
         <Fixed className="header" >
           <Footer />
         </Fixed>
