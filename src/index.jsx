@@ -1,7 +1,7 @@
 "use strict";
 import React from 'react';
 import Router from 'react-router';
-import { Accordion, ButtonInput, Panel, Grid, Row, Col } from 'react-bootstrap';
+import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from 'react-bootstrap';
 import { IndependentPanel } from './components/independentpanel.jsx';
 import Autocomplete from 'react-autocomplete';
 
@@ -86,6 +86,7 @@ class Home extends React.Component {
           <Row className='center-block'>
             <Col md={12}>
               <h1>Welcome to slang</h1>
+              <p>Please select a project to view</p>
               <form className='form-inline' onSubmit={this.routeHandler}>
                 {autocomplete}
                 <ButtonInput type="submit" value="Open" />
@@ -98,13 +99,43 @@ class Home extends React.Component {
   }
 }
 
+class CreateForm extends React.Component {
+  render() {
+    return(
+
+    <Flex className="content" >
+      <Grid fluid>
+        <Row className='center-block'>
+          <Col md={6}>
+            <h1>Create new Project</h1>
+            <form onSubmit={this.routeHandler}>
+              <Input type="text" label="Project Name" />
+              <Input type="textarea" label="Project Description" />
+              <Input type="file" label="Source Code" help='Select archive to upload' />
+              <ButtonInput type="submit" value="Create" />
+            </form>
+          </Col>
+        </Row>
+      </Grid>
+    </Flex>
+
+    )
+  }
+}
+
 // This is es7 code to get transitionTo working.
 Home.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
 class MainApp extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {inapp: false};
+  }
+
   render() {
+
     return(
       <Layout type="rows" >
         <Fixed className="header" >
@@ -137,10 +168,13 @@ var routes = (
     <Route name="project" path="project/:id" handler={App}>
       <NotFoundRoute handler={ProjectNotFound} />
     </Route>
+
+    <Route name="create" path="create" handler={CreateForm} />
+
     <Route path="/footer" handler={Footer} />
   </Route>
 );
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
+Router.run(routes, Router.HistoryLocation, (Root, state) => {
   React.render(<Root/>, document.body);
 });

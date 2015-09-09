@@ -77,11 +77,16 @@ class MyNavbar extends React.Component {
 
     ) : undefined;
 
+    let create = !this.props.inapp ? (
+      <NavItemLink to="create">Create New</NavItemLink>
+    ) : undefined;
+
     return (
       <Navbar brand="Slang" fixedTop fluid inverse >
         <Nav>
           <NavItemLink to="home">Home</NavItemLink>
 
+          {create}
           {viewmenu}
           {commandmenu}
 
