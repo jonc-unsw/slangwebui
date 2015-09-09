@@ -81,20 +81,29 @@ class Home extends React.Component {
         />) : <div/>;
 
     return (
-      <Flex className="content" >
-        <Grid fluid>
-          <Row className='center-block'>
-            <Col md={12}>
-              <h1>Welcome to slang</h1>
-              <p>Please select a project to view</p>
-              <form className='form-inline' onSubmit={this.routeHandler}>
-                {autocomplete}
-                <ButtonInput type="submit" value="Open" />
-              </form>
-            </Col>
-          </Row>
-        </Grid>
-      </Flex>
+      <Layout type="rows" >
+        <Fixed className="header" >
+          <Header inapp={false} />
+        </Fixed>
+          <Flex className="content" >
+
+            <Grid fluid>
+              <Row className='center-block'>
+                <Col md={12}>
+                  <h1>Welcome to slang</h1>
+                  <form className='form-inline' onSubmit={this.routeHandler}>
+                    {autocomplete}
+                    <ButtonInput type="submit" value="Open" />
+                  </form>
+                </Col>
+              </Row>
+            </Grid>
+
+          </Flex>
+        <Fixed className="header" >
+          <Footer />
+        </Fixed>
+      </Layout>
     )
   }
 }
@@ -102,22 +111,29 @@ class Home extends React.Component {
 class CreateForm extends React.Component {
   render() {
     return(
-
-    <Flex className="content" >
-      <Grid fluid>
-        <Row className='center-block'>
-          <Col md={6}>
-            <h1>Create new Project</h1>
-            <form onSubmit={this.routeHandler}>
-              <Input type="text" label="Project Name" />
-              <Input type="textarea" label="Project Description" />
-              <Input type="file" label="Source Code" help='Select archive to upload' />
-              <ButtonInput type="submit" value="Create" />
-            </form>
-          </Col>
-        </Row>
-      </Grid>
-    </Flex>
+      <Layout type="rows" >
+        <Fixed className="header" >
+          <Header inapp={false} />
+        </Fixed>
+          <Flex className="content" >
+            <Grid fluid>
+              <Row className='center-block'>
+                <Col md={6}>
+                  <h1>Create new Project</h1>
+                  <form onSubmit={this.routeHandler}>
+                    <Input type="text" label="Project Name" />
+                    <Input type="textarea" label="Project Description" />
+                    <Input type="file" label="Source Code" help='Select archive to upload' />
+                    <ButtonInput type="submit" value="Create" />
+                  </form>
+                </Col>
+              </Row>
+            </Grid>
+          </Flex>
+        <Fixed className="header" >
+          <Footer />
+        </Fixed>
+      </Layout>
 
     )
   }
@@ -129,25 +145,9 @@ Home.contextTypes = {
 };
 
 class MainApp extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {inapp: false};
-  }
-
   render() {
-
     return(
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={false} />
-        </Fixed>
-
-          <RouteHandler/>
-
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
+      <RouteHandler/>
     )
   }
 }
