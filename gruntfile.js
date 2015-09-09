@@ -64,7 +64,7 @@ module.exports = function(grunt){
           archive: 'demo.tgz',
         },
         files: [
-          {src: ['dist/**','projects/**','index.html'], dest: 'demo/', filter: 'isFile', expand: true}, // includes files in path and its subdirs
+          {src: ['dist/**','projects/**','index.html', 'server.py'], dest: 'demo/', filter: 'isFile', expand: true}, // includes files in path and its subdirs
         ]
       }
     }    
