@@ -41,66 +41,52 @@ class App extends React.Component {
   render() {
     if( this.state.project === undefined ) {
       return (
-        <Layout type="rows" >
-          <Fixed className="header" >
-            <Header inapp={true} />
-          </Fixed>
-          <Flex>
-            <Layout type="columns" >
-              <Fixed className="sidebar" >
-              </Fixed>
-              <Flex className="content" >
-              </Flex>
-              <Fixed className="sidebar" >
-              </Fixed>
-            </Layout>
-          </Flex>
-          <Fixed className="header" >
-            <Footer />
-          </Fixed>
-        </Layout>
+        <Flex>
+          <Layout type="columns" >
+            <Fixed className="sidebar" >
+            </Fixed>
+            <Flex className="content" >
+            </Flex>
+            <Fixed className="sidebar" >
+            </Fixed>
+          </Layout>
+        </Flex>
       )
     }
 
     return (
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={true} />
-        </Fixed>
-        <Flex>
-          <Layout type="columns" >
-            <Fixed className="sidebar" >
-              <Accordion>
-                <Project root={this.PROJECTS_DIR} url={this.state.project.source} name={this.state.project.name} />
-                <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
-                <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
-              </Accordion>
-            </Fixed>
-            <Flex className="content" >
-              <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} >
-                <TabPane eventKey={1} tab="System Dependence Graph" >
-                  <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
-                </TabPane>
-                <TabPane eventKey={2} tab="Statistics" >
-                  <MyChart />
-                </TabPane>
-                <TabPane eventKey={3} tab="Tree" >
-                  <Tree />
-                </TabPane>
-              </TabbedArea>
-            </Flex>
-            <Fixed className="sidebar" >
-              <Accordion>
-                <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
-                <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
-              </Accordion>
-            </Fixed>
-          </Layout>
-        </Flex>
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
+
+      <Flex>
+        <Layout type="columns" >
+          <Fixed className="sidebar" >
+            <Accordion>
+              <Project root={this.PROJECTS_DIR} url={this.state.project.source} name={this.state.project.name} />
+              <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
+              <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
+            </Accordion>
+          </Fixed>
+          <Flex className="content" >
+            <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect} >
+              <TabPane eventKey={1} tab="System Dependence Graph" >
+                <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
+              </TabPane>
+              <TabPane eventKey={2} tab="Statistics" >
+                <MyChart />
+              </TabPane>
+              <TabPane eventKey={3} tab="Tree" >
+                <Tree />
+              </TabPane>
+            </TabbedArea>
+          </Flex>
+          <Fixed className="sidebar" >
+            <Accordion>
+              <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
+              <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
+            </Accordion>
+          </Fixed>
+        </Layout>
+      </Flex>
+
     )
   }
 }
