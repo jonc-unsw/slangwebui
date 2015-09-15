@@ -2,9 +2,9 @@ import React from 'react';
 import Immutable from 'immutable';
 
 //import cytoscape from 'cytoscape';
-import connectToStores from 'alt/utils/connectToStores';
-import { GraphStore } from '../stores/Store.js';
-import { DDBActions, GraphActions, SourceCodeActions } from '../actions/Actions.js';
+import connectToStores from '../../../node_modules/alt/utils/connectToStores';
+import { GraphStore } from '../../stores/Store.js';
+import { DDBActions, GraphActions, SourceCodeActions } from '../../actions/Actions.js';
 
 const DEFAULT_NODE_COLOR = "#428bca";
 const HIGHLIGHTED_NODE_COLOR = "#ff0000";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { DropdownMenu, Nav, Navbar, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
-import { DDBActions, BBActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js';
+import { DDBActions, BBActions, ProjectActions, SourceCodeActions } from '../../actions/Actions.js';
 
 import { NavItemLink } from 'react-router-bootstrap';
 

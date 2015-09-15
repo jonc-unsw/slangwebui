@@ -1,8 +1,8 @@
 import React from 'react';
-import connectToStores from 'alt/utils/connectToStores';
-import { BBStore } from '../stores/Store.js';
-import { BBActions } from '../actions/Actions.js';
-import { SourceCodeActions } from '../actions/Actions.js';
+import connectToStores from '../../../node_modules/alt/utils/connectToStores';
+import { BBStore } from '../../stores/Store.js';
+import { BBActions } from '../../actions/Actions.js';
+import { SourceCodeActions } from '../../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 
 @connectToStores class BasicBlocks extends React.Component {

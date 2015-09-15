@@ -1,8 +1,8 @@
 import React from 'react';
 
-import connectToStores from 'alt/utils/connectToStores';
-import { SourceCodeStore } from '../stores/Store.js';
-import { SourceCodeActions } from '../actions/Actions.js';
+import connectToStores from '../../../node_modules/alt/utils/connectToStores';
+import { SourceCodeStore } from '../../stores/Store.js';
+import { SourceCodeActions } from '../../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 
 //import CodeMirrorEditor from 'react-code-mirror';

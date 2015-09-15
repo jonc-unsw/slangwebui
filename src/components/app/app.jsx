@@ -5,7 +5,7 @@ import { Accordion, TabbedArea, TabPane } from 'react-bootstrap';
 
 import {Layout, Flex, Fixed} from 'react-layout-pane';
 
-import { Header } from './header.jsx';
+import { Header } from './../common/header.jsx';
 import { IndependentPanel } from './independentpanel.jsx';
 import { Project } from './project.jsx';
 import { SourceCode } from './sourcecode.jsx';
@@ -15,7 +15,7 @@ import { MyChart } from './chart.jsx';
 import { Tree } from './tree.jsx';
 import { BasicBlocks } from './bb.jsx';
 import { DataDependenceBlocks } from './ddb.jsx';
-import { Footer } from './footer.jsx';
+import { Footer } from './../common/footer.jsx';
 
 class App extends React.Component {
   constructor( props ) {

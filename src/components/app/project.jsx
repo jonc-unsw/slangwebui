@@ -1,8 +1,8 @@
 "use strict";
 import React from 'react';
-import connectToStores from 'alt/utils/connectToStores';
-import { ProjectStore } from '../stores/Store.js';
-import { ProjectActions, SourceCodeActions } from '../actions/Actions.js';
+import connectToStores from '../../../node_modules/alt/utils/connectToStores';
+import { ProjectStore } from '../../stores/Store.js';
+import { ProjectActions, SourceCodeActions } from '../../actions/Actions.js';
 import { IndependentPanel } from './independentpanel.jsx';
 import TreeView from 'react-treeview';
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import connectToStores from 'alt/utils/connectToStores';
-import { GraphStore } from '../stores/Store.js';
-import { GraphActions } from '../actions/Actions.js';
+import connectToStores from '../../../node_modules/alt/utils/connectToStores';
+import { GraphStore } from '../../stores/Store.js';
+import { GraphActions } from '../../actions/Actions.js';
 import { Input } from 'react-bootstrap';
 import { IndependentPanel } from './independentpanel.jsx';
 import TreeView from 'react-treeview';
