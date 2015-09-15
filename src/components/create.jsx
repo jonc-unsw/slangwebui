@@ -6,6 +6,7 @@ import { Layout, Flex, Fixed } from 'react-layout-pane';
 import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from 'react-bootstrap';
 
 class CreateForm extends React.Component {
+
   render() {
     return(
       <Layout type="rows" >
