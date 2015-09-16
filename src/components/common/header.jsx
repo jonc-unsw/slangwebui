@@ -26,6 +26,8 @@ class MyNavbar extends React.Component {
    */
   render() {
 
+    return <div/>;
+
     let viewmenu = this.props.inapp ? (
       <DropdownButton eventKey={1} title='View' onSelect={this.closeMenu} >
         <MenuItem eventKey='1' onClick={ () => {

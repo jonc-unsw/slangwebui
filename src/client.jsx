@@ -1,9 +1,7 @@
 "use strict";
 import React from 'react';
 import Router from 'react-router';
-
+import history from './history'
 import { routes } from './routes.jsx';
 
-Router.run(routes, Router.HistoryLocation, (Root, state) => {
-  React.render(<Root/>, document.body);
-});
+React.render(<Router history={history}>{routes}</Router>, document.body)

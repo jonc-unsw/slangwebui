@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react';
-import Router from 'react-router';
+import { RouteHandler, Route } from 'react-router';
 
 import { Index } from './index.jsx';
 
@@ -11,21 +11,19 @@ import { ProjectNotFound } from './components/errors/projectnotfound.jsx';
 import { Uploading } from './components/uploading.jsx';
 import { Summary } from './components/summary.jsx';
 
-let { RouteHandler, DefaultRoute, Route, Link, NotFoundRoute } = Router;
-
 var routes = (
-  <Route path="/" handler={Index}>
+  <Route component={Index}>
 
-    <DefaultRoute name="home" handler={Home} />
+    <Route path="/" component={Home} />
 
-    <Route name="project" path="project/:id">
-      <Route name="summary" path="summary/:detail" handler={Summary} />
-      <Route name="view" path="view" handler={App} />
+    <Route path="project/:id">
+      <Route path="summary/(:detail)" component={Summary} />
+      <Route path="view" component={App} />
     </Route>
 
-    <Route name="create" path="create" handler={CreateForm} />
+    <Route path="create" component={CreateForm} />
 
-    <Route name="uploading" path="uploading/:id" handler={Uploading} />
+    <Route path="uploading/:id" component={Uploading} />
 
   </Route>
 );

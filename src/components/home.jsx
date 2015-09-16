@@ -1,11 +1,12 @@
 "use strict";
 import React from 'react';
+import PropTypes from 'react-router'
 import { Header } from './common/header.jsx';
 import { Footer } from './common/footer.jsx';
 import Autocomplete from 'react-autocomplete';
 import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from 'react-bootstrap';
 import {Layout, Flex, Fixed} from 'react-layout-pane';
-
+import history from '../history.js';
 
 class Home extends React.Component {
 
@@ -25,7 +26,9 @@ class Home extends React.Component {
 
   routeHandler = (e) => {
     e.preventDefault();
-    this.context.router.transitionTo('summary', {id: this.state.transitionpage})
+    //this.context.router.transitionTo('summary', {id: this.state.transitionpage})
+    history.pushState(null, `project/${this.state.transitionpage}/summary/`, null);
+
   }
 
   matchProjectToTerm (project, value) {
@@ -102,8 +105,6 @@ class Home extends React.Component {
 }
 
 // This is es7 code to get transitionTo working.
-Home.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
+//Home.contextTypes = { history: PropTypes.history }
 
 export { Home }
