@@ -25,7 +25,7 @@ class Home extends React.Component {
 
   routeHandler = (e) => {
     e.preventDefault();
-    this.context.router.transitionTo('project', {id: this.state.transitionpage})
+    this.context.router.transitionTo('summary', {id: this.state.transitionpage})
   }
 
   matchProjectToTerm (project, value) {

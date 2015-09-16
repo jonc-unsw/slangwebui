@@ -9,6 +9,7 @@ import { Home } from './components/home.jsx';
 import { CreateForm } from './components/create.jsx';
 import { ProjectNotFound } from './components/errors/projectnotfound.jsx';
 import { Uploading } from './components/uploading.jsx';
+import { Summary } from './components/summary.jsx';
 
 let { RouteHandler, DefaultRoute, Route, Link, NotFoundRoute } = Router;
 
@@ -17,8 +18,9 @@ var routes = (
 
     <DefaultRoute name="home" handler={Home} />
 
-    <Route name="project" path="project/:id" handler={App}>
-      <NotFoundRoute handler={ProjectNotFound} />
+    <Route name="project" path="project/:id">
+      <Route name="summary" path="summary/:detail" handler={Summary} />
+      <Route name="view" path="view" handler={App} />
     </Route>
 
     <Route name="create" path="create" handler={CreateForm} />
