@@ -3,9 +3,10 @@ import React from 'react';
 import { Header } from './common/header.jsx';
 import { Footer } from './common/footer.jsx';
 import { Layout, Flex, Fixed } from 'react-layout-pane';
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col, ListGroup } from 'react-bootstrap';
+import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-import { ListGroupItemLink } from 'react-router-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router';
 
 import { BarChart, PieChart, LineChart } from 'react-d3';
 
@@ -87,6 +88,8 @@ class Summary extends React.Component {
 
     const detail = this.whichDetail();
 
+    const className = "";
+
     return(
       <Layout type="rows" >
         <Fixed className="header" >
@@ -99,11 +102,30 @@ class Summary extends React.Component {
 
                   <div className="summary">
                     <ul className="nav nav-sidebar">
-                      <li className="active"><a href="#">Overview</a></li>
-                      <li><a href="#">Reports</a></li>
-                      <li><a href="#">Analytics</a></li>
-                      <li><a href="#">Export</a></li>
+                      <li className={className} ><Link to={`/project/${this.props.params.id}/summary/`}>Overview</Link></li>
+                      <li className={className} ><a href="#">Reports</a></li>
+                      <li className={className} ><a href="#">Analytics</a></li>
+                      <li className={className} ><a href="#">Export</a></li>
                     </ul>
+
+                    <ListGroup>
+                      <LinkContainer to={`/project/${this.props.params.id}/summary/`}>
+                        <ListGroupItem listItem>Overview</ListGroupItem>
+                      </LinkContainer>
+                      <LinkContainer to={`/project/${this.props.params.id}/view`}>
+                        <ListGroupItem listItem>Goto Analysis</ListGroupItem>
+                      </LinkContainer>
+                      <LinkContainer to={`/project/${this.props.params.id}/summary/pie`}>
+                        <ListGroupItem listItem>Pie Chart</ListGroupItem>
+                      </LinkContainer>
+                    </ListGroup>
+
+                    <ListGroup>
+                      <ListGroupItem><Link to={`/project/${this.props.params.id}/summary/`}>Overview</Link></ListGroupItem>
+                      <ListGroupItem >Info</ListGroupItem>
+                      <ListGroupItem >Warning</ListGroupItem>
+                      <ListGroupItem >Danger</ListGroupItem>
+                    </ListGroup>
 
                   </div>
 
