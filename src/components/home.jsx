@@ -1,11 +1,11 @@
 "use strict";
-import React from 'react';
-import PropTypes from 'react-router'
-import { Header } from './common/header.jsx';
-import { Footer } from './common/footer.jsx';
-import Autocomplete from 'react-autocomplete';
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from 'react-bootstrap';
-import {Layout, Flex, Fixed} from 'react-layout-pane';
+import React from "react";
+import PropTypes from "react-router";
+import { Header } from "./common/header.jsx";
+import { Footer } from "./common/footer.jsx";
+import Autocomplete from "react-autocomplete";
+import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from "react-bootstrap";
+import {Layout, Flex, Fixed} from "react-layout-pane";
 
 class Home extends React.Component {
 
@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.state = {
       projects: undefined,
       transitionpage: ""
-    }
+    };
   }
 
   componentDidMount() {
@@ -33,25 +33,25 @@ class Home extends React.Component {
   matchProjectToTerm (project, value) {
     return (
       project.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
-    )
+    );
   }
 
   renderItems (items) {
     return items.map((item, index) => {
-      var text = item.props.children
+      var text = item.props.children;
       if (index === 0 || items[index - 1].props.children.charAt(0) !== text.charAt(0)) {
         var style = {
-          background: '#eee',
-          color: '#454545',
-          padding: '2px 6px',
-          fontWeight: 'bold'
-        }
-        return [<div style={style}>{text.charAt(0)}</div>, item]
+          background: "#eee",
+          color: "#454545",
+          padding: "2px 6px",
+          fontWeight: "bold"
+        };
+        return [<div style={style}>{text.charAt(0)}</div>, item];
       }
       else {
-        return item
+        return item;
       }
-    })
+    });
   }
 
   render() {
@@ -61,18 +61,18 @@ class Home extends React.Component {
      * so we manually pass down this class to get it styled correctly. Alternatively rewrite react-autocomplete...
      * */
     const autocomplete = this.state.projects ? (
-      <Autocomplete inputProps={{placeholder: 'Project Search', className: "form-control"}} initialValue="" items={this.state.projects.children} getItemValue={(item) => item.name} shouldItemRender={this.matchProjectToTerm}
+      <Autocomplete inputProps={{placeholder: "Project Search", className: "form-control"}} initialValue="" items={this.state.projects.children} getItemValue={(item) => item.name} shouldItemRender={this.matchProjectToTerm}
                     renderItem={(item, isHighlighted) => (
             <div key={item.name} >{item.name}</div>
       )}
                     renderMenu={(items, value, style) => (
             <Panel>
-              {value === '' ? (
+              {value === "" ? (
                 <div />
               ) : this.renderItems(items)}
             </Panel>
        )}
-                    onSelect={ (value, item) => { this.setState( {transitionpage : value} ) } }
+                    onSelect={ (value, item) => { this.setState( {transitionpage : value} ); } }
         />) : <div/>;
 
     return (
@@ -99,11 +99,11 @@ class Home extends React.Component {
           <Footer />
         </Fixed>
       </Layout>
-    )
+    );
   }
 }
 
 // This is es7 code to get transitionTo working.
 //Home.contextTypes = { history: PropTypes.history }
 
-export { Home }
+export { Home };

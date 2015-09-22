@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { Panel } from 'react-bootstrap';
+import { Panel } from "react-bootstrap";
 
 class IndependentPanel extends React.Component {
   constructor( props ) {
     super( props );
-    this.state = { expanded: this.props.expanded }
+    this.state = { expanded: this.props.expanded };
   }
 
   componentWillReceiveProps( nextProps ) {
@@ -23,7 +23,7 @@ class IndependentPanel extends React.Component {
         >
         {this.props.children}
       </Panel>
-    )
+    );
   }
 
   _toggleExpand = () => {
@@ -31,4 +31,4 @@ class IndependentPanel extends React.Component {
   }
 }
 
-export { IndependentPanel }
+export { IndependentPanel };

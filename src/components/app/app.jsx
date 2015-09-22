@@ -1,21 +1,19 @@
 "use strict";
-import React from 'react';
-import { Accordion, Tabs, Tab } from 'react-bootstrap';
+import React from "react";
+import { Accordion } from "react-bootstrap";
 
+import $ from "jquery";
 
-import {Layout, Flex, Fixed} from 'react-layout-pane';
+import {Layout, Flex, Fixed} from "react-layout-pane";
 
-import { Header } from './../common/header.jsx';
-import { IndependentPanel } from './independentpanel.jsx';
-import { Project } from './project.jsx';
-import { SourceCode } from './sourcecode.jsx';
-import { Features } from './features.jsx';
-import { Graph } from './graph.jsx';
-import { MyChart } from './chart.jsx';
-import { Tree } from './tree.jsx';
-import { BasicBlocks } from './bb.jsx';
-import { DataDependenceBlocks } from './ddb.jsx';
-import { Footer } from './../common/footer.jsx';
+import { Header } from "./../common/header.jsx";
+import { Project } from "./project.jsx";
+import { SourceCode } from "./sourcecode.jsx";
+import { Features } from "./features.jsx";
+import { Graph } from "./graph.jsx";
+import { BasicBlocks } from "./bb.jsx";
+import { DataDependenceBlocks } from "./ddb.jsx";
+import { Footer } from "./../common/footer.jsx";
 
 class App extends React.Component {
   constructor( props ) {
@@ -55,7 +53,7 @@ class App extends React.Component {
             <Footer />
           </Fixed>
         </Layout>
-      )
+      );
     }
 
     return (
@@ -87,7 +85,7 @@ class App extends React.Component {
           <Footer />
         </Fixed>
       </Layout>
-    )
+    );
   }
 }
 

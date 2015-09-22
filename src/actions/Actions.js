@@ -1,33 +1,33 @@
-import alt from '../alt';
+import alt from "../alt";
 
 class DDBActions {
   constructor() {
-    this.generateActions( 'loadDdb', 'updateCurrentDdb', 'toggleAccordion' );
+    this.generateActions( "loadDdb", "updateCurrentDdb", "toggleAccordion" );
   }
 }
 
 class BBActions {
   constructor() {
-    this.generateActions( 'loadBb', 'toggleAccordion' );
+    this.generateActions( "loadBb", "toggleAccordion" );
   }
 }
 
 class ProjectActions {
   constructor() {
-    this.generateActions( 'loadProject', 'toggleAccordion' );
+    this.generateActions( "loadProject", "toggleAccordion" );
   }
 }
 
 class SourceCodeActions {
   constructor() {
-    this.generateActions( 'highlightLine', 'loadSource', 'toggleAccordion' );
+    this.generateActions( "highlightLine", "loadSource", "toggleAccordion" );
   }
 }
 
 class GraphActions {
   constructor() {
-    this.generateActions( 'loadFeatures', 'getOptimisationForFile',
-      'selectOptimisation', 'toggleAccordion', 'storeGraph', 'storeFeaturedNodes' );
+    this.generateActions( "loadFeatures", "getOptimisationForFile",
+      "selectOptimisation", "toggleAccordion", "storeGraph", "storeFeaturedNodes" );
   }
 }
 

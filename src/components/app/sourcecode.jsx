@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { SourceCodeStore } from '../../stores/Store.js';
-import { SourceCodeActions } from '../../actions/Actions.js';
-import { IndependentPanel } from './independentpanel.jsx';
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { SourceCodeStore } from "../../stores/Store.js";
+import { IndependentPanel } from "./independentpanel.jsx";
 
-//import CodeMirrorEditor from 'react-code-mirror';
-import CodeMirror from 'codemirror';
-require( 'codemirror/addon/selection/active-line' );
-require( 'codemirror/addon/selection/mark-selection' );
-require( 'codemirror/addon/search/searchcursor' );
-require( 'codemirror/mode/clike/clike' );
+import $ from "jquery";
+
+import CodeMirror from "codemirror";
+import "codemirror/addon/selection/active-line";
+import "codemirror/addon/selection/mark-selection";
+import "codemirror/addon/search/searchcursor";
+import "codemirror/mode/clike/clike";
 
 class CodeMirrorEditor extends React.Component {
   constructor( props ) {
@@ -87,7 +87,7 @@ class CodeMirrorEditor extends React.Component {
   render() {
     return (
       <textarea id="code" ref="code" readOnly />
-    )
+    );
   }
 }
 
@@ -109,8 +109,8 @@ class CodeMirrorEditor extends React.Component {
       <IndependentPanel {...this.props} header="Source Code" expanded={this.props.expanded} >
         <CodeMirrorEditor prefix={this.props.prefix} file={this.props.file} line={this.props.line} />
       </IndependentPanel>
-    )
+    );
   }
 }
 
-export { SourceCode }
+export { SourceCode };

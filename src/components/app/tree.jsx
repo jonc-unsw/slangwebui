@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class Tree extends React.Component {
   constructor( props ) {
@@ -10,51 +10,51 @@ class Tree extends React.Component {
       //boxSelectionEnabled: true,
       //selectionType: 'additive',
       style: cytoscape.stylesheet()
-        .selector( 'node' )
+        .selector( "node" )
         .css( {
-          'content': 'data(id)',
-          'text-valign': 'center',
+          "content": "data(id)",
+          "text-valign": "center",
           //'color': 'data(color)',
-          'background-color': '#428bca',
-          'text-outline-width': 1,
-          'text-outline-color': '#888'
+          "background-color": "#428bca",
+          "text-outline-width": 1,
+          "text-outline-color": "#888"
         } )
-        .selector( '$node > node' )
+        .selector( "$node > node" )
         .css( {
-          'content': 'data(id)',
-          'text-valign': 'center',
+          "content": "data(id)",
+          "text-valign": "center",
           //'color': 'data(color)',
-          'background-color': '#f5f5f5',
-          'border-color': 'black',
-          'border-width': 2,
-          'text-outline-width': 2,
-          'text-outline-color': '#888'
+          "background-color": "#f5f5f5",
+          "border-color": "black",
+          "border-width": 2,
+          "text-outline-width": 2,
+          "text-outline-color": "#888"
         } )
-        .selector( 'edge' )
+        .selector( "edge" )
         .css( {
-          'target-arrow-shape': 'triangle',
+          "target-arrow-shape": "triangle",
           //'line-color': 'data(color)',
           //'source-arrow-color': 'data(color)',
           //'target-arrow-color': 'data(color)',
-          'curve-style': 'haystack',
+          "curve-style": "haystack",
           /*'content' : 'data(label)',*/
           //'width': 'mapData(weight, 0, 6400, 1, 10)',
         } )
-        .selector( ':selected' )
+        .selector( ":selected" )
         .css( {
-          'background-color': 'black',
-          'line-color': 'black',
-          'target-arrow-color': 'black',
-          'source-arrow-color': 'black'
+          "background-color": "black",
+          "line-color": "black",
+          "target-arrow-color": "black",
+          "source-arrow-color": "black"
         } )
-        .selector( '.faded' )
+        .selector( ".faded" )
         .css( {
-          'opacity': 0.25,
-          'text-opacity': 0
+          "opacity": 0.25,
+          "text-opacity": 0
         } ),
 
       layout: {
-        name: 'breadthfirst',
+        name: "breadthfirst",
 
         fit: true, // whether to fit the viewport to the graph
         directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
@@ -74,7 +74,7 @@ class Tree extends React.Component {
         //cy1.on('tap', 'node', (e) => self.handleClick(e) );
       }
     } );
-    var cy1 = $( '#cy1' ).cytoscape( 'get' );
+    var cy1 = $( "#cy1" ).cytoscape( "get" );
     $.get( "projects/fib/tree.json", ( result ) => {
       cy1.load( result );
     } );
@@ -85,11 +85,11 @@ class Tree extends React.Component {
 
     this.handleResize();
 
-    $( 'a' ).on( 'shown.bs.tab', function( e ) {
+    $( "a" ).on( "shown.bs.tab", function( e ) {
       //e.target // newly activated tab
       //e.relatedTarget // previous active tab
       console.log( e );
-    } )
+    } );
   }
 
   handleResize = () => {
@@ -98,7 +98,7 @@ class Tree extends React.Component {
     // TODO fix this. Since putting the graph in the tabpane we need to got up the DOM
     // find a better way to do this
     $( React.findDOMNode( this ) ).height( $( React.findDOMNode( this ) ).closest( ".Flex" ).height() - 100 );
-    $( "#cy1" ).cytoscape( 'get' ).resize();
+    $( "#cy1" ).cytoscape( "get" ).resize();
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
@@ -109,8 +109,8 @@ class Tree extends React.Component {
     return (
       <div id="cy1" >
       </div>
-    )
+    );
   }
 }
 
-export { Tree }
+export { Tree };

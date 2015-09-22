@@ -1,9 +1,9 @@
 "use strict";
-import React from 'react';
-import { Header } from './common/header.jsx';
-import { Footer } from './common/footer.jsx';
-import { Layout, Flex, Fixed } from 'react-layout-pane';
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from 'react-bootstrap';
+import React from "react";
+import { Header } from "./common/header.jsx";
+import { Footer } from "./common/footer.jsx";
+import { Layout, Flex, Fixed } from "react-layout-pane";
+import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from "react-bootstrap";
 
 class Uploading extends React.Component {
 
@@ -38,7 +38,7 @@ class Uploading extends React.Component {
             <Footer />
           </Fixed>
         </Layout>
-      )
+      );
     }
 
     return(
@@ -61,8 +61,8 @@ class Uploading extends React.Component {
         </Fixed>
       </Layout>
 
-    )
+    );
   }
 }
 
-export { Uploading }
+export { Uploading };

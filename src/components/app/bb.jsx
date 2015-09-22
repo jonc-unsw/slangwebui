@@ -1,9 +1,9 @@
-import React from 'react';
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { BBStore } from '../../stores/Store.js';
-import { BBActions } from '../../actions/Actions.js';
-import { SourceCodeActions } from '../../actions/Actions.js';
-import { IndependentPanel } from './independentpanel.jsx';
+import React from "react";
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { BBStore } from "../../stores/Store.js";
+import { BBActions } from "../../actions/Actions.js";
+import { SourceCodeActions } from "../../actions/Actions.js";
+import { IndependentPanel } from "./independentpanel.jsx";
 
 @connectToStores class BasicBlocks extends React.Component {
   constructor( props ) {
@@ -30,7 +30,7 @@ import { IndependentPanel } from './independentpanel.jsx';
             <Preds preds={bb.preds} />
             <Succs succs={bb.succs} />
           </div>
-        )
+        );
       } );
     return (
       <IndependentPanel {...this.props} header="Basic Blocks"
@@ -38,7 +38,7 @@ import { IndependentPanel } from './independentpanel.jsx';
         >
         {blocks}
       </IndependentPanel>
-    )
+    );
   }
 }
 
@@ -53,12 +53,12 @@ class Preds extends React.Component {
     if( this.props.preds ) {
       var handleClick = this.handleClick;
       var preds = this.props.preds.map( function( pred, key ) {
-        return <a className="preds" href="#" key={key} onClick={handleClick} >{pred}</a>
+        return <a className="preds" href="#" key={key} onClick={handleClick} >{pred}</a>;
       } );
 
-      return ( <div className="preds" >Preds ({this.props.preds.length}): {preds} </div> )
+      return ( <div className="preds" >Preds ({this.props.preds.length}): {preds} </div> );
     }
-    return null
+    return null;
   }
 }
 
@@ -69,9 +69,9 @@ class Succs extends React.Component {
         return <a className="succs" href="#" key={key} >{succ}</a>;
       } );
 
-      return ( <div className="succs" >Succs ({this.props.succs.length}): {succs} </div> )
+      return ( <div className="succs" >Succs ({this.props.succs.length}): {succs} </div> );
     }
-    return null
+    return null;
   }
 }
 
@@ -85,7 +85,7 @@ class Statement extends React.Component {
     return (
       // TODO the json has encoded html. Maybe we should not do that..
       <li><a href="#" onClick={this.handleClick} dangerouslySetInnerHTML={{__html: this.props.statement}} /></li>
-    )
+    );
   }
 }
 
@@ -102,11 +102,11 @@ class Statements extends React.Component {
             return <Statement key={key} file={file} line={statement[1]} statement={statement[0]} />;
           } ) }
         </ol>
-      )
+      );
     }
 
-    return null
+    return null;
   }
 }
 
-export { BasicBlocks }
+export { BasicBlocks };

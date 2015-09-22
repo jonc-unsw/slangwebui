@@ -1,14 +1,14 @@
 "use strict";
-import React from 'react';
-import { Header } from './common/header.jsx';
-import { Footer } from './common/footer.jsx';
-import { Layout, Flex, Fixed } from 'react-layout-pane';
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React from "react";
+import { Header } from "./common/header.jsx";
+import { Footer } from "./common/footer.jsx";
+import { Layout, Flex, Fixed } from "react-layout-pane";
+import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
-import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router';
+import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router";
 
-import { BarChart, PieChart, LineChart } from 'react-d3';
+import { BarChart, PieChart, LineChart } from "react-d3";
 
 class Summary extends React.Component {
   constructor( props ) {
@@ -61,9 +61,9 @@ class Summary extends React.Component {
 
     if( this.props.params.detail === "pie" )
       return <PieChart data={pieData} width={450} height={400} radius={110}
-              innerRadius={20} sectorBorderColor="white" title="Edges" />
+              innerRadius={20} sectorBorderColor="white" title="Edges" />;
 
-    return <div/>
+    return <div/>;
   }
 
   render() {
@@ -83,7 +83,7 @@ class Summary extends React.Component {
             <Footer />
           </Fixed>
         </Layout>
-      )
+      );
     }
 
     const detail = this.whichDetail();
@@ -151,8 +151,8 @@ class Summary extends React.Component {
         </Fixed>
       </Layout>
 
-    )
+    );
   }
 }
 
-export { Summary }
+export { Summary };

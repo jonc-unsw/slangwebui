@@ -1,8 +1,8 @@
-import alt from '../alt';
+import alt from "../alt";
 
-import Immutable from 'immutable';
+import Immutable from "immutable";
 
-import { BBActions, DDBActions, GraphActions, ProjectActions, SourceCodeActions } from '../actions/Actions.js'
+import { BBActions, DDBActions, GraphActions, ProjectActions, SourceCodeActions } from "../actions/Actions.js";
 
 class DDBStore {
   constructor() {

@@ -1,5 +1,7 @@
-import React from 'react';
-import { BarChart, PieChart, LineChart } from 'react-d3';
+import React from "react";
+import { BarChart, PieChart } from "react-d3";
+
+import $ from "jquery";
 
 class MyChart extends React.Component {
 
@@ -49,22 +51,22 @@ class MyChart extends React.Component {
     ];
 
     return (
-      <div style={{'overflow': 'auto'}} >
-        <div style={{'display': 'flex'}} >
-          <div style={{'flex': 1}} ><PieChart data={pieData} width={450} height={400} radius={110}
+      <div style={{"overflow": "auto"}} >
+        <div style={{"display": "flex"}} >
+          <div style={{"flex": 1}} ><PieChart data={pieData} width={450} height={400} radius={110}
                                               innerRadius={20} sectorBorderColor="white" title="Edges" /></div>
-          <div style={{'flex': 1}} ><BarChart data={barData} width={500} height={300} title="Edges"
+          <div style={{"flex": 1}} ><BarChart data={barData} width={500} height={300} title="Edges"
                                               yAxisLabel="Percentage" xAxisLabel="Edges" /></div>
         </div>
-        <div style={{'display': 'flex'}} >
-          <div style={{'margin': 'auto'}} ><BarChart data={bbData} width={1000}
+        <div style={{"display": "flex"}} >
+          <div style={{"margin": "auto"}} ><BarChart data={bbData} width={1000}
                                                      height={300} title="Number of Basic Blocks"
                                                      yAxisLabel="Number"
                                                      xAxisLabel="Basic Blocks" /></div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export { MyChart }
+export { MyChart };

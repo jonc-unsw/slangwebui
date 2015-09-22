@@ -1,10 +1,10 @@
 "use strict";
-import React from 'react';
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { ProjectStore } from '../../stores/Store.js';
-import { ProjectActions, SourceCodeActions } from '../../actions/Actions.js';
-import { IndependentPanel } from './independentpanel.jsx';
-import TreeView from 'react-treeview';
+import React from "react";
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { ProjectStore } from "../../stores/Store.js";
+import { ProjectActions, SourceCodeActions } from "../../actions/Actions.js";
+import { IndependentPanel } from "./independentpanel.jsx";
+import TreeView from "react-treeview";
 
 @connectToStores class Project extends React.Component {
   constructor( props ) {
@@ -33,13 +33,13 @@ import TreeView from 'react-treeview';
         <div key={key}>
           <a href="#" className="info" onClick={ () => this.handleClick( src.path ) } >{src.name}</a>
         </div>
-      )
+      );
     }
 
     if( src.type === "directory" )
       return (
         <TreeView nodeLabel={src.name} defaultCollapsed={false} key={key} >
-          {src.children.map( (newsrc, key) => { return this.generatePath(newsrc, key) } )}
+          {src.children.map( (newsrc, key) => { return this.generatePath(newsrc, key); } )}
         </TreeView>
       );
 
@@ -57,14 +57,14 @@ import TreeView from 'react-treeview';
             {files}
           </TreeView>
         </IndependentPanel>
-      )
+      );
     }
     else {
-      return (<div>Loading</div>)
+      return (<div>Loading</div>);
     }
 
 
   }
 }
 
-export { Project }
+export { Project };

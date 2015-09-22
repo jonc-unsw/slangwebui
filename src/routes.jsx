@@ -1,15 +1,15 @@
 "use strict";
-import React from 'react';
-import { RouteHandler, Route } from 'react-router';
+import React from "react";
+import { RouteHandler, Route } from "react-router";
 
-import { Index } from './index.jsx';
+import { Index } from "./index.jsx";
 
-import { App } from './components/app/app.jsx';
-import { Home } from './components/home.jsx';
-import { CreateForm } from './components/create.jsx';
-import { ProjectNotFound } from './components/errors/projectnotfound.jsx';
-import { Uploading } from './components/uploading.jsx';
-import { Summary } from './components/summary.jsx';
+import { App } from "./components/app/app.jsx";
+import { Home } from "./components/home.jsx";
+import { CreateForm } from "./components/create.jsx";
+import { ProjectNotFound } from "./components/errors/projectnotfound.jsx";
+import { Uploading } from "./components/uploading.jsx";
+import { Summary } from "./components/summary.jsx";
 
 var routes = (
   <Route component={Index}>

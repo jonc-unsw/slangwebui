@@ -1,5 +1,5 @@
 "use strict";
-import React from 'react';
+import React from "react";
 
 class Footer extends React.Component {
   render() {
@@ -7,7 +7,7 @@ class Footer extends React.Component {
       <footer className="footer" >
         Footer
       </footer>
-    )
+    );
   }
 }
 

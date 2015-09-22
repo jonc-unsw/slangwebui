@@ -1,10 +1,10 @@
-import React from 'react';
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { GraphStore } from '../../stores/Store.js';
-import { GraphActions } from '../../actions/Actions.js';
-import { Input } from 'react-bootstrap';
-import { IndependentPanel } from './independentpanel.jsx';
-import TreeView from 'react-treeview';
+import React from "react";
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { GraphStore } from "../../stores/Store.js";
+import { GraphActions } from "../../actions/Actions.js";
+import { Input } from "react-bootstrap";
+import { IndependentPanel } from "./independentpanel.jsx";
+import TreeView from "react-treeview";
 
 @connectToStores class Features extends React.Component {
   constructor( props ) {
@@ -21,7 +21,7 @@ import TreeView from 'react-treeview';
   }
 
   handleChange = ( e ) => {
-    GraphActions.selectOptimisation( e.target.getAttribute( 'data-id' ) );
+    GraphActions.selectOptimisation( e.target.getAttribute( "data-id" ) );
   }
 
   render() {
@@ -37,7 +37,7 @@ import TreeView from 'react-treeview';
               <TreeView nodeLabel={label} defaultCollapsed={false} key={k} >
                 <div className="featuresmessage" >{v.message}</div>
               </TreeView>
-            )
+            );
           } )
         }
       </form>
@@ -47,9 +47,9 @@ import TreeView from 'react-treeview';
       <IndependentPanel {...this.props} header="Features" expanded={this.props.expanded} >
         {features}
       </IndependentPanel>
-    )
+    );
 
   }
 }
 
-export { Features }
+export { Features };

@@ -1,8 +1,8 @@
-import React from 'react';
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { DDBStore } from '../../stores/Store.js';
-import { DDBActions } from '../../actions/Actions.js';
-import { IndependentPanel } from './independentpanel.jsx';
+import React from "react";
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { DDBStore } from "../../stores/Store.js";
+import { DDBActions } from "../../actions/Actions.js";
+import { IndependentPanel } from "./independentpanel.jsx";
 
 @connectToStores class DataDependenceBlocks extends React.Component {
   constructor( props ) {
@@ -31,12 +31,12 @@ import { IndependentPanel } from './independentpanel.jsx';
           <ul>
             {
               Object.keys( ddblock ).map( ( k, v ) => {
-                return ( <li key={v} >{k} {ddblock[ k ]}</li> )
+                return ( <li key={v} >{k} {ddblock[ k ]}</li> );
               } )
             }
           </ul>
         </IndependentPanel>
-      )
+      );
     }
     return (
       <IndependentPanel {...this.props} header="Data Dependence Blocks"
@@ -44,8 +44,8 @@ import { IndependentPanel } from './independentpanel.jsx';
         >
         <div>Nothing selected</div>
       </IndependentPanel>
-    )
+    );
   }
 }
 
-export { DataDependenceBlocks }
+export { DataDependenceBlocks };
