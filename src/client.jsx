@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import Router from "react-router";
+import { Router } from "react-router";
 import history from "./history";
 import { routes } from "./routes.jsx";
 

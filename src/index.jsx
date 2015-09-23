@@ -2,9 +2,13 @@
 import React from "react";
 
 class Index extends React.Component {
-  render() {
-    return(
-      <RouteHandler/>
+  render () {
+    return (
+      <div>
+        {this.props.children}
+      </div>
     );
   }
 }
+
+export { Index };
