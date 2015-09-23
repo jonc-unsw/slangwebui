@@ -10,24 +10,8 @@ import { Link } from "react-router";
 
 import { BarChart, PieChart, LineChart } from "react-d3";
 
-class Summary extends React.Component {
-  constructor( props ) {
-    super( props );
-    this.state = {
-      key: 1,
-      project: undefined
-    };
-
-    this.PROJECTS_DIR = `/projects/${this.props.params.id}`;
-  }
-
-  componentDidMount() {
-    $.get( `${this.PROJECTS_DIR}/project.json`, ( result ) => {
-      this.setState( { project: result } );
-    } );
-  }
-
-  whichDetail() {
+class Statistics extends React.Component {
+  render() {
 
     var pieData = [
       { label: "Control Flow", value: 20.0 },
@@ -59,16 +43,29 @@ class Summary extends React.Component {
       }
     ];
 
-    if( this.props.params.detail === "pie" )
-      return <PieChart data={pieData} width={450} height={400} radius={110}
-              innerRadius={20} sectorBorderColor="white" title="Edges" />;
+    return <PieChart data={pieData} width={450} height={400} radius={110}
+                            innerRadius={20} sectorBorderColor="white" title="Edges" />;
+  }
+}
 
-    return <div/>;
+class Overview extends React.Component {
+  constructor( props ) {
+    super( props );
+    this.state = {
+      key: 1,
+      project: undefined
+    };
+
+    this.PROJECTS_DIR = `/projects/${this.props.params.id}`;
+  }
+
+  componentDidMount() {
+    $.get( `${this.PROJECTS_DIR}/project.json`, ( result ) => {
+      this.setState( { project: result } );
+    } );
   }
 
   render() {
-
-
 
     if( this.state.project === undefined ) {
       return (
@@ -86,8 +83,6 @@ class Summary extends React.Component {
       );
     }
 
-    const detail = this.whichDetail();
-
     const className = "";
 
     return(
@@ -102,8 +97,8 @@ class Summary extends React.Component {
 
                   <div className="summary">
                     <ul className="nav nav-sidebar">
-                      <li className={className} ><Link to={`/project/${this.props.params.id}/summary/`}>Overview</Link></li>
-                      <li className={className} ><Link to={`/project/${this.props.params.id}/summary/pie`}>Statistics</Link></li>
+                      <li className={className} ><Link to={`/project/${this.props.params.id}/overview/`}>Overview</Link></li>
+                      <li className={className} ><Link to={`/project/${this.props.params.id}/overview/statistics`}>Statistics</Link></li>
                       <li className={className} ><Link to={`/project/${this.props.params.id}/view`}>Goto Analysis</Link></li>
                     </ul>
                   </div>
@@ -112,12 +107,9 @@ class Summary extends React.Component {
               <Flex className="content" >
                 <Grid fluid>
                   <Row className='center-block'>
-                    <Col md={6}>
-                      <h1>Project Summary</h1>
-                      <h2>{this.state.project.name} - {this.state.project.description} </h2>
-                    </Col>
-                    <Col md={6}>
-                      {detail}
+                    <Col md={12}>
+                      <h1>{this.state.project.name} - {this.state.project.description} </h1>
+                      {this.props.children}
                     </Col>
                   </Row>
                 </Grid>
@@ -134,4 +126,4 @@ class Summary extends React.Component {
   }
 }
 
-export { Summary };
+export { Overview, Statistics };

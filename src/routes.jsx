@@ -8,7 +8,7 @@ import { App } from "./components/app/app.jsx";
 import { Home } from "./components/home.jsx";
 import { CreateForm } from "./components/create.jsx";
 import { Uploading } from "./components/uploading.jsx";
-import { Summary } from "./components/summary.jsx";
+import { Overview, Statistics } from "./components/overview.jsx";
 
 var routes = (
   <Route component={Index}>
@@ -16,8 +16,13 @@ var routes = (
     <Route path="/" component={Home} />
 
     <Route path="project/:id">
-      <Route path="summary/(:detail)" component={Summary} />
+
+      <Route path="overview" component={Overview} >
+        <Route path="statistics" component={Statistics} />
+      </Route>
+
       <Route path="view" component={App} />
+
     </Route>
 
     <Route path="create" component={CreateForm} />
