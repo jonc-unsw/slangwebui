@@ -1,10 +1,12 @@
 "use strict";
 import React from "react";
-import PropTypes from "react-router";
+
+import $ from "jquery";
+
 import { Header } from "./common/header.jsx";
 import { Footer } from "./common/footer.jsx";
 import Autocomplete from "react-autocomplete";
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from "react-bootstrap";
+import { ButtonInput, Panel, Grid, Row, Col } from "react-bootstrap";
 import {Layout, Flex, Fixed} from "react-layout-pane";
 
 class Home extends React.Component {
@@ -62,10 +64,10 @@ class Home extends React.Component {
      * */
     const autocomplete = this.state.projects ? (
       <Autocomplete inputProps={{placeholder: "Project Search", className: "form-control"}} initialValue="" items={this.state.projects.children} getItemValue={(item) => item.name} shouldItemRender={this.matchProjectToTerm}
-                    renderItem={(item, isHighlighted) => (
+                    renderItem={(item, _isHighlighted) => (
             <div key={item.name} >{item.name}</div>
       )}
-                    renderMenu={(items, value, style) => (
+                    renderMenu={(items, value, _style) => (
             <Panel>
               {value === "" ? (
                 <div />
