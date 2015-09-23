@@ -1,14 +1,13 @@
 "use strict";
 import React from "react";
-import { Header } from "./common/header.jsx";
-import { Footer } from "./common/footer.jsx";
 import { Layout, Flex, Fixed } from "react-layout-pane";
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router";
 
-import { BarChart, PieChart, LineChart } from "react-d3";
+import { PieChart } from "react-d3";
+
+import $ from "jquery";
 
 class Statistics extends React.Component {
   render() {
@@ -18,7 +17,7 @@ class Statistics extends React.Component {
       { label: "Data Dependence", value: 55.0 }
     ];
 
-    var barData = [
+    /*var barData = [
       {
         name: "Edges",
         values: [
@@ -26,9 +25,9 @@ class Statistics extends React.Component {
           { x: "Data Dependence", y: 55.0 }
         ]
       }
-    ];
+    ];*/
 
-    var bbData = [
+    /*var bbData = [
       {
         "name": "Series A",
         "values": [
@@ -41,7 +40,7 @@ class Statistics extends React.Component {
           { x: "main_B6", y: 0 }
         ]
       }
-    ];
+    ];*/
 
     return <PieChart data={pieData} width={450} height={400} radius={110}
                             innerRadius={20} sectorBorderColor="white" title="Edges" />;

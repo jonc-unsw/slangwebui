@@ -6,14 +6,12 @@ import $ from "jquery";
 
 import {Layout, Flex, Fixed} from "react-layout-pane";
 
-import { Header } from "./../common/header.jsx";
 import { Project } from "./project.jsx";
 import { SourceCode } from "./sourcecode.jsx";
 import { Features } from "./features.jsx";
 import { Graph } from "./graph.jsx";
 import { BasicBlocks } from "./bb.jsx";
 import { DataDependenceBlocks } from "./ddb.jsx";
-import { Footer } from "./../common/footer.jsx";
 
 class App extends React.Component {
   constructor( props ) {

@@ -1,8 +1,6 @@
 "use strict";
 import React from "react";
-import { Header } from "./common/header.jsx";
-import { Footer } from "./common/footer.jsx";
-import { Layout, Flex, Fixed } from "react-layout-pane";
+import { Flex } from "react-layout-pane";
 import { Input, Grid, Row, Col } from "react-bootstrap";
 
 import $ from "jquery";

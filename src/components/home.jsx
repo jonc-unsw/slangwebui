@@ -3,11 +3,9 @@ import React from "react";
 
 import $ from "jquery";
 
-import { Header } from "./common/header.jsx";
-import { Footer } from "./common/footer.jsx";
 import Autocomplete from "react-autocomplete";
 import { ButtonInput, Panel, Grid, Row, Col } from "react-bootstrap";
-import {Layout, Flex, Fixed} from "react-layout-pane";
+import { Flex } from "react-layout-pane";
 
 class Home extends React.Component {
 
@@ -74,7 +72,7 @@ class Home extends React.Component {
               ) : this.renderItems(items)}
             </Panel>
        )}
-                    onSelect={ (value, item) => { this.setState( {transitionpage : value} ); } }
+                    onSelect={ (value, _item) => { this.setState( {transitionpage : value} ); } }
         />) : <div/>;
 
     return (

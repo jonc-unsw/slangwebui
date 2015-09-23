@@ -1,9 +1,7 @@
 "use strict";
 import React from "react";
-import { Header } from "./common/header.jsx";
-import { Footer } from "./common/footer.jsx";
-import { Layout, Flex, Fixed } from "react-layout-pane";
-import { Accordion, ButtonInput, Input, Panel, Grid, Row, Col } from "react-bootstrap";
+import { Flex } from "react-layout-pane";
+import { ButtonInput, Input, Grid, Row, Col } from "react-bootstrap";
 
 class CreateForm extends React.Component {
 
@@ -18,7 +16,21 @@ class CreateForm extends React.Component {
               <form onSubmit={this.routeHandler}>
                 <Input type="text" label="Project Name" />
                 <Input type="textarea" label="Project Description" />
-                <Input type="file" label="Source Code" help='Select archive to upload' />
+
+                <Input label="Source Code" help="" wrapperClassName="wrapper">
+                  <Row>
+                    <Col xs={5}>
+                      <Input type="file" label="Upload" help='Select archive to upload' />
+                    </Col>
+                    <Col xs={2}>
+                      Or
+                    </Col>
+                    <Col xs={5}>
+                      <Input type="text" label="Location on server" placeholder="eg. /srv/nfs4/common" />
+                    </Col>
+                  </Row>
+                </Input>
+
                 <ButtonInput type="submit" value="Create" />
               </form>
             </Col>
