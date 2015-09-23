@@ -1,13 +1,15 @@
-import React from 'react';
-import Immutable from 'immutable';
+import React from "react";
+//import $ from "jquery";
 
-//import cytoscape from 'cytoscape';
-import connectToStores from '../../../node_modules/alt/utils/connectToStores';
-import { GraphStore } from '../../stores/Store.js';
-import { DDBActions, GraphActions, SourceCodeActions } from '../../actions/Actions.js';
+import cytoscape from "cytoscape";
+import "cytoscape-qtip/cytoscape-qtip.js";
+
+import connectToStores from "../../../node_modules/alt/utils/connectToStores";
+import { GraphStore } from "../../stores/Store.js";
+import { DDBActions, GraphActions, SourceCodeActions } from "../../actions/Actions.js";
 
 const DEFAULT_NODE_COLOR = "#428bca";
-const HIGHLIGHTED_NODE_COLOR = "#ff0000";
+//const HIGHLIGHTED_NODE_COLOR = "#ff0000";
 const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00ffff" ];
 
 
@@ -50,7 +52,7 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
         let query = "";
 
         for( let v of optimisation.data.nodes ) {
-          query += 'node[id = "' + v + '" ] , ';
+          query += `node[id = "${v}" ], `;
         }
         query = query.substring( 0, query.length - 2 );
 
@@ -62,12 +64,12 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
           this.featured[ optimisation.id ][ "edges" ] = {};
         }
 
-        nodes.forEach( ( ele, i, eles ) => {
+        nodes.forEach( ( ele, _i, _eles ) => {
           // Backup the current color
-          this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] = ele.css( 'background-color' );
+          this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] = ele.css( "background-color" );
 
           // Apply new color
-          ele.css( 'background-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
+          ele.css( "background-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
 
           ele.qtip( {
             content: {
@@ -75,17 +77,17 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
               text: "Priority: " + optimisation.priority + "<br>" + optimisation.message
             },
             position: {
-              my: 'top center',
-              at: 'bottom center'
+              my: "top center",
+              at: "bottom center"
             },
             show: {
-              event: 'mouseover'
+              event: "mouseover"
             },
             hide: {
-              event: 'mouseout'
+              event: "mouseout"
             },
             style: {
-              classes: 'qtip-bootstrap',
+              classes: "qtip-bootstrap",
               tip: {
                 width: 16,
                 height: 8
@@ -98,9 +100,9 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
         // Highlight the edges which are connected by each node in the collection
         let edges = nodes.edgesWith( nodes );
 
-        edges.forEach( ( ele, i, eles ) => {
-          this.featured[ optimisation.id ][ "edges" ][ ele.id() ] = ele.css( 'line-color' );
-          ele.css( 'line-color', HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
+        edges.forEach( ( ele, _i, _eles ) => {
+          this.featured[ optimisation.id ][ "edges" ][ ele.id() ] = ele.css( "line-color" );
+          ele.css( "line-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
         } );
 
       }
@@ -118,21 +120,21 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
         let query = "";
 
         for( let v of optimisation.data.nodes ) {
-          query += 'node[id = "' + v + '" ] , ';
+          query += `node[id = "${v}" ], `;
         }
         query = query.substring( 0, query.length - 2 );
 
         let nodes = this.props.graph.filter( query );
 
-        nodes.forEach( ( ele, i, eles ) => {
-          ele.css( 'background-color', this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] );
-          ele.qtip( 'api' ).destroy( true );
+        nodes.forEach( ( ele, _i, _eles ) => {
+          ele.css( "background-color", this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] );
+          ele.qtip( "api" ).destroy( true );
         } );
 
         let edges = nodes.edgesWith( nodes );
 
-        edges.forEach( ( ele, i, eles ) => {
-          ele.css( 'line-color', this.featured[ optimisation.id ][ "edges" ][ ele.id() ] );
+        edges.forEach( ( ele, _i, _eles ) => {
+          ele.css( "line-color", this.featured[ optimisation.id ][ "edges" ][ ele.id() ] );
         } );
 
         this.featured[ optimisation.id ] = undefined;
@@ -147,63 +149,63 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
   componentDidMount() {
     //$( React.findDOMNode(this) ).cytoscape({
     //boxSelectionEnabled: true,
-    //selectionType: 'additive',
+    //selectionType: "additive",
     var cy = window.cy = cytoscape( {
       container: document.getElementById( "cy" ),
       style: cytoscape.stylesheet()
-        .selector( 'node' )
+        .selector( "node" )
         .css( {
-          'content': 'data(id)',
-          'text-valign': 'center',
-          'color': 'data(color)',
-          'background-color': DEFAULT_NODE_COLOR,
-          'text-outline-width': 1,
-          'text-outline-color': '#888'
+          "content": "data(id)",
+          "text-valign": "center",
+          "color": "data(color)",
+          "background-color": DEFAULT_NODE_COLOR,
+          "text-outline-width": 1,
+          "text-outline-color": "#888"
         } )
-        .selector( '$node > node' )
+        .selector( "$node > node" )
         .css( {
-          'content': 'data(id)',
-          'text-valign': 'center',
-          'color': 'data(color)',
-          'background-color': '#f5f5f5',
-          'border-color': 'black',
-          'border-width': 2,
-          'text-outline-width': 2,
-          'text-outline-color': '#888'
+          "content": "data(id)",
+          "text-valign": "center",
+          "color": "data(color)",
+          "background-color": "#f5f5f5",
+          "border-color": "black",
+          "border-width": 2,
+          "text-outline-width": 2,
+          "text-outline-color": "#888"
         } )
-        .selector( 'edge' )
+        .selector( "edge" )
         .css( {
-          'target-arrow-shape': 'triangle',
-          'line-color': 'data(color)',
-          'source-arrow-color': 'data(color)',
-          'target-arrow-color': 'data(color)',
-          'curve-style': 'haystack',
-          /*'content' : 'data(label)',*/
-          'width': 'mapData(weight, 0, 6400, 1, 10)',
+          "target-arrow-shape": "triangle",
+          "line-color": "data(color)",
+          "source-arrow-color": "data(color)",
+          "target-arrow-color": "data(color)",
+          "curve-style": "haystack",
+          /*"content" : "data(label)",*/
+          "width": "mapData(weight, 0, 6400, 1, 10)"
         } )
-        .selector( ':selected' )
+        .selector( ":selected" )
         .css( {
-          'background-color': 'black',
-          'line-color': 'black',
-          'target-arrow-color': 'black',
-          'source-arrow-color': 'black'
+          "background-color": "black",
+          "line-color": "black",
+          "target-arrow-color": "black",
+          "source-arrow-color": "black"
         } )
-        .selector( '.faded' )
+        .selector( ".faded" )
         .css( {
-          'opacity': 0.25,
-          'text-opacity': 0
+          "opacity": 0.25,
+          "text-opacity": 0
         } ),
 
       layout: {
-        name: 'dagre',
+        name: "dagre",
         nodeSep: undefined,
         edgeSep: undefined,
         rankSep: undefined,
         rankDir: undefined,
-        minLen: function( edge ) {
+        minLen: function( _edge ) {
           return 1;
         },
-        edgeWeight: function( edge ) {
+        edgeWeight: function( _edge ) {
           return 1;
         },
 
@@ -218,26 +220,26 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
         }
       },
       ready: function() {
-        //cy.on('tap', 'node', (e) => self.handleClick(e) );
+        //cy.on("tap", "node", (e) => self.handleClick(e) );
       }
     } );
 
     GraphActions.storeGraph( cy );
 
-    //var cy = $('#cy').cytoscape('get');
+    //var cy = $("#cy").cytoscape("get");
     $.get( `${this.props.root}/${this.props.url}`, ( result ) => {
       this.setState( { json: result } );
       cy.load( result );
     } );
-    cy.on( 'select', 'node', ( n ) => this.handleSelectNode( n ) );
-    cy.on( 'unselect', 'node', ( n ) => this.handleUnSelectNode( n ) );
-    cy.on( 'select', 'edge', ( e ) => this.handleSelectEdge( e ) );
-    cy.on( 'unselect', 'edge', ( e ) => this.handleUnSelectEdge( e ) );
+    cy.on( "select", "node", ( n ) => this.handleSelectNode( n ) );
+    cy.on( "unselect", "node", ( n ) => this.handleUnSelectNode( n ) );
+    cy.on( "select", "edge", ( e ) => this.handleSelectEdge( e ) );
+    cy.on( "unselect", "edge", ( e ) => this.handleUnSelectEdge( e ) );
 
     // TODO this is letting cytoscape handle custom function calls itself
     var ddbedges = cy.collection();
-    cytoscape( 'core', 'toggleddb', function( fn ) {
-      var edges = cy.elements( 'edge[ddb]' )
+    cytoscape( "core", "toggleddb", function( _fn ) {
+      var edges = cy.elements( "edge[ddb]" );
 
       if( ddbedges.removed() ) {
         ddbedges.restore();
@@ -252,8 +254,8 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     } );
 
     var cfedges = cy.collection();
-    cytoscape( 'core', 'togglecontrolflow', function( fn ) {
-      var edges = cy.elements( 'edge[^ddb]' )
+    cytoscape( "core", "togglecontrolflow", function( _fn ) {
+      var edges = cy.elements( "edge[^ddb]" );
 
       if( cfedges.removed() ) {
         cfedges.restore();
@@ -265,8 +267,8 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
       }
       return this; // chainability
     } );
-    var self = this;
-    cytoscape( 'core', 'reloadJson', function() {
+
+    cytoscape( "core", "reloadJson", function() {
       ddbedges.restore();
       cfedges.restore();
       return this; // chainability
@@ -285,8 +287,8 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     // TODO fix this. Since putting the graph in the tabpane we need to got up the DOM
     // find a better way to do this
     $( React.findDOMNode( this ) ).height( $( React.findDOMNode( this ) ).closest( ".Flex" ).height() - 100 );
-    $( React.findDOMNode( this ) ).cytoscape( 'get' ).resize();
-  }
+    $( React.findDOMNode( this ) ).cytoscape( "get" ).resize();
+  };
 
   handleSelectEdge( e ) {
     var edge = e.cyTarget;
@@ -304,7 +306,7 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
     }
   }
 
-  handleUnSelectEdge( e ) {
+  handleUnSelectEdge( _e ) {
     DDBActions.updateCurrentDdb( undefined );
     SourceCodeActions.highlightLine( { file: undefined, line: undefined } );
   }
@@ -331,30 +333,30 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
         effect: true
       },
       position: {
-        my: 'top center',
-        at: 'bottom center',
+        my: "top center",
+        at: "bottom center",
         effect: false
       },
       hide: {
         //fixed: true,
         //event: false,
         //inactive: 2000,
-        event: 'click',
+        event: "click",
         effect: true
       },
       style: {
-        classes: 'qtip-bootstrap'
+        classes: "qtip-bootstrap"
       }
     } );
 
   }
 
-  handleUnSelectNode( e ) {
+  handleUnSelectNode( _e ) {
     DDBActions.updateCurrentDdb( undefined );
     SourceCodeActions.highlightLine( { file: undefined, line: undefined } );
   }
 
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( _nextProps, _nextState ) {
     return false;
   }
 
@@ -370,8 +372,8 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
       <div id="cy" >
         <div id="box" ></div>
       </div>
-    )
+    );
   }
 }
 
-export { Graph }
+export { Graph };
