@@ -103,30 +103,9 @@ class Summary extends React.Component {
                   <div className="summary">
                     <ul className="nav nav-sidebar">
                       <li className={className} ><Link to={`/project/${this.props.params.id}/summary/`}>Overview</Link></li>
-                      <li className={className} ><a href="#">Reports</a></li>
-                      <li className={className} ><a href="#">Analytics</a></li>
-                      <li className={className} ><a href="#">Export</a></li>
+                      <li className={className} ><Link to={`/project/${this.props.params.id}/summary/pie`}>Statistics</Link></li>
+                      <li className={className} ><Link to={`/project/${this.props.params.id}/view`}>Goto Analysis</Link></li>
                     </ul>
-
-                    <ListGroup>
-                      <LinkContainer to={`/project/${this.props.params.id}/summary/`}>
-                        <ListGroupItem listItem>Overview</ListGroupItem>
-                      </LinkContainer>
-                      <LinkContainer to={`/project/${this.props.params.id}/view`}>
-                        <ListGroupItem listItem>Goto Analysis</ListGroupItem>
-                      </LinkContainer>
-                      <LinkContainer to={`/project/${this.props.params.id}/summary/pie`}>
-                        <ListGroupItem listItem>Pie Chart</ListGroupItem>
-                      </LinkContainer>
-                    </ListGroup>
-
-                    <ListGroup>
-                      <ListGroupItem><Link to={`/project/${this.props.params.id}/summary/`}>Overview</Link></ListGroupItem>
-                      <ListGroupItem >Info</ListGroupItem>
-                      <ListGroupItem >Warning</ListGroupItem>
-                      <ListGroupItem >Danger</ListGroupItem>
-                    </ListGroup>
-
                   </div>
 
                 </Fixed>
