@@ -10,7 +10,7 @@
     "babel-eslint": "^4.1.2",
     "babelify": "^6.3.0",
     "bootstrap": "^3.3.5",
-    "codemirror": "^5.6.0",
+    "codemirror": "^5.7.0",
     "cytoscape": "^2.4.8",
     "cytoscape-qtip": "^2.2.3",
     "dir-to-json": "0.0.3",
