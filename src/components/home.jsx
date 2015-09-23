@@ -28,7 +28,7 @@ class Home extends React.Component {
   routeHandler = (e) => {
     e.preventDefault();
     //this.context.router.transitionTo('summary', {id: this.state.transitionpage})
-    this.props.history.pushState(null, `project/${this.state.transitionpage}/summary/`, null);
+    this.props.history.pushState(null, `project/${this.state.transitionpage}/overview/`, null);
 
   }
 
@@ -78,29 +78,21 @@ class Home extends React.Component {
         />) : <div/>;
 
     return (
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={false} />
-        </Fixed>
-        <Flex className="content" >
+      <Flex className="content" >
 
-          <Grid fluid>
-            <Row className='center-block'>
-              <Col md={12}>
-                <h1>Welcome to slang</h1>
-                <form className='form-inline' onSubmit={this.routeHandler}>
-                  {autocomplete}
-                  <ButtonInput type="submit" value="Open" />
-                </form>
-              </Col>
-            </Row>
-          </Grid>
+        <Grid fluid>
+          <Row className='center-block'>
+            <Col md={12}>
+              <h1>Welcome to slang</h1>
+              <form className='form-inline' onSubmit={this.routeHandler}>
+                {autocomplete}
+                <ButtonInput type="submit" value="Open" />
+              </form>
+            </Col>
+          </Row>
+        </Grid>
 
-        </Flex>
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
+      </Flex>
     );
   }
 }

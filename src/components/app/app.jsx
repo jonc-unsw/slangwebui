@@ -33,58 +33,43 @@ class App extends React.Component {
 
 
   render() {
+
     if( this.state.project === undefined ) {
       return (
-        <Layout type="rows" >
-          <Fixed className="header" >
-            <Header inapp={true} />
-          </Fixed>
-          <Flex>
-            <Layout type="columns" >
-              <Fixed className="sidebar" >
-              </Fixed>
-              <Flex className="content" >
-              </Flex>
-              <Fixed className="sidebar" >
-              </Fixed>
-            </Layout>
-          </Flex>
-          <Fixed className="header" >
-            <Footer />
-          </Fixed>
-        </Layout>
+        <Flex>
+          <Layout type="columns" >
+            <Fixed className="sidebar" >
+            </Fixed>
+            <Flex className="content" >
+            </Flex>
+            <Fixed className="sidebar" >
+            </Fixed>
+          </Layout>
+        </Flex>
       );
     }
 
     return (
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={true} />
-        </Fixed>
-        <Flex>
-          <Layout type="columns" >
-            <Fixed className="sidebar" >
-              <Accordion>
-                <Project root={this.PROJECTS_DIR} url={this.state.project.source} name={this.state.project.name} />
-                <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
-                <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
-              </Accordion>
-            </Fixed>
-            <Flex className="content" >
-              <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
-            </Flex>
-            <Fixed className="sidebar" >
-              <Accordion>
-                <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
-                <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
-              </Accordion>
-            </Fixed>
-          </Layout>
-        </Flex>
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
+      <Flex>
+        <Layout type="columns" >
+          <Fixed className="sidebar" >
+            <Accordion>
+              <Project root={this.PROJECTS_DIR} url={this.state.project.source} name={this.state.project.name} />
+              <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
+              <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
+            </Accordion>
+          </Fixed>
+          <Flex className="content" >
+            <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
+          </Flex>
+          <Fixed className="sidebar" >
+            <Accordion>
+              <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
+              <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
+            </Accordion>
+          </Fixed>
+        </Layout>
+      </Flex>
     );
   }
 }

@@ -29,40 +29,22 @@ class Uploading extends React.Component {
 
     if( this.state.project === undefined ) {
       return (
-        <Layout type="rows" >
-          <Fixed className="header" >
-            <Header inapp={true} />
-          </Fixed>
-          <Flex>
-
-          </Flex>
-          <Fixed className="header" >
-            <Footer />
-          </Fixed>
-        </Layout>
+        <Flex>
+        </Flex>
       );
     }
 
     return(
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={false} />
-        </Fixed>
-        <Flex className="content" >
-          <Grid fluid>
-            <Row className='center-block'>
-              <Col md={6}>
-                <h1>Analysis of {this.state.project.name} is inprogress</h1>
-                <Input type="textarea" label="Text Area" placeholder="textarea" />
-              </Col>
-            </Row>
-          </Grid>
-        </Flex>
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
-
+      <Flex className="content" >
+        <Grid fluid>
+          <Row className='center-block'>
+            <Col md={6}>
+              <h1>Analysis of {this.state.project.name} is inprogress</h1>
+              <Input type="textarea" label="Text Area" placeholder="textarea" />
+            </Col>
+          </Row>
+        </Grid>
+      </Flex>
     );
   }
 }

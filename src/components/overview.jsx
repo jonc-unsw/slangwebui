@@ -69,59 +69,41 @@ class Overview extends React.Component {
 
     if( this.state.project === undefined ) {
       return (
-        <Layout type="rows" >
-          <Fixed className="header" >
-            <Header inapp={false} />
-          </Fixed>
-          <Flex className="content" >
-
-          </Flex>
-          <Fixed className="header" >
-            <Footer />
-          </Fixed>
-        </Layout>
+        <Flex className="content" >
+        </Flex>
       );
     }
 
     const className = "";
 
     return(
-      <Layout type="rows" >
-        <Fixed className="header" >
-          <Header inapp={false} />
-        </Fixed>
-        <Flex className="content" >
+      <Flex className="content" >
 
-            <Layout type="columns" >
-                <Fixed className="sidebar" >
+        <Layout type="columns" >
+          <Fixed className="sidebar" >
 
-                  <div className="summary">
-                    <ul className="nav nav-sidebar">
-                      <li className={className} ><Link to={`/project/${this.props.params.id}/overview/`}>Overview</Link></li>
-                      <li className={className} ><Link to={`/project/${this.props.params.id}/overview/statistics`}>Statistics</Link></li>
-                      <li className={className} ><Link to={`/project/${this.props.params.id}/view`}>Goto Analysis</Link></li>
-                    </ul>
-                  </div>
+            <div className="summary">
+              <ul className="nav nav-sidebar">
+                <li className={className} ><Link to={`/project/${this.props.params.id}/overview/`}>Overview</Link></li>
+                <li className={className} ><Link to={`/project/${this.props.params.id}/overview/statistics`}>Statistics</Link></li>
+                <li className={className} ><Link to={`/project/${this.props.params.id}/view`}>Goto Analysis</Link></li>
+              </ul>
+            </div>
 
-                </Fixed>
-              <Flex className="content" >
-                <Grid fluid>
-                  <Row className='center-block'>
-                    <Col md={12}>
-                      <h1>{this.state.project.name} - {this.state.project.description} </h1>
-                      {this.props.children}
-                    </Col>
-                  </Row>
-                </Grid>
-              </Flex>
-            </Layout>
+          </Fixed>
+          <Flex className="content" >
+            <Grid fluid>
+              <Row className='center-block'>
+                <Col md={12}>
+                  <h1>{this.state.project.name} - {this.state.project.description} </h1>
+                  {this.props.children}
+                </Col>
+              </Row>
+            </Grid>
+          </Flex>
+        </Layout>
 
-        </Flex>
-        <Fixed className="header" >
-          <Footer />
-        </Fixed>
-      </Layout>
-
+      </Flex>
     );
   }
 }

@@ -1,12 +1,13 @@
 "use strict";
 import React from "react";
+import {Fixed} from "react-layout-pane";
 
 class Footer extends React.Component {
   render() {
     return (
-      <footer className="footer" >
+      <Fixed className="header" >
         Footer
-      </footer>
+      </Fixed>
     );
   }
 }
