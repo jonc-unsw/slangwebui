@@ -1,23 +1,12 @@
 "use strict";
 import React from "react";
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { ProjectStore } from "../../stores/Store.js";
-import { ProjectActions, SourceCodeActions } from "../../actions/Actions.js";
+import { SourceCodeActions } from "../../actions/Actions.js";
 import { IndependentPanel } from "./independentpanel.jsx";
 import TreeView from "react-treeview";
 
-@connectToStores class Project extends React.Component {
+class Project extends React.Component {
   constructor( props ) {
     super( props );
-    ProjectActions.loadProject( { root: this.props.root, url: this.props.url } );
-  }
-
-  static getStores() {
-    return [ ProjectStore ];
-  }
-
-  static getPropsFromStores() {
-    return ProjectStore.getState();
   }
 
   handleClick = ( source ) => {
@@ -47,23 +36,15 @@ import TreeView from "react-treeview";
 
   render() {
 
-    if( this.props.source ) {
+    let files = this.props.source && this.generatePath( this.props.source, 0 );
 
-      let files = this.generatePath( this.props.source, 0 );
-
-      return (
-        <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
-          <TreeView nodeLabel={this.props.name} defaultCollapsed={false} >
-            {files}
-          </TreeView>
-        </IndependentPanel>
-      );
-    }
-    else {
-      return (<div>Loading</div>);
-    }
-
-
+    return (
+      <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
+        <TreeView nodeLabel={this.props.name} defaultCollapsed={false} >
+          {files}
+        </TreeView>
+      </IndependentPanel>
+    );
   }
 }
 
