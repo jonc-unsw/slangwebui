@@ -4,30 +4,19 @@ import React from "react";
 import cytoscape from "cytoscape";
 import "cytoscape-qtip/cytoscape-qtip.js";
 
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { GraphStore } from "../../stores/Store.js";
 import { DDBActions, GraphActions, SourceCodeActions } from "../../actions/Actions.js";
 
 const DEFAULT_NODE_COLOR = "#428bca";
 //const HIGHLIGHTED_NODE_COLOR = "#ff0000";
 const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00ffff" ];
 
-
-@connectToStores class Graph extends React.Component {
+class Graph extends React.Component {
   constructor( props ) {
     super( props );
 
     this.featured = {}; // Just store the css properties that we want to change for each node/edge
                         // TODO move this into a store...
     this.ready = false;
-  }
-
-  static getStores() {
-    return [ GraphStore ];
-  }
-
-  static getPropsFromStores() {
-    return GraphStore.getState();
   }
 
   componentWillReceiveProps( nextProps ) {

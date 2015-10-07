@@ -1,21 +1,9 @@
 import React from "react";
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { DDBStore } from "../../stores/Store.js";
-import { DDBActions } from "../../actions/Actions.js";
 import { IndependentPanel } from "./independentpanel.jsx";
 
-@connectToStores class DataDependenceBlocks extends React.Component {
+class DataDependenceBlocks extends React.Component {
   constructor( props ) {
     super( props );
-    DDBActions.loadDdb( { root: this.props.root, url: this.props.url } );
-  }
-
-  static getStores() {
-    return [ DDBStore ];
-  }
-
-  static getPropsFromStores() {
-    return DDBStore.getState();
   }
 
   render() {

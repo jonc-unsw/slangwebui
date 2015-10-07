@@ -14,8 +14,8 @@ import { Graph } from "./graph.jsx";
 import { BasicBlocks } from "./bb.jsx";
 import { DataDependenceBlocks } from "./ddb.jsx";
 
-import { ProjectActions } from "../../actions/Actions.js";
-import { ProjectStore } from "../../stores/Store.js";
+import { BBActions, DDBActions, GraphActions, ProjectActions } from "../../actions/Actions.js";
+import { BBStore, DDBStore, GraphStore, ProjectStore, SourceCodeStore } from "../../stores/Store.js";
 
 
 @connectToStores class App extends React.Component {
@@ -29,20 +29,28 @@ import { ProjectStore } from "../../stores/Store.js";
   }
 
   static getStores() {
-    return [ ProjectStore ];
+    return [ BBStore, DDBStore, GraphStore, ProjectStore, SourceCodeStore ];
   }
 
   static getPropsFromStores() {
-    return ProjectStore.getState();
+    return {
+      bbStore: BBStore.getState(),
+      ddbStore: DDBStore.getState(),
+      graphStore: GraphStore.getState(),
+      projectStore: ProjectStore.getState(),
+      sourceCodeStore: SourceCodeStore.getState()
+    };
   }
 
   componentDidMount() {
     $.get( `${this.PROJECTS_DIR}/project.json`, ( result ) => {
       this.setState( { project: result } );
+      DDBActions.loadDdb( { root: this.PROJECTS_DIR, url: result.ddb } );
+      BBActions.loadBb( { root: this.PROJECTS_DIR, url: result.bb } );
+      GraphActions.loadFeatures( { root: this.PROJECTS_DIR, url: result.features } );
       ProjectActions.loadProject( { root: this.PROJECTS_DIR, url: result.source } );
     } );
   }
-
 
   render() {
 
@@ -66,9 +74,9 @@ import { ProjectStore } from "../../stores/Store.js";
         <Layout type="columns" >
           <Fixed className="sidebar" >
             <Accordion>
-              <Project name={this.state.project.name} source={this.props.source} />
-              <SourceCode prefix={this.PROJECTS_DIR} file="fib/main.c" />
-              <Features root={this.PROJECTS_DIR} url={this.state.project.features} />
+              <Project {...this.props.projectStore} name={this.state.project.name} />
+              <SourceCode {...this.props.sourceCodeStore} prefix={this.PROJECTS_DIR} />
+              <Features {...this.props.graphStore} />
             </Accordion>
           </Fixed>
           <Flex className="content" >
@@ -76,8 +84,8 @@ import { ProjectStore } from "../../stores/Store.js";
           </Flex>
           <Fixed className="sidebar" >
             <Accordion>
-              <BasicBlocks root={this.PROJECTS_DIR} url={this.state.project.bb} />
-              <DataDependenceBlocks root={this.PROJECTS_DIR} url={this.state.project.ddb} />
+              <BasicBlocks {...this.props.bbStore} />
+              <DataDependenceBlocks {...this.props.ddbStore} />
             </Accordion>
           </Fixed>
         </Layout>

@@ -1,23 +1,12 @@
 import React from "react";
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { GraphStore } from "../../stores/Store.js";
 import { GraphActions } from "../../actions/Actions.js";
 import { Input } from "react-bootstrap";
 import { IndependentPanel } from "./independentpanel.jsx";
 import TreeView from "react-treeview";
 
-@connectToStores class Features extends React.Component {
+class Features extends React.Component {
   constructor( props ) {
     super( props );
-    GraphActions.loadFeatures( { root: this.props.root, url: this.props.url } );
-  }
-
-  static getStores() {
-    return [ GraphStore ];
-  }
-
-  static getPropsFromStores() {
-    return GraphStore.getState();
   }
 
   handleChange = ( e ) => {
@@ -25,7 +14,7 @@ import TreeView from "react-treeview";
   }
 
   render() {
-
+    console.log(this.props.optimisations);
     let features = this.props.optimisations ? (
       <form>
         {

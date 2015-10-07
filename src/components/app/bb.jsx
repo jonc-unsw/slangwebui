@@ -1,37 +1,25 @@
 import React from "react";
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { BBStore } from "../../stores/Store.js";
-import { BBActions } from "../../actions/Actions.js";
 import { SourceCodeActions } from "../../actions/Actions.js";
 import { IndependentPanel } from "./independentpanel.jsx";
 
-@connectToStores class BasicBlocks extends React.Component {
+class BasicBlocks extends React.Component {
   constructor( props ) {
     super( props );
-    BBActions.loadBb( { root: this.props.root, url: this.props.url } );
-  }
-
-  static getStores() {
-    return [ BBStore ];
-  }
-
-  static getPropsFromStores() {
-    return BBStore.getState();
   }
 
   render() {
     var blocks = this.props.bbdata && this.props.bbdata.map( ( bb, key ) => {
-        return (
-          <div key={key} className="block" >
-            <div className="blockname" >
-              <a href="#" >[ {bb.name} ]</a>
-            </div>
-            <Statements file={bb.file} line={bb.line} statements={bb.statements} />
-            <Preds preds={bb.preds} />
-            <Succs succs={bb.succs} />
+      return (
+        <div key={key} className="block" >
+          <div className="blockname" >
+            <a href="#" >[ {bb.name} ]</a>
           </div>
-        );
-      } );
+          <Statements file={bb.file} line={bb.line} statements={bb.statements} />
+          <Preds preds={bb.preds} />
+          <Succs succs={bb.succs} />
+        </div>
+      );
+    });
     return (
       <IndependentPanel {...this.props} header="Basic Blocks"
                                         expanded={this.props.expanded}

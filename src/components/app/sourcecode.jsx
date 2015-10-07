@@ -1,7 +1,5 @@
 import React from "react";
 
-import connectToStores from "../../../node_modules/alt/utils/connectToStores";
-import { SourceCodeStore } from "../../stores/Store.js";
 import { IndependentPanel } from "./independentpanel.jsx";
 
 import $ from "jquery";
@@ -91,17 +89,9 @@ class CodeMirrorEditor extends React.Component {
   }
 }
 
-@connectToStores class SourceCode extends React.Component {
+class SourceCode extends React.Component {
   constructor( props ) {
     super( props );
-  }
-
-  static getStores() {
-    return [ SourceCodeStore ];
-  }
-
-  static getPropsFromStores() {
-    return SourceCodeStore.getState();
   }
 
   render() {

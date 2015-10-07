@@ -139,6 +139,11 @@ class GraphStore {
       return;
 
     let { file, ...xs } = arg0;
+
+    // Dont update if file is null since this means that the features will disappear
+    if( file === undefined )
+      return;
+
     let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
         return v.files.includes( file );
       } );
