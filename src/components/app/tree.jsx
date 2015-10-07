@@ -88,7 +88,6 @@ class Tree extends React.Component {
     $( "a" ).on( "shown.bs.tab", function( e ) {
       //e.target // newly activated tab
       //e.relatedTarget // previous active tab
-      console.log( e );
     } );
   }
 

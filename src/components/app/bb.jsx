@@ -7,6 +7,12 @@ class BasicBlocks extends React.Component {
     super( props );
   }
 
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.bbdata === nextProps.bbdata)
+      return false;
+    return true;
+  }
+
   render() {
     var blocks = this.props.bbdata && this.props.bbdata.map( ( bb, key ) => {
       return (
@@ -34,7 +40,6 @@ class Preds extends React.Component {
 
   handleClick = ( e ) => {
     //SourceCodeActions.highlightLine( edge.data("ddb") );
-    console.log( e );
   }
 
   render() {

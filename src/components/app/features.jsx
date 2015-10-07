@@ -14,7 +14,6 @@ class Features extends React.Component {
   }
 
   render() {
-    console.log(this.props.optimisations);
     let features = this.props.optimisations ? (
       <form>
         {
