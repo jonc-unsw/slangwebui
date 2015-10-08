@@ -3,7 +3,6 @@ import { GraphActions } from "../../actions/Actions.js";
 import { Input } from "react-bootstrap";
 import { IndependentPanel } from "./independentpanel.jsx";
 import TreeView from "react-treeview";
-import perf from "react-perf-component";
 
 class Features extends React.Component {
   constructor( props ) {
@@ -11,8 +10,14 @@ class Features extends React.Component {
   }
 
   shouldComponentUpdate( nextProps, _nextState) {
-    if( this.props.optimisations === nextProps.optimisations )
+
+    // we want to render if file is undefined as we will render everything...
+    if( this.props.file === undefined || nextProps.file === undefined )
+      return true;
+
+    if( this.props.file === nextProps.file )
       return false;
+
     return true;
   }
 
@@ -21,7 +26,7 @@ class Features extends React.Component {
   }
 
   render() {
-    let features = this.props.optimisations.map( ( v, k ) => {
+    let features = this.props.optimisations.filter( (v, _k) => { return v.get("files").includes( this.props.file ) || this.props.file === undefined; } ).map( ( v, k ) => {
       const label = <Input groupClassName="featureslabel" checked={v.get("checked")} type='checkbox'
                            label={v.get("title")} data-id={v.get("id")} onChange={this.handleChange} />;
       return (

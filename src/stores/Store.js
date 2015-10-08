@@ -136,21 +136,9 @@ class GraphStore {
   }
 
   onGetOptimisationForFile( arg0 ) {
-    if( this.state.json === undefined )
-      return;
-
     let { file, ...xs } = arg0;
 
-    // Dont update if file is null since this means that the features will disappear
-    if( file === undefined )
-      return;
-
-    // Filter from the master json file so we only store the selected ones for a file
-    // Alternatively we could get the react component to filter. The below keeps that logic in the store
-    let o = this.state.json.optimisations.filter( ( v, _k ) => {
-      return v.files.includes( file );
-    });
-    this.setState( { optimisations: Immutable.fromJS(o), file: file } );
+    this.setState( { file: file } );
   }
 
   onSelectOptimisation( optimisation ) {
