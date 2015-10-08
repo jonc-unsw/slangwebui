@@ -13,120 +13,68 @@ const HIGHLIGHTED_NODE_COLOR_PRIORITY = [ "#00ff00", "#ff00ff", "#ffff00", "#00f
 class Graph extends React.Component {
   constructor( props ) {
     super( props );
-
-    this.featured = {}; // Just store the css properties that we want to change for each node/edge
-                        // TODO move this into a store...
-    this.ready = false;
   }
 
   componentWillReceiveProps( nextProps ) {
-    // We are not ready yet.
-    if( this.props.graph === undefined || this.props.json === undefined )
+    // We are not ready yet. Hack
+    if( this.props.graph === undefined )
       return;
 
+    // Batch things to make it faster
     this.props.graph.startBatch();
 
-    // this.props is the original state and nextProps is the incomming state.
-    // This means that if we have some already highlighted optimisations we need to add or remove the highlights of the
-    // difference between the two sets
+    // This clears the graph of custom styles. It would be better to only remove the ones we are changing but it gets
+    // complicated when we need to remove a highlighted node which is part of another optimisation which should be
+    // highlighted
+    this.props.graph.elements().removeStyle();
 
-    // To add
-    if( this.props.selected.size < nextProps.selected.size ) {
-      let optimisations = nextProps.selected.subtract( this.props.selected );
+    for( let v of nextProps.selected ) {
+      let optimisation = this.props.optimisations.get(v);
 
-      for( let o of optimisations ) {
-        let optimisation = nextProps.json.optimisations[ o ];
+      let query = "";
+      for( let n of optimisation.getIn(["data", "nodes"]) ){
+        query += `node[id = "${n}" ], `;
+      }
+      query = query.substring( 0, query.length - 2 );
 
-        let query = "";
+      let nodes = this.props.graph.filter( query );
 
-        for( let v of optimisation.data.nodes ) {
-          query += `node[id = "${v}" ], `;
-        }
-        query = query.substring( 0, query.length - 2 );
+      nodes.forEach( ( ele, _i, _eles ) => {
 
-        let nodes = this.props.graph.filter( query );
+        // Apply new color
+        ele.css( "background-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.get("priority") ] );
 
-        if( this.featured[ optimisation.id ] === undefined ) {
-          this.featured[ optimisation.id ] = {};
-          this.featured[ optimisation.id ][ "nodes" ] = {};
-          this.featured[ optimisation.id ][ "edges" ] = {};
-        }
-
-        nodes.forEach( ( ele, _i, _eles ) => {
-          // Backup the current color
-          this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] = ele.css( "background-color" );
-
-          // Apply new color
-          ele.css( "background-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
-
-          ele.qtip( {
-            content: {
-              title: optimisation.title,
-              text: "Priority: " + optimisation.priority + "<br>" + optimisation.message
-            },
-            position: {
-              my: "top center",
-              at: "bottom center"
-            },
-            show: {
-              event: "mouseover"
-            },
-            hide: {
-              event: "mouseout"
-            },
-            style: {
-              classes: "qtip-bootstrap",
-              tip: {
-                width: 16,
-                height: 8
-              }
+        ele.qtip( {
+          content: {
+            title: optimisation.get("title"),
+            text: "Priority: " + optimisation.get("priority") + "<br>" + optimisation.get("message")
+          },
+          position: {
+            my: "top center",
+            at: "bottom center"
+          },
+          show: {
+            event: "mouseover"
+          },
+          hide: {
+            event: "mouseout"
+          },
+          style: {
+            classes: "qtip-bootstrap",
+            tip: {
+              width: 16,
+              height: 8
             }
-          } );
-
+          }
         } );
+      } );
 
-        // Highlight the edges which are connected by each node in the collection
-        let edges = nodes.edgesWith( nodes );
+      // Highlight the edges which are connected by each node in the collection
+      let edges = nodes.edgesWith( nodes );
 
-        edges.forEach( ( ele, _i, _eles ) => {
-          this.featured[ optimisation.id ][ "edges" ][ ele.id() ] = ele.css( "line-color" );
-          ele.css( "line-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.priority ] );
-        } );
-
-      }
-
-    }
-    // To remove
-    else {
-      let optimisations = this.props.selected.subtract( nextProps.selected );
-
-      for( let o of optimisations ) {
-        let optimisation = nextProps.json.optimisations[ o ];
-
-        // We still need to query the graph to find which nodes to unhighlight.
-        // Originally I thought to remove the clone the nodes then delete/restore but that breaks the graph...
-        let query = "";
-
-        for( let v of optimisation.data.nodes ) {
-          query += `node[id = "${v}" ], `;
-        }
-        query = query.substring( 0, query.length - 2 );
-
-        let nodes = this.props.graph.filter( query );
-
-        nodes.forEach( ( ele, _i, _eles ) => {
-          ele.css( "background-color", this.featured[ optimisation.id ][ "nodes" ][ ele.id() ] );
-          ele.qtip( "api" ).destroy( true );
-        } );
-
-        let edges = nodes.edgesWith( nodes );
-
-        edges.forEach( ( ele, _i, _eles ) => {
-          ele.css( "line-color", this.featured[ optimisation.id ][ "edges" ][ ele.id() ] );
-        } );
-
-        this.featured[ optimisation.id ] = undefined;
-      }
+      edges.forEach( ( ele, _i, _eles ) => {
+        ele.css( "line-color", HIGHLIGHTED_NODE_COLOR_PRIORITY[ optimisation.get("priority") ] );
+      } );
 
     }
 
@@ -345,6 +293,7 @@ class Graph extends React.Component {
   }
 
   shouldComponentUpdate( _nextProps, _nextState ) {
+    // Just return false since the graph is updated via normal js and we dont need to update the html
     return false;
   }
 

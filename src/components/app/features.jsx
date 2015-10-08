@@ -26,9 +26,10 @@ class Features extends React.Component {
   }
 
   render() {
-    let features = this.props.optimisations.filter( (v, _k) => { return v.get("files").includes( this.props.file ) || this.props.file === undefined; } ).map( ( v, k ) => {
+    let features = this.props.optimisations.filter( (v, k) => { return v.get("files").includes( this.props.file ) || this.props.file === undefined; } ).map( ( v, k ) => {
       const label = <Input groupClassName="featureslabel" checked={v.get("checked")} type='checkbox'
-                           label={v.get("title")} data-id={v.get("id")} onChange={this.handleChange} />;
+                           label={v.get("title")} data-id={k} onChange={this.handleChange} />;
+
       return (
         <TreeView nodeLabel={label} defaultCollapsed={false} key={k} >
           <div className="featuresmessage" >{v.get("message")}</div>

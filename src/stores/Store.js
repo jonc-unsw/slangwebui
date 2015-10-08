@@ -118,7 +118,7 @@ class GraphStore {
 
     this.state = {
       json: undefined,
-      optimisations: Immutable.Map(), // The currently viewed optimisations
+      optimisations: Immutable.List(), // The currently viewed optimisations
       file: undefined,
       expanded: true,
       graph: undefined,
@@ -142,24 +142,12 @@ class GraphStore {
   }
 
   onSelectOptimisation( optimisation ) {
-
-    if( this.state.json === undefined )
-      return;
-
-    // Find the correct array element
-    // This is because this.state.optimisations is an reduced sized array. Maybe change the filtering to be in the
-    // jsx file so we can have a 1-1 index mapping...
-    let i = this.state.json.optimisations.findIndex( x => x.id === optimisation );
-
-    // Update the main file
-    // This is passed around as a reference so it will always be up to date.
-    // Make this immutable if we dont want this...
-    this.state.json.optimisations[ i ].checked = !this.state.json.optimisations[ i ].checked;
-
-    if( this.state.selected.has(i) )
-      this.setState({selected: this.state.selected.delete(i)});
-    else
-      this.setState({selected: this.state.selected.add(i)});
+    if( this.state.selected.has(optimisation) ){
+      this.setState({selected: this.state.selected.delete(optimisation)});
+    }
+    else{
+      this.setState({selected: this.state.selected.add(optimisation)});
+    }
   }
 
   onToggleAccordion() {
