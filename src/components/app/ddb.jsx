@@ -6,34 +6,28 @@ class DataDependenceBlocks extends React.Component {
     super( props );
   }
 
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.ddbid === nextProps.ddbid )
+      return false;
+    return true;
+  }
+
   render() {
 
-    if( this.props.ddbid !== undefined ) {
+    let ddb = this.props.ddbdata && this.props.ddbdata[ this.props.ddbid ];
 
-      var ddblock = this.props.ddbdata[ this.props.ddbid ];
+    let ddbblock = ddb ?
+      <ul>{Object.keys( ddb ).map( ( k, v ) => { return ( <li key={v} >{k} {ddb[ k ]}</li> ); } )}</ul> :
+      <div>Nothing selected</div>;
 
-      return (
-        <IndependentPanel {...this.props} header="Data Dependence Blocks"
-                                          expanded={this.props.expanded}
-          >
-          <ul>
-            {
-              Object.keys( ddblock ).map( ( k, v ) => {
-                return ( <li key={v} >{k} {ddblock[ k ]}</li> );
-              } )
-            }
-          </ul>
-        </IndependentPanel>
-      );
-    }
     return (
-      <IndependentPanel {...this.props} header="Data Dependence Blocks"
-                                        expanded={this.props.expanded}
-        >
-        <div>Nothing selected</div>
+      <IndependentPanel {...this.props} header="Data Dependence Blocks" expanded={this.props.expanded} >
+        {ddbblock}
       </IndependentPanel>
     );
   }
+
+
 }
 
 export { DataDependenceBlocks };
