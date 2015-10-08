@@ -80,7 +80,7 @@ import { BBStore, DDBStore, GraphStore, ProjectStore, SourceCodeStore } from "..
             </Accordion>
           </Fixed>
           <Flex className="content" >
-            <Graph root={this.PROJECTS_DIR} url={this.state.project.graph} />
+            <Graph {...this.props.graphStore} root={this.PROJECTS_DIR} url={this.state.project.graph} />
           </Flex>
           <Fixed className="sidebar" >
             <Accordion>

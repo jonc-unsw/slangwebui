@@ -118,7 +118,7 @@ class GraphStore {
 
     this.state = {
       json: undefined,
-      optimisations: [], // The currently viewed optimisations
+      optimisations: Immutable.Map(), // The currently viewed optimisations
       file: undefined,
       expanded: true,
       graph: undefined,
@@ -130,7 +130,8 @@ class GraphStore {
   onLoadFeatures( data ) {
     let { root, url } = data;
     $.get( `${root}/${url}`, ( result ) => {
-      this.setState( { json: result, optimisations: result.optimisations } );
+      let o = Immutable.fromJS(result.optimisations);
+      this.setState( { json: result, optimisations: o } );
     } );
   }
 
@@ -144,10 +145,12 @@ class GraphStore {
     if( file === undefined )
       return;
 
-    let o = this.state.json && this.state.json.optimisations.filter( ( v, k ) => {
-        return v.files.includes( file );
-      } );
-    this.setState( { optimisations: o, file: file } );
+    // Filter from the master json file so we only store the selected ones for a file
+    // Alternatively we could get the react component to filter. The below keeps that logic in the store
+    let o = this.state.json.optimisations.filter( ( v, _k ) => {
+      return v.files.includes( file );
+    });
+    this.setState( { optimisations: Immutable.fromJS(o), file: file } );
   }
 
   onSelectOptimisation( optimisation ) {

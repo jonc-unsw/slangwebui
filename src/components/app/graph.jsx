@@ -20,7 +20,6 @@ class Graph extends React.Component {
   }
 
   componentWillReceiveProps( nextProps ) {
-
     // We are not ready yet.
     if( this.props.graph === undefined || this.props.json === undefined )
       return;
