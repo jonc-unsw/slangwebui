@@ -9,6 +9,12 @@ class Project extends React.Component {
     super( props );
   }
 
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.source === nextProps.source )
+      return false;
+    return true;
+  }
+
   handleClick = ( source ) => {
     SourceCodeActions.loadSource( { file: source } );
   }
