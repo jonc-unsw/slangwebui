@@ -1,5 +1,4 @@
 import React from "react";
-
 import { IndependentPanel } from "./independentpanel.jsx";
 
 import $ from "jquery";
@@ -14,6 +13,12 @@ class CodeMirrorEditor extends React.Component {
   constructor( props ) {
     super( props );
     this.marked = [ undefined, undefined ];
+  }
+
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.file === nextProps.file && this.props.line === nextProps.line )
+      return false;
+    return true;
   }
 
   componentDidMount() {
@@ -92,6 +97,13 @@ class CodeMirrorEditor extends React.Component {
 class SourceCode extends React.Component {
   constructor( props ) {
     super( props );
+  }
+
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.file === nextProps.file && this.props.line === nextProps.line )
+      return false;
+
+    return true;
   }
 
   render() {
