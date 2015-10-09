@@ -8,12 +8,14 @@ class BasicBlocks extends React.Component {
   }
 
   shouldComponentUpdate( nextProps, _nextState) {
-    if( this.props.bbdata === nextProps.bbdata)
+    if( this.props.bbdata === nextProps.bbdata )
       return false;
+
     return true;
   }
 
   render() {
+
     var blocks = this.props.bbdata && this.props.bbdata.map( ( bb, key ) => {
       return (
         <div key={key} className="block" >
@@ -37,12 +39,23 @@ class BasicBlocks extends React.Component {
 }
 
 class Preds extends React.Component {
+  constructor( props ) {
+    super( props );
+  }
+
+  shouldComponentUpdate( nextProps, _nextState) {
+    if( this.props.preds === nextProps.preds )
+      return false;
+
+    return true;
+  }
 
   handleClick = ( e ) => {
     //SourceCodeActions.highlightLine( edge.data("ddb") );
   }
 
   render() {
+
     if( this.props.preds ) {
       var handleClick = this.handleClick;
       var preds = this.props.preds.map( function( pred, key ) {

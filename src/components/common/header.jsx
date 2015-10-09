@@ -6,6 +6,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import {Fixed} from "react-layout-pane";
 
 class Header extends React.Component {
+  constructor( props ) {
+    super( props );
+  }
+
+  shouldComponentUpdate( _nextProps, _nextState) {
+    return false;
+  }
 
   render() {
     return (
@@ -28,6 +35,14 @@ class Header extends React.Component {
 }
 
 class HeaderInApp extends React.Component {
+  constructor( props ) {
+    super( props );
+  }
+
+  shouldComponentUpdate( _nextProps, _nextState) {
+    return false;
+  }
+
   render() {
     return (
       <Fixed className="header" >
