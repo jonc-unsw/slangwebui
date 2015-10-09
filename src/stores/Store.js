@@ -41,7 +41,7 @@ class BBStore {
     this.bindActions( BBActions ); //Bind all the actions like this: myFunc -> onMyFunc
 
     this.state = {
-      bbdata: undefined,
+      bbdata: Immutable.List(),
       expanded: true
     };
   }
@@ -49,7 +49,7 @@ class BBStore {
   onLoadBb( data ) {
     let { root, url } = data;
     $.get( `${root}/${url}`, ( result ) => {
-      this.setState( { bbdata: result } );
+      this.setState( { bbdata: Immutable.fromJS(result) } );
     } );
   }
 
