@@ -11,7 +11,7 @@ import { CreateForm } from "./components/create.jsx";
 import { Uploading } from "./components/uploading.jsx";
 import { Overview, Statistics } from "./components/overview.jsx";
 
-var routes = (
+let routes = (
   <Route component={Index}>
 
     <Route path="/" component={Home} />
