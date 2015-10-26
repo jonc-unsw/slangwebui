@@ -133,7 +133,8 @@ class Graph extends React.Component {
         } ),
 
       layout: {
-        name: "dagre",
+        name: "preset"
+        /*name: "dagre",
         nodeSep: undefined,
         edgeSep: undefined,
         rankSep: undefined,
@@ -153,7 +154,7 @@ class Graph extends React.Component {
         ready: function() {
         },
         stop: function() {
-        }
+        }*/
       },
       ready: function() {
         //cy.on("tap", "node", (e) => self.handleClick(e) );
