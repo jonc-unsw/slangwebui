@@ -5,30 +5,17 @@ import { Panel } from "react-bootstrap";
 class IndependentPanel extends React.Component {
   constructor( props ) {
     super( props );
-    this.state = { expanded: this.props.expanded };
-  }
-
-  componentWillReceiveProps( nextProps ) {
-    this.setState( {
-      expanded: nextProps.expanded
-    } );
   }
 
   render() {
+    console.log("ind panel " + this.props.expanded);
     return (
-      <Panel {...this.props}
-        collapsable={true}
-        expanded={this.state.expanded}
-        onSelect={this._toggleExpand}
-        >
+      <Panel {...this.props} collapsable={true}>
         {this.props.children}
       </Panel>
     );
   }
 
-  _toggleExpand = () => {
-    this.setState( { expanded: !this.state.expanded } );
-  }
 }
 
 export { IndependentPanel };

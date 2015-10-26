@@ -68,7 +68,6 @@ import { BBStore, DDBStore, GraphStore, ProjectStore, SourceCodeStore } from "..
         </Flex>
       );
     }
-
     return (
       <Flex>
         <Layout type="columns" >

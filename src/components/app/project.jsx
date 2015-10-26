@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import { SourceCodeActions } from "../../actions/Actions.js";
+import { ProjectActions, SourceCodeActions } from "../../actions/Actions.js";
 import { IndependentPanel } from "./independentpanel.jsx";
 import TreeView from "react-treeview";
 
@@ -12,6 +12,8 @@ class Project extends React.Component {
   shouldComponentUpdate( nextProps, _nextState) {
     if( this.props.source === nextProps.source )
       return false;
+    /*if( this.props.expanded === nextProps.expanded )
+      return false;*/
     return true;
   }
 
@@ -43,9 +45,9 @@ class Project extends React.Component {
   render() {
 
     let files = this.props.source && this.generatePath( this.props.source, 0 );
-
+    console.log(this.props);
     return (
-      <IndependentPanel {...this.props} header="Project" expanded={this.props.expanded} >
+      <IndependentPanel {...this.props} header="Project" onSelect={ProjectActions.toggleAccordion}>
         <TreeView nodeLabel={this.props.name} defaultCollapsed={false} >
           {files}
         </TreeView>

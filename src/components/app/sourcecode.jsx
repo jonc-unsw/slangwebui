@@ -1,5 +1,6 @@
 import React from "react";
 import { IndependentPanel } from "./independentpanel.jsx";
+import { SourceCodeActions } from "../../actions/Actions.js";
 
 import $ from "jquery";
 
@@ -108,7 +109,7 @@ class SourceCode extends React.Component {
 
   render() {
     return (
-      <IndependentPanel {...this.props} header="Source Code" expanded={this.props.expanded} >
+      <IndependentPanel {...this.props} header="Source Code" onSelect={() => SourceCodeActions.toggleAccordion()}>
         <CodeMirrorEditor prefix={this.props.prefix} file={this.props.file} line={this.props.line} />
       </IndependentPanel>
     );

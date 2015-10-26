@@ -76,7 +76,9 @@ class ProjectStore {
   }
 
   onToggleAccordion() {
+    console.log("befoer " + this.state.expanded);
     this.setState( { expanded: !this.state.expanded } );
+    console.log("after " + this.state.expanded);
   }
 
 }

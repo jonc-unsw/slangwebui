@@ -38,7 +38,7 @@ class Features extends React.Component {
     } ).toList(); // Remove toList when react 0.14 is released. react 0.13 doesnt like maps...
 
     return (
-      <IndependentPanel {...this.props} header="Features" expanded={this.props.expanded} >
+      <IndependentPanel {...this.props} header="Features" onSelect={() => GraphActions.toggleAccordion()}>
         {features}
       </IndependentPanel>
     );
